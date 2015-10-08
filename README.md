@@ -1,1 +1,3 @@
-# ros_ws
+# My ROS Workspace
+
+The whole catkin workspace folder
