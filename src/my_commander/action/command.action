@@ -1,0 +1,10 @@
+#Goal messages
+float64 amplitude	#magnitude of the sine wave
+float64 frequency	#frequency of the sine wave
+uint32 cycles		#numbers of cycles to run
+---
+#Result messages
+uint32 total_cycle	#numbers of cycles have been run when terminated
+---
+#Feedback messages
+float64 cmd_out		#current vel_cmd output value

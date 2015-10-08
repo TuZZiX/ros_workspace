@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<robot name="human">
+	
+	<material name="blue">
+		<color rgba="0 0 .8 1" />
+	</material>
+	<material name="red">
+		<color rgba=".8 0 0 1" />
+	</material>
+	<material name="white">
+		<color rgba="1 1 1 1" />
+	</material>
+	
+	<!-- Used for fixing robot to Gazebo 'base_link' -->
+	<link name="world"/>
+	
+	<link name="body">
+		<collision>
+			<origin xyz="0 1 0.75" rpy="0 0 0" />
+			<geometry>
+				<cylinder length="1" radius="0.15" />
+			</geometry>
+		</collision>
+		<visual>
+			<origin xyz="0 1 0.75" rpy="0 0 0" />
+			<geometry>
+				<cylinder length="1" radius="0.15" />
+			</geometry>
+			<material name="blue"/>
+		</visual>
+		<inertial>
+			<origin xyz="0 1 0.75" rpy="0 0 0" />
+			<mass value="2" />
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+		</inertial>
+	</link>
+	
+	<link name="leftfoot">
+		<collision>
+			<origin xyz="-0.125 1 0" rpy="0 2.6180126536 0" />
+			<geometry>
+				<box size="0.1 0.1 0.5" />
+			</geometry>
+		</collision>
+		<visual>
+			<origin xyz="-0.125 1 0" rpy="0 2.6180126536 0" />
+			<geometry>
+				<box size="0.1 0.1 0.75" />
+			</geometry>
+			<material name="white"/>
+		</visual>
+		<inertial>
+			<origin xyz="0.125 1 0" rpy="0 2.6180126536 0" />
+			<mass value="1" />
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+		</inertial>
+	</link>
+	
+	<link name="rightfoot">
+		<collision>
+			<origin xyz="0.125 1 0" rpy="0 -2.6180126536 0" />
+			<geometry>
+				<box size="0.1 0.1 0.75" />
+			</geometry>
+		</collision>
+		<visual>
+			<origin xyz="0.125 1 0" rpy="0 -2.6180126536 0" />
+			<geometry>
+				<box size="0.1 0.1 0.75" />
+			</geometry>
+			<material name="white"/>
+		</visual>
+		<inertial>
+			<origin xyz="-0.125 1 0" rpy="0 -2.6180126536 0" />
+			<mass value="1" />
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+		</inertial>
+	</link>
+	
+	<link name="head">
+		<visual>
+			<origin xyz="0 1 1.5" rpy="0 0 0" />
+			<geometry>
+				<sphere radius="0.25"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+		<collision>
+			<origin xyz="0 1 1.5" rpy="0 0 0" />
+			<geometry>
+				<sphere radius="0.25"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="0 1 1.5" rpy="0 0 0" />
+			<mass value="2"/>
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+		</inertial>
+	</link>
+	
+	<link name="lefthand">
+		<visual>
+			<origin xyz="-0.3 1 1.2" rpy="0 0 0" />
+			<geometry>
+				<sphere radius="0.15"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+		<collision>
+			<origin xyz="-0.3 1 1.2" rpy="0 0 0" />
+			<geometry>
+				<sphere radius="0.15"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<origin xyz="-0.3 1 1.2" rpy="0 0 0" />
+			<mass value="2"/>
+			<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+		</inertial>
+	</link>
+	
+	<joint name="body_ground" type="fixed">
+		<parent link="world" />
+		<child link="body" />
+		<origin xyz="0 0 0.75" rpy="0 0 0"/>
+	</joint>
+	<joint name="leftfoot_body" type="fixed">
+		<parent link="body" />
+		<child link="leftfoot" />
+	</joint>
+	<joint name="rightfoot_body" type="fixed">
+		<parent link="body" />
+		<child link="rightfoot" />
+	</joint>
+	<joint name="head_body" type="fixed">
+		<parent link="body" />
+		<child link="head" />
+	</joint>
+	
+	<joint name="lefthand_body" type="continuous">
+		<parent link="body"/>
+		<child link="lefthand"/>
+		<origin xyz="-0.3 1 1.2" rpy="0 0 3.14159"/>
+		<axis xyz="1 1 0"/>
+	</joint>
+</robot>
