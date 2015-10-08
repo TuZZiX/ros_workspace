@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: reachability
+Description: Description of reachability
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib -lreachability -lcwru_joint_space_planner
+Requires: roscpp std_msgs sensor_msgs baxter_core_msgs trajectory_msgs cwru_joint_space_planner baxter_kinematics cwru_srv visualization_msgs

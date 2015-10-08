@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: robot_simulator
+Description: Description of robot_simulator
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: gazebo_ros roscpp std_msgs

@@ -1,0 +1,19 @@
+(cl:defpackage baxter_traj_streamer-msg
+  (:use )
+  (:export
+   "<TRAJACTIONGOAL>"
+   "TRAJACTIONGOAL"
+   "<TRAJACTIONRESULT>"
+   "TRAJACTIONRESULT"
+   "<TRAJGOAL>"
+   "TRAJGOAL"
+   "<TRAJACTIONFEEDBACK>"
+   "TRAJACTIONFEEDBACK"
+   "<TRAJACTION>"
+   "TRAJACTION"
+   "<TRAJRESULT>"
+   "TRAJRESULT"
+   "<TRAJFEEDBACK>"
+   "TRAJFEEDBACK"
+  ))
+

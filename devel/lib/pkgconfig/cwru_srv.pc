@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: cwru_srv
+Description: Description of cwru_srv
+Version: 0.0.0
+Cflags: -I/home/tianshipei/ros_ws/devel/include
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: geometry_msgs nav_msgs roscpp std_msgs
