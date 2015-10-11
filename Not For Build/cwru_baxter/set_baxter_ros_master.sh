@@ -1,1 +1,0 @@
-export ROS_MASTER_URI="http://011503P0031:11311"

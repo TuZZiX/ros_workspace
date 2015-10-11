@@ -1,6 +1,0 @@
-bool start
-float64 amp_cmd
-float64 feq_cmd
----
-bool success
-
