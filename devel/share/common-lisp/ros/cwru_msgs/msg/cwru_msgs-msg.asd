@@ -12,6 +12,8 @@
     (:file "_package_DesiredState" :depends-on ("_package"))
     (:file "NavSatStatus" :depends-on ("_package_NavSatStatus"))
     (:file "_package_NavSatStatus" :depends-on ("_package"))
+    (:file "VecOfDoubles" :depends-on ("_package_VecOfDoubles"))
+    (:file "_package_VecOfDoubles" :depends-on ("_package"))
     (:file "PathSegment" :depends-on ("_package_PathSegment"))
     (:file "_package_PathSegment" :depends-on ("_package"))
     (:file "cRIOSensors" :depends-on ("_package_cRIOSensors"))

@@ -153,7 +153,7 @@ foreach(t ${example_action_server_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;std_msgs;actionlib")
+set(depends "roscpp;std_msgs;actionlib;message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

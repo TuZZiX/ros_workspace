@@ -1,0 +1,7 @@
+bool start
+float64 amplitude
+float64 frequency
+---
+bool success
+---
+float64 cmd_out

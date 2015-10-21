@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: example_robot_tf_listener
+Description: Description of example_robot_tf_listener
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: roscpp tf geometry_msgs
