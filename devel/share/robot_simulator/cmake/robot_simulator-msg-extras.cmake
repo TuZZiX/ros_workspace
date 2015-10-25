@@ -1,2 +1,2 @@
-set(robot_simulator_MESSAGE_FILES "")
+set(robot_simulator_MESSAGE_FILES "/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgAction.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgActionGoal.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgActionResult.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgActionFeedback.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgGoal.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgResult.msg;/home/tianshipei/ros_ws/devel/share/robot_simulator/msg/TrajMsgFeedback.msg")
 set(robot_simulator_SERVICE_FILES "")

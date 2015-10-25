@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: example_eigen
+Description: Description of example_eigen
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: std_msgs tf roscpp sensor_msgs

@@ -5,4 +5,4 @@ Description: Description of move_gazebo_model
 Version: 0.0.0
 Cflags: 
 Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: gazebo_msgs roscpp std_msgs geometry_msgs
+Requires: gazebo_msgs roscpp std_msgs cwru_srv geometry_msgs

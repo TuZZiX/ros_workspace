@@ -9,6 +9,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   message_generation
+  actionlib
+  actionlib_msgs
+  trajectory_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -59,16 +62,18 @@ find_package(Boost REQUIRED COMPONENTS system)
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
+ add_action_files(
+   FILES
+   TrajMsg.action
 #   Action2.action
-# )
+ )
 
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
    std_msgs
+   actionlib_msgs
+   trajectory_msgs
  )
 
 ################################################
@@ -103,7 +108,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robot_simulator
-  CATKIN_DEPENDS gazebo_ros roscpp std_msgs
+  CATKIN_DEPENDS gazebo_ros roscpp std_msgs actionlib_msgs trajectory_msgs
 #  DEPENDS system_lib
 )
 
@@ -129,17 +134,27 @@ include_directories(
 # add_dependencies(robot_simulator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
- add_executable(simulator_controller src/simulator_controller.cpp)
-
+# add_executable(simulator_controller src/simulator_controller.cpp)
+ add_executable(trajectory_controller src/trajectory_controller.cpp)
+ add_executable(trajectory_commander src/trajectory_commander.cpp)
+ add_executable(trajectory_interface src/trajectory_interface.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(robot_simulator_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(simulator_controller
+# target_link_libraries(simulator_controller
+#   ${catkin_LIBRARIES}
+# )
+ target_link_libraries(trajectory_controller
    ${catkin_LIBRARIES}
  )
-
+ target_link_libraries(trajectory_commander
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(trajectory_interface
+   ${catkin_LIBRARIES}
+ )
 #############
 ## Install ##
 #############

@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: example_ros_library_usage
+Description: Description of example_ros_library_usage
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: roscpp example_ros_library std_msgs cmake_modules

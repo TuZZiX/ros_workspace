@@ -1,0 +1,8 @@
+#Goal messages
+trajectory_msgs/JointTrajectory trajectory	#trajectory messages
+---
+#Result messages
+float64 progress	#current rate of progress
+---
+#Feedback messages
+float64 cmd_out		#current output

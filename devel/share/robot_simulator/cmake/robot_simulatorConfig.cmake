@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(robot_simulator_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/home/tianshipei/ros_ws/devel/include " STREQUAL " ")
   set(robot_simulator_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/home/tianshipei/ros_ws/devel/include")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
@@ -153,7 +153,7 @@ foreach(t ${robot_simulator_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "gazebo_ros;roscpp;std_msgs")
+set(depends "gazebo_ros;roscpp;std_msgs;actionlib_msgs;trajectory_msgs")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

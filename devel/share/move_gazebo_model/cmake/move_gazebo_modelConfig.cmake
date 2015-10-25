@@ -153,7 +153,7 @@ foreach(t ${move_gazebo_model_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "gazebo_msgs;roscpp;std_msgs;geometry_msgs")
+set(depends "gazebo_msgs;roscpp;std_msgs;cwru_srv;geometry_msgs")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

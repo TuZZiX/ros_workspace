@@ -109,7 +109,7 @@ if(NOT "/home/tianshipei/ros_ws/devel/include " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "")
+set(libraries "cartesian_moves;cwru_joint_space_planner;actionlib")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -153,7 +153,7 @@ foreach(t ${cartesian_moves_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "baxter_core_msgs;baxter_kinematics;baxter_traj_streamer;cwru_joint_space_planner;cwru_srv;sensor_msgs;moveit_msgs;trajectory_msgs;std_msgs;visualization_msgs;roscpp;actionlib_msgs;actionlib;message_runtime")
+set(depends "roscpp;std_msgs;sensor_msgs;moveit_msgs;baxter_core_msgs;trajectory_msgs;cwru_joint_space_planner;baxter_kinematics;cwru_srv;actionlib_msgs;actionlib")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

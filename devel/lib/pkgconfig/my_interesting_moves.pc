@@ -1,0 +1,8 @@
+prefix=/home/tianshipei/ros_ws/devel
+
+Name: my_interesting_moves
+Description: Description of my_interesting_moves
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: actionlib actionlib_msgs roscpp sensor_msgs std_msgs trajectory_msgs

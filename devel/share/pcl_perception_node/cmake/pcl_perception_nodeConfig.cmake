@@ -109,7 +109,7 @@ if(NOT " " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "")
+set(libraries "pcl_perception_node")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -153,7 +153,7 @@ foreach(t ${pcl_perception_node_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;pcl_ros;pcl_conversions;sensor_msgs;std_msgs;tf;cwru_srv;tf_conversions")
+set(depends "roscpp;std_msgs;sensor_msgs;cwru_srv")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
