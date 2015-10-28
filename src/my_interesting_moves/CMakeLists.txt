@@ -5,6 +5,7 @@ project(my_interesting_moves)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  baxter_traj_streamer
   actionlib
   actionlib_msgs
   roscpp
@@ -12,11 +13,19 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   trajectory_msgs
 )
+find_package(cmake_modules REQUIRED)
+find_package(Eigen REQUIRED)
 
 ## System dependencies are found with CMake's conventions
- find_package(Boost REQUIRED COMPONENTS system)
+include_directories(
+  ${Eigen_INCLUDE_DIRS}
+  ${PROJECT_NAME}/include
+  #${baxter_kinematics_INCLUDE_DIRS}
+)
 
+add_definitions(${EIGEN_DEFINITIONS})
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
@@ -68,10 +77,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   actionlib_msgs   sensor_msgs   std_msgs   trajectory_msgs
- )
+# generate_messages(
+#   DEPENDENCIES
+#   actionlib_msgs   sensor_msgs   std_msgs   trajectory_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -103,10 +112,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES my_interesting_moves
-  CATKIN_DEPENDS actionlib actionlib_msgs roscpp sensor_msgs std_msgs trajectory_msgs
-#  DEPENDS system_lib
+  INCLUDE_DIRS include 
+  LIBRARIES ${PROJECT_NAME} actionlib
+  CATKIN_DEPENDS baxter_traj_streamer roscpp std_msgs sensor_msgs trajectory_msgs baxter_traj_streamer
+  DEPENDS eigen system_lib actionlib
 )
 
 ###########
@@ -117,30 +126,36 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
-# add_library(my_interesting_moves
-#   src/${PROJECT_NAME}/my_interesting_moves.cpp
+# add_library(
+#  ${PROJECT_NAME}  
+  ##src/cwru_baxter/baxter_kinematics/src/baxter_kinematics.cpp
+  ##${PROJECT_NAME}/src/baxter_kinematics.cpp
+  ##${${PROJECT_NAME}_SRCS}
+  ##${PROJECT_NAME}/include/my_interesting_moves.hpp
+  ## src/${PROJECT_NAME}/baxter_kinematics.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(my_interesting_moves ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(interesting_moves_example baxter_traj_streamer_generate_messages_cpp)
 
 ## Declare a C++ executable
-# add_executable(my_interesting_moves_node src/my_interesting_moves_node.cpp)
+ add_executable(interesting_moves_example src/interesting_moves_example.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(my_interesting_moves_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(my_interesting_moves_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(interesting_moves_example
+   baxter_traj_streamer
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
