@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 
     ros::Rate sleep_timer(1.0); //a timer for desired rate, e.g. 1Hz
    
-	ROS_INFO("starting main loop");
+    ROS_INFO:("starting main loop");
     tf::Vector3 origin,row;
     tf::Matrix3x3 R_orientation;
 

@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     std_msgs::Float64 trq_msg;
     std_msgs::Float64 q1_msg,q1dot_msg;
     sensor_msgs::JointState joint_state_msg;
- 
+
     double q1, q1dot;
     double dt = 0.01;
     ros::Duration duration(dt);
