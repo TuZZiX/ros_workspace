@@ -67,14 +67,14 @@ set(baxter_sim_io_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(baxter_sim_io_SOURCE_PREFIX /home/tianshipei/ros_ws/src/baxter_simulator/baxter_sim_io)
-  set(baxter_sim_io_DEVEL_PREFIX /home/tianshipei/ros_ws/devel)
+  set(baxter_sim_io_SOURCE_PREFIX /media/psf/Programming/ros_ws/src/baxter_simulator/baxter_sim_io)
+  set(baxter_sim_io_DEVEL_PREFIX /media/psf/Programming/ros_ws/devel)
   set(baxter_sim_io_INSTALL_PREFIX "")
   set(baxter_sim_io_PREFIX ${baxter_sim_io_DEVEL_PREFIX})
 else()
   set(baxter_sim_io_SOURCE_PREFIX "")
   set(baxter_sim_io_DEVEL_PREFIX "")
-  set(baxter_sim_io_INSTALL_PREFIX /home/tianshipei/ros_ws/install)
+  set(baxter_sim_io_INSTALL_PREFIX /media/psf/Programming/ros_ws/install)
   set(baxter_sim_io_PREFIX ${baxter_sim_io_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(baxter_sim_io_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/tianshipei/ros_ws/src/baxter_simulator/baxter_sim_io/include " STREQUAL " ")
+if(NOT "/media/psf/Programming/ros_ws/src/baxter_simulator/baxter_sim_io/include " STREQUAL " ")
   set(baxter_sim_io_INCLUDE_DIRS "")
-  set(_include_dirs "/home/tianshipei/ros_ws/src/baxter_simulator/baxter_sim_io/include")
+  set(_include_dirs "/media/psf/Programming/ros_ws/src/baxter_simulator/baxter_sim_io/include")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
@@ -103,7 +103,7 @@ if(NOT "/home/tianshipei/ros_ws/src/baxter_simulator/baxter_sim_io/include " STR
         message(FATAL_ERROR "Project 'baxter_sim_io' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  Ask the maintainer 'Rethink Robotics Inc. <rsdk.support@rethinkrobotics.com>' to fix it.")
       endif()
     else()
-      message(FATAL_ERROR "Project 'baxter_sim_io' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/tianshipei/ros_ws/src/baxter_simulator/baxter_sim_io/${idir}'.  Ask the maintainer 'Rethink Robotics Inc. <rsdk.support@rethinkrobotics.com>' to fix it.")
+      message(FATAL_ERROR "Project 'baxter_sim_io' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/media/psf/Programming/ros_ws/src/baxter_simulator/baxter_sim_io/${idir}'.  Ask the maintainer 'Rethink Robotics Inc. <rsdk.support@rethinkrobotics.com>' to fix it.")
     endif()
     _list_append_unique(baxter_sim_io_INCLUDE_DIRS ${include})
   endforeach()
@@ -122,7 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/tianshipei/ros_ws/devel/lib;/home/tianshipei/ros_ws/devel/lib;/opt/ros/indigo/lib)
+    foreach(path /media/psf/Programming/ros_ws/devel/lib;/home/tianshipei/ros_ws/devel/lib;/opt/ros/indigo/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
