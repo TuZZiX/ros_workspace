@@ -11,20 +11,14 @@
 
 #include <baxter_traj_streamer/baxter_traj_streamer.h>
 #include <actionlib/client/simple_action_client.h>
-//this #include refers to the new "action" message defined for this package
-// the action message can be found in: .../baxter_traj_streamer/action/traj.action
-// automated header generation creates multiple headers for message I/O
-// these are referred to by the root name (traj) and appended name (Action)
-// If you write a new client of the server in this package, you will need to include baxter_traj_streamer in your package.xml,
-// and include the header file below
-#include<baxter_traj_streamer/trajAction.h>
+#include <baxter_traj_streamer/trajAction.h>
 
 
-/// <#Description#>
 class Baxter_right_arm
 {
 public:
-///  <#Description#>
+	bool enable_pose_limit = false;
+	///  class constructor, create and connect to the action client to send trajectory commander
 	Baxter_right_arm(ros::NodeHandle* nodehandle)
 	{
 		bool server_exists;
@@ -48,18 +42,18 @@ public:
 			ros::Duration(0.01).sleep();
 		}
 	}
-	///  <#Description#>
+	///  move right arm to a certain pose, waiting for finish
 	///
-	///  @param joint_pose <#joint_pose description#>
+	///  @param joint_pose input:
 	void move(Vectorq7x1 joint_pose)
 	{
 		add_movement(joint_pose);
 		start_move();
 		wait_for_finish();
 	}
-	///  <#Description#>
+	///  move right arm to a certain pose, waiting for finish
 	///
-	///  @param joint_pose <#joint_pose description#>
+	///  @param joint_pose input:
 	void move(const double joint_pose[])
 	{
 		add_movement(joint_pose);
@@ -71,9 +65,18 @@ public:
 	///  @param joint_pose <#joint_pose description#>
 	void add_movement(Vectorq7x1 joint_pose)
 	{
-		q_vec_right_arm = (*traj_streamer).get_qvec_right_arm();
-		q_in_vecxd = q_vec_right_arm; // start from here;
-		des_path.push_back(q_vec_right_arm); //put all zeros here
+		ROS_INFO("Baxter_right_arm: pose [%f, %f, %f, %f, %f, %f, %f] added to the sequence", 
+			joint_pose[0], joint_pose[1], joint_pose[2], joint_pose[3], 
+			joint_pose[4], joint_pose[5], joint_pose[6]);
+		check_limit(joint_pose);
+		ros::spinOnce();
+		if (first_cmd == true)
+		{
+			q_vec_right_arm = (*traj_streamer).get_qvec_right_arm();
+			q_in_vecxd = q_vec_right_arm; // start from here;
+			des_path.push_back(q_vec_right_arm); //put all zeros here
+			first_cmd = false;
+		}
 		q_in_vecxd = joint_pose; // conversion; not sure why I needed to do this...but des_path.push_back(q_in_vecxd) likes it
 		des_path.push_back(joint_pose); //twice, to define a trajectory
 	}
@@ -93,23 +96,24 @@ public:
 	{
 		(*traj_streamer).stuff_trajectory(des_path, joint_traj); //convert from vector of 7dof poses to trajectory message
 		des_path.clear();
+		first_cmd = true;
 		goal_.trajectory = joint_traj;
 		goal_.traj_id = g_cnt;
 		g_cnt++;
 		(*as_).sendGoal(goal_);
-		while (check_state().compare("ACTIVE") != 0);
-		ROS_INFO("Baxter_right_arm: goal accepted");
+		while (check_as_state().compare("ACTIVE") != 0);
+		ROS_INFO("Baxter_right_arm: goal number %d accepted", g_cnt);
 	}
 ///  <#Description#>
 	void stop_move()
 	{
 		(*as_).cancelGoal();
-		ROS_INFO("Baxter_right_arm: goal cancelled");
+		ROS_INFO("Baxter_right_arm: goal number %d cancelled", g_cnt);
 	}
 	///  <#Description#>
 	///
 	///  @return <#return value description#>
-	std::string check_state()
+	std::string check_as_state()
 	{
 		return ((*as_).getState()).toString();
 	}
@@ -132,13 +136,8 @@ public:
 				return false;
 			}
 		}
-		ROS_INFO("Baxter_right_arm: finished before timeout");
+		ROS_INFO("Baxter_right_arm: goal number %d finished before timeout", g_cnt);
 		return true;
-	}
-///  <#Description#>
-	void back_to_orignal()
-	{
-		move(orignal_pose_right);
 	}
 	///  <#Description#>
 	///
@@ -147,49 +146,79 @@ public:
 	{
 		for (int i = 0; i < times; i++)
 		{
-			move(wave_pose_right_1);
-			move(wave_pose_right_2);
+			move(wave_pose_right[1]);
+			move(wave_pose_right[2]);
+			move(wave_pose_right[1]);
+			move(wave_pose_right[0]);
+			move(wave_pose_right[1]);
 		}
 	}
-///  <#Description#>
 	void push_beer()
 	{
-		move(push_pose_right_1);
-		move(push_pose_right_2);
+		move(push_pose_right[0]);
+		move(push_pose_right[1]);
+		move(push_pose_right[2]);
+	}
+	void move_above_table()
+	{
+		move(table_pose_right[0]);
+		move(table_pose_right[1]);
 	}
 private:
-	///  <#Description#>
-	const double wave_pose_right_1[7] = {
-		-0.907528, -0.111813,   2.06622,    1.8737,    -1.295,   2.00164,  -2.87179
+	const double wave_pose_right[3][7] = {
+		{0.5, 0, 0, 0, 0.5, -1.74, 0},
+		{0.5, 0, 0, 0, 0, -1.74, 0},
+		{0.5, 0, 0, 0, -0.5, -1.74, 0}
 	};
-	const double wave_pose_right_2[7] = {
-		-0.907528, -0.111813,   2.06622,    1.8737,    -1.295,   2.00164,  -2.87179
+	const double push_pose_right[3][7] = {
+		{0.7, 0.2, 0.4, 0.7, -0.3, -0.7, 0},
+		{1.0, 0.2, 0.4, 0.7, -0.3, -0.7, 0},
+		{1.3, 0.2, 0.4, 0.7, -0.3, -0.7, 0}
 	};
-	const double push_pose_right_1[7] = {
-		-0.907528, -0.111813,   2.06622,    1.8737,    -1.295,   2.00164,  -2.87179
+	const double table_pose_right[2][7] = {
+		{-0.6, 0.6, 0, -0.4, 0, -1, 0},
+		{0.5, 0.2, 0, 0.4, 0, -0.7, 0}
 	};
-	const double push_pose_right_2[7] = {
-		-0.907528, -0.111813,   2.06622,    1.8737,    -1.295,   2.00164,  -2.87179
+	const double pose_limit[2][7] = {
+		{M_PI/2, M_PI/4, M_PI/2, M_PI/4, M_PI/2, M_PI/4, M_PI/2,},			//from position in col 1 to position in col 2
+		{-M_PI/2, -M_PI/4, -M_PI/2, -M_PI/6, -M_PI/2, -M_PI/4, -M_PI/2,}
 	};
-	const double orignal_pose_right[7] = {
-		0, 0, 0, 0, 0, 0, 0
-	};
-///  <#Description#>
 	actionlib::SimpleActionClient<baxter_traj_streamer::trajAction> *as_;
-///  <#Description#>
 	baxter_traj_streamer::trajGoal goal_;
-///  <#Description#>
 	trajectory_msgs::JointTrajectory joint_traj;
-///  <#Description#>
 	Baxter_traj_streamer *traj_streamer;
-///  <#Description#>
 	int g_cnt;
-///  <#Description#>
+	bool first_cmd = true;
 	Eigen::VectorXd q_in_vecxd;
-///  <#Description#>
 	Vectorq7x1 q_vec_right_arm;
-///  <#Description#>
 	std::vector<Eigen::VectorXd> des_path;
+	
+	bool check_limit(Vectorq7x1 &joint_pose)
+	{
+		bool all_correct = true;
+		if (enable_pose_limit == true)
+		{
+			for (int i = 0; i < 7; i++)
+			{
+				if (joint_pose[i] > pose_limit[0][i])
+				{
+					joint_pose[i] = pose_limit[0][i];
+					ROS_WARN("joint_pose[i] is above upper limit");
+					all_correct = false;
+				}
+				if (joint_pose[i] < pose_limit[1][i])
+				{
+					joint_pose[i] = pose_limit[1][i];
+					ROS_WARN("joint_pose[i] is below lower limit");
+					all_correct = false;
+				}
+			}
+			ROS_INFO("Baxter_right_arm: pose after adjust: [%f, %f, %f, %f, %f, %f, %f]", 
+			joint_pose[0], joint_pose[1], joint_pose[2], joint_pose[3], 
+			joint_pose[4], joint_pose[5], joint_pose[6]);
+		}
+	}
+
 };
 
 #endif /* my_interesting_moves_node_hpp */
