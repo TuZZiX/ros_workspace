@@ -14,7 +14,7 @@ const double impossible_pose[] = {-4, 5, 6, -7, 8, -9, 10};
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "traj_action_client_node");   // name this node
+    ros::init(argc, argv, "interesting_moves_example");   // name this node
     ros::NodeHandle nh;                                 // standard ros node handle
     ros::Duration(sleep_time).sleep();                  // wait for other nodes
     Baxter_right_arm right_arm(&nh);                    // create our object

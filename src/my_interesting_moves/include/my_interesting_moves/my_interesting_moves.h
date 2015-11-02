@@ -113,14 +113,17 @@ public:
     ///
     void start_move()
     {
-        // convert from vector of 7dof poses to trajectory message
+		if (check_as_state("ACTIVE")) {
+			stop_move();
+		}
+		// convert from vector of 7dof poses to trajectory message
         (*traj_streamer).stuff_trajectory(des_path, joint_traj);
         des_path.clear();                // clear the sequence
         first_cmd = true;                // also clear the flag
         goal_.trajectory = joint_traj;   // fill the goal
         goal_.traj_id = g_cnt++;         // also increase the goal count
         (*as_).sendGoal(goal_);          // sent goal to interpolator_as to start moving
-        while (check_as_state().compare("ACTIVE") != 0)   // make sure the goal have been accepted
+        while (!check_as_state("ACTIVE"))   // make sure the goal have been accepted
         {
             ros::spinOnce();
             ros::Duration(0.01).sleep();
@@ -146,9 +149,9 @@ public:
     ///  LOST
     ///
     ///  @return string of current action server state, compare it with state above
-    std::string check_as_state()
+	bool check_as_state(const char state_wanted[])
     {
-        return ((*as_).getState()).toString();    // return the string of action server state
+        return ((*as_).getState()).toString().compare(state_wanted);    // return the string of action server state
     }
     ///  wait for the current movement to finish in a certain time
     ///
@@ -245,18 +248,18 @@ private:
             {
                 if ((*pose_to_check)[i] > pose_limit[0][i])                        // check upper limit
                 {
-                    (*pose_to_check)[i] = pose_limit[0][i];                        // adjust the angle
-                    ROS_WARN("joint_pose[%d] is above upper limit", i);
+					ROS_WARN("joint_pose[%d] is above upper limit, will adjust from %f to %f", i, (*pose_to_check)[i], pose_limit[0][i]);
+					(*pose_to_check)[i] = pose_limit[0][i];                        // adjust the angle
                     all_correct = false;
                 }
                 if ((*pose_to_check)[i] < pose_limit[1][i])                        // check lower limit
                 {
-                    (*pose_to_check)[i] = pose_limit[1][i];
-                    ROS_WARN("joint_pose[%d] is below lower limit", i);
+					ROS_WARN("joint_pose[%d] is below lower limit, will adjust from %f to %f", i, (*pose_to_check)[i], pose_limit[1][i]);
+					(*pose_to_check)[i] = pose_limit[1][i];
                     all_correct = false;
                 }
             }
-            ROS_INFO("Baxter_right_arm: pose after adjust: [%f, %f, %f, %f, %f, %f, %f]",
+            ROS_INFO("Baxter_right_arm: pose after adjustment: [%f, %f, %f, %f, %f, %f, %f]",
             (*pose_to_check)[0], (*pose_to_check)[1], (*pose_to_check)[2], (*pose_to_check)[3],
             (*pose_to_check)[4], (*pose_to_check)[5], (*pose_to_check)[6]);
         }
