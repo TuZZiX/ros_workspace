@@ -1,7 +1,0 @@
-float64 amplitude
-float64 frequency
-uint32 cycles
----
-uint32 total_cycle
----
-float64 cmd_out

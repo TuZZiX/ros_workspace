@@ -1,5 +1,0 @@
-<launch>
-
-<include file="$(find cwru_baxter_sim)/baxter_world.launch"/>
-
-</launch>
