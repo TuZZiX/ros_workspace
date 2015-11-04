@@ -1,8 +1,8 @@
-prefix=/media/psf/Programming/ros_ws/devel
+prefix=/home/tianshipei/ros_ws/devel
 
 Name: move_gazebo_model
 Description: Description of move_gazebo_model
 Version: 0.0.0
 Cflags: 
-Libs: -L/media/psf/Programming/ros_ws/devel/lib 
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
 Requires: gazebo_msgs roscpp std_msgs cwru_srv geometry_msgs

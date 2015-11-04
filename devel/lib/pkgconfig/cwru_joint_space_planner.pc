@@ -1,8 +1,8 @@
-prefix=/media/psf/Programming/ros_ws/devel
+prefix=/home/tianshipei/ros_ws/devel
 
 Name: cwru_joint_space_planner
 Description: Description of cwru_joint_space_planner
 Version: 0.0.0
-Cflags: -I/media/psf/Programming/ros_ws/src/cwru_baxter/cwru_joint_space_planner/include
-Libs: -L/media/psf/Programming/ros_ws/devel/lib -lcwru_joint_space_planner
+Cflags: -I/home/tianshipei/ros_ws/src/cwru_baxter/cwru_joint_space_planner/include
+Libs: -L/home/tianshipei/ros_ws/devel/lib -lcwru_joint_space_planner
 Requires: roscpp std_msgs baxter_core_msgs

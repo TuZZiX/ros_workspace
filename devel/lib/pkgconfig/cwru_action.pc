@@ -1,8 +1,8 @@
-prefix=/media/psf/Programming/ros_ws/devel
+prefix=/home/tianshipei/ros_ws/devel
 
 Name: cwru_action
 Description: Description of cwru_action
 Version: 0.0.0
-Cflags: -I/media/psf/Programming/ros_ws/devel/include
-Libs: -L/media/psf/Programming/ros_ws/devel/lib 
-Requires: roscpp std_msgs actionlib message_generation message_runtime
+Cflags: -I/home/tianshipei/ros_ws/devel/include
+Libs: -L/home/tianshipei/ros_ws/devel/lib 
+Requires: roscpp std_msgs trajectory_msgs actionlib message_generation message_runtime

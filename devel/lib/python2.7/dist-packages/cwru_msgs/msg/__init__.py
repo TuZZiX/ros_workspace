@@ -1,5 +1,6 @@
 from ._PathSegment import *
 from ._PowerState import *
+from ._VecOfDoubles import *
 from ._Pose import *
 from ._ErrorCode import *
 from ._DesiredState import *

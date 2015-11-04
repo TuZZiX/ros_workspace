@@ -5,12 +5,25 @@
   :depends-on (:roslisp-msg-protocol :roslisp-utils :actionlib_msgs-msg
                :geometry_msgs-msg
                :std_msgs-msg
+               :trajectory_msgs-msg
 )
   :components ((:file "_package")
+    (:file "trajActionGoal" :depends-on ("_package_trajActionGoal"))
+    (:file "_package_trajActionGoal" :depends-on ("_package"))
+    (:file "trajActionResult" :depends-on ("_package_trajActionResult"))
+    (:file "_package_trajActionResult" :depends-on ("_package"))
+    (:file "trajGoal" :depends-on ("_package_trajGoal"))
+    (:file "_package_trajGoal" :depends-on ("_package"))
     (:file "cart_moveFeedback" :depends-on ("_package_cart_moveFeedback"))
     (:file "_package_cart_moveFeedback" :depends-on ("_package"))
+    (:file "trajActionFeedback" :depends-on ("_package_trajActionFeedback"))
+    (:file "_package_trajActionFeedback" :depends-on ("_package"))
     (:file "cart_moveGoal" :depends-on ("_package_cart_moveGoal"))
     (:file "_package_cart_moveGoal" :depends-on ("_package"))
+    (:file "trajAction" :depends-on ("_package_trajAction"))
+    (:file "_package_trajAction" :depends-on ("_package"))
+    (:file "trajResult" :depends-on ("_package_trajResult"))
+    (:file "_package_trajResult" :depends-on ("_package"))
     (:file "cart_moveAction" :depends-on ("_package_cart_moveAction"))
     (:file "_package_cart_moveAction" :depends-on ("_package"))
     (:file "cart_moveActionGoal" :depends-on ("_package_cart_moveActionGoal"))
@@ -21,4 +34,6 @@
     (:file "_package_cart_moveActionFeedback" :depends-on ("_package"))
     (:file "cart_moveActionResult" :depends-on ("_package_cart_moveActionResult"))
     (:file "_package_cart_moveActionResult" :depends-on ("_package"))
+    (:file "trajFeedback" :depends-on ("_package_trajFeedback"))
+    (:file "_package_trajFeedback" :depends-on ("_package"))
   ))
