@@ -26,6 +26,8 @@
     (:file "_package_PowerState" :depends-on ("_package"))
     (:file "ErrorCode" :depends-on ("_package_ErrorCode"))
     (:file "_package_ErrorCode" :depends-on ("_package"))
+    (:file "PatchParams" :depends-on ("_package_PatchParams"))
+    (:file "_package_PatchParams" :depends-on ("_package"))
     (:file "NavSatFix" :depends-on ("_package_NavSatFix"))
     (:file "_package_NavSatFix" :depends-on ("_package"))
   ))

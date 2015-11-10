@@ -22,6 +22,8 @@
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/TransformStamped.h>
 
+#include <cwru_msgs/PatchParams.h>
+
 #include <tf/transform_listener.h>  // transform listener headers
 #include <tf/transform_broadcaster.h>
 
@@ -58,6 +60,8 @@ public:
     void fit_points_to_plane(Eigen::MatrixXf points_array, 
         Eigen::Vector3f &plane_normal, 
         double &plane_dist); 
+    Eigen::Vector3f compute_centroid(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr);
+    
     void fit_points_to_plane(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr,Eigen::Vector3f &plane_normal, double &plane_dist);
     void fit_xformed_selected_pts_to_plane(Eigen::Vector3f &plane_normal, double &plane_dist);  
 
@@ -82,20 +86,27 @@ public:
     bool got_selected_points() {return got_selected_points_;};
     void save_kinect_snapshot() {    pcl::io::savePCDFileASCII ("kinect_snapshot.pcd", *pclKinect_ptr_);};
     void save_transformed_kinect_snapshot() { pcl::io::savePCDFileASCII ("xformed_kinect_snapshot.pcd", *pclTransformed_ptr_);};
-
+    void get_transformed_selected_points(pcl::PointCloud<pcl::PointXYZ> & outputCloud );
+    void copy_cloud(PointCloud<pcl::PointXYZ>::Ptr inputCloud, PointCloud<pcl::PointXYZ>::Ptr outputCloud); 
+    void get_gen_purpose_cloud(pcl::PointCloud<pcl::PointXYZ> & outputCloud );    
+    void example_pcl_operation();
+    
 private:
     ros::NodeHandle nh_; 
     // some objects to support subscriber, service, and publisher
     ros::Subscriber pointcloud_subscriber_; //use this to subscribe to a pointcloud topic
     ros::Subscriber selected_points_subscriber_; // this to subscribe to "selectedPoints" topic from Rviz
+
     
     //ros::ServiceServer minimal_service_; //maybe want these later
     ros::Publisher  pointcloud_publisher_;
+    ros::Publisher patch_publisher_;    
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr pclKinect_ptr_; //(new PointCloud<pcl::PointXYZ>);
     pcl::PointCloud<pcl::PointXYZ>::Ptr pclTransformed_ptr_;
     pcl::PointCloud<pcl::PointXYZ>::Ptr pclSelectedPoints_ptr_;
     pcl::PointCloud<pcl::PointXYZ>::Ptr pclTransformedSelectedPoints_ptr_;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr pclGenPurposeCloud_ptr_;
     
     bool got_kinect_cloud_;
     bool got_selected_points_;

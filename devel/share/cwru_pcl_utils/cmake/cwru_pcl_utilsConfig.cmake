@@ -153,7 +153,7 @@ foreach(t ${cwru_pcl_utils_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;pcl_ros;pcl_conversions;sensor_msgs;std_msgs;tf;cwru_srv")
+set(depends "roscpp;pcl_ros;pcl_conversions;sensor_msgs;std_msgs;tf;cwru_srv;cwru_msgs")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
