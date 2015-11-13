@@ -1,3 +1,10 @@
 # My ROS Workspace
 
-The whole catkin workspace folder
+Source code only, you need to do 
+
+	catkin_make
+
+	catkin_make install
+
+before you run this code
+
