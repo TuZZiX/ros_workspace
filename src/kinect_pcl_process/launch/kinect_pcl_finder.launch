@@ -1,0 +1,10 @@
+<launch>
+
+<node pkg="tf" type="static_transform_publisher" name="camera_link_frame_bdcst" args="0 0 0  0 0 0 1 kinect_link camera_link 100"/>
+<node pkg="tf" type="static_transform_publisher" name="kinect_calib" args="0 0 0 -0.500 0.500 -0.500 0.500 kinect_link kinect_pc_frame 100"/>
+
+<node pkg="kinect_pcl_process" type="kinect_pcl_finder" name="kinect_pcl_finder" output="screen"/>
+
+<node pkg="rviz" type="rviz" name="rviz"/>
+
+</launch>

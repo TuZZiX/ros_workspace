@@ -1,3 +1,4 @@
+from ._CollisionAvoidanceState import *
 from ._CameraSettings import *
 from ._AnalogIOState import *
 from ._NavigatorState import *
@@ -6,7 +7,7 @@ from ._CameraControl import *
 from ._RobustControllerStatus import *
 from ._HeadState import *
 from ._EndEffectorProperties import *
-from ._CollisionAvoidanceState import *
+from ._NavigatorStates import *
 from ._EndpointStates import *
 from ._EndEffectorCommand import *
 from ._ITBState import *
@@ -19,8 +20,7 @@ from ._AssemblyState import *
 from ._ITBStates import *
 from ._DigitalOutputCommand import *
 from ._DigitalIOState import *
-from ._JointCommand import *
+from ._CollisionDetectionState import *
 from ._AnalogOutputCommand import *
 from ._AssemblyStates import *
-from ._CollisionDetectionState import *
-from ._NavigatorStates import *
+from ._JointCommand import *

@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: cartesian_moves
-Description: Description of cartesian_moves
-Version: 0.0.0
-Cflags: -I/home/tianshipei/ros_ws/devel/include
-Libs: -L/home/tianshipei/ros_ws/devel/lib -lcartesian_moves -lcwru_joint_space_planner -lactionlib
-Requires: roscpp std_msgs sensor_msgs moveit_msgs baxter_core_msgs trajectory_msgs cwru_joint_space_planner baxter_kinematics cwru_srv actionlib_msgs actionlib

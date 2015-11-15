@@ -186,7 +186,6 @@ void trajActionServer::executeCB(const actionlib::SimpleActionServer<cwru_action
     if (npts  < 2) {
         ROS_WARN("too few points; aborting goal");
         as_.setAborted(result_);
-		return;
     } else { //OK...have a valid trajectory goal; execute it
         //got_new_goal = true;
         //got_new_trajectory = true;
@@ -226,20 +225,9 @@ void trajActionServer::executeCB(const actionlib::SimpleActionServer<cwru_action
         cout << "traj_clock: " << traj_clock << "; vec:" << qvec_new.transpose() << endl;
         ros::spinOnce();
         ros::Duration(dt_traj).sleep(); //update the outputs at time-step resolution specified by dt_traj
-		if (as_.isPreemptRequested()){	//check cancel request
-			working_on_trajectory = false;
-		}
     }
-	if (working_on_trajectory) {
-		ROS_INFO("completed execution of a trajectory" );
-		as_.setSucceeded(result_); // tell the client that we were successful acting on the request, and return the "result" message
-	}
-	else
-	{
-		ROS_INFO("action cancelled by user" );
-		as_.setAborted(result_); // giveup the request, and return a "result" message to the client
-	}
-	
+    ROS_INFO("completed execution of a trajectory" );
+    as_.setSucceeded(result_); // tell the client that we were successful acting on the request, and return the "result" message 
 }
 
 int main(int argc, char** argv) {

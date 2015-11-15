@@ -1,6 +1,0 @@
-bool start
-double amp_cmd
-double feq_cmd
----
-bool success
-

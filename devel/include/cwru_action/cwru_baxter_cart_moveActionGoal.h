@@ -125,12 +125,12 @@ struct MD5Sum< ::cwru_action::cwru_baxter_cart_moveActionGoal_<ContainerAllocato
 {
   static const char* value()
   {
-    return "87779332fb6b4ca3be0cc01d1105e311";
+    return "0dd8083c14e4b775a204ee3c6bf9d4ed";
   }
 
   static const char* value(const ::cwru_action::cwru_baxter_cart_moveActionGoal_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x87779332fb6b4ca3ULL;
-  static const uint64_t static_value2 = 0xbe0cc01d1105e311ULL;
+  static const uint64_t static_value1 = 0x0dd8083c14e4b775ULL;
+  static const uint64_t static_value2 = 0xa204ee3c6bf9d4edULL;
 };
 
 template<class ContainerAllocator>
@@ -203,6 +203,7 @@ uint8 ARM_TEST_MODE =0\n\
 \n\
 #queries\n\
 uint8 ARM_IS_SERVER_BUSY_QUERY = 1\n\
+\n\
 uint8 ARM_QUERY_IS_PATH_VALID = 2\n\
 uint8 RT_ARM_GET_Q_DATA = 3\n\
 uint8 LEFT_ARM_GET_Q_DATA = 4\n\
@@ -213,7 +214,6 @@ uint8 LEFT_ARM_GET_TOOL_POSE = 5\n\
 uint8 RT_ARM_PLAN_PATH_CURRENT_TO_GOAL_POSE=20 #plan paths from current arm pose\n\
 uint8 RT_ARM_PLAN_PATH_CURRENT_TO_PRE_POSE=21\n\
 \n\
-\n\
 uint8 RT_ARM_PLAN_JSPACE_PATH_CURRENT_TO_PRE_POSE=22\n\
 uint8 RT_ARM_PLAN_JSPACE_PATH_CURRENT_TO_QGOAL=23\n\
 \n\
@@ -222,7 +222,7 @@ uint8 RT_ARM_PLAN_JSPACE_PATH_CURRENT_TO_QGOAL=23\n\
 uint8 RT_ARM_PLAN_PATH_QSTART_TO_QGOAL = 25\n\
 uint8 RT_ARM_PLAN_PATH_QSTART_TO_ADES = 24 #specify start and end, j-space start, affine desired end\n\
 \n\
-uint8 RT_ARM_PLAN_PATH_ASTART_TO_QGOAL = 26 #specified affine start, joint-space goal\n\
+#uint8 RT_ARM_PLAN_PATH_ASTART_TO_QGOAL = 26 #specified affine start, joint-space goal\n\
 uint8 RT_ARM_PLAN_PATH_CURRENT_TO_GOAL_DP_XYZ = 27 #rectilinear translation w/ fixed orientation\n\
 \n\
 # request to preview plan:\n\
@@ -230,22 +230,10 @@ uint8 RT_ARM_DISPLAY_TRAJECTORY = 50\n\
 \n\
 #MOVE commands!\n\
 uint8 RT_ARM_EXECUTE_PLANNED_PATH = 100\n\
-uint8 RT_ARM_DESCEND_20CM=101\n\
-uint8 RT_ARM_DEPART_20CM=102\n\
 \n\
-#  response codes...\n\
-uint8 ARM_STATUS_UNDEFINED=0\n\
-uint8 ARM_RECEIVED_AND_INITIATED_RQST=1\n\
-uint8 ARM_REQUEST_REJECTED_ALREADY_BUSY=2\n\
-uint8 ARM_SERVER_NOT_BUSY=3\n\
-uint8 ARM_SERVER_IS_BUSY=4\n\
-uint8 ARM_RECEIVED_AND_COMPLETED_RQST=5\n\
-uint8 RT_ARM_PATH_IS_VALID=6\n\
-uint8 RT_ARM_PATH_NOT_VALID=7\n\
+#uint8 RT_ARM_DESCEND_20CM=101\n\
+#uint8 RT_ARM_DEPART_20CM=102\n\
 \n\
-uint8 COMMAND_CODE_NOT_RECOGNIZED=8\n\
-uint8 SUCCESS=9\n\
-uint8 NOT_FINISHED_BEFORE_TIMEOUT=10\n\
 \n\
 #goal:\n\
 int32 command_code\n\
