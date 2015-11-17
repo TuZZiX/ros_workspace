@@ -4,10 +4,10 @@
 ///This class provides example functions using the Point Cloud Library to operate
 /// on point-cloud data
 
-#ifndef CWRU_PCL_UTILS_H_
-#define CWRU_PCL_UTILS_H_
+#ifndef KINECT_PCL_PROCESS_H_
+#define KINECT_PCL_PROCESS_H_
 
-#include<ros/ros.h> //generic C++ stuff
+#include <ros/ros.h> //generic C++ stuff
 #include <stdlib.h>
 #include <math.h>
 #include <iostream>
@@ -93,10 +93,7 @@ public:
     void get_gen_purpose_cloud(pcl::PointCloud<pcl::PointXYZ> & outputCloud );
     void example_pcl_operation();
     void find_plane();
-
-    double plane_tolerance;
-    double beer_tolerance;
-    double beer_z_axis;
+	void find_swip_pos(std::vector<Eigen::Vector3f> &key_position);
 
     Eigen::Vector3f get_centroid() { return centroid_; };
     Eigen::Vector3f get_major_axis() { return major_axis_; };
@@ -122,6 +119,10 @@ private:
 
     bool got_kinect_cloud_;
     bool got_selected_points_;
+	
+	double plane_tolerance;
+	double beer_tolerance;
+	double beer_z_axis;
     // member methods as well:
     void initializeSubscribers(); // we will define some helper methods to encapsulate the gory details of initializing subscribers, publishers and services
     void initializePublishers();
@@ -135,5 +136,6 @@ private:
     //bool serviceCallback(example_srv::simple_bool_service_messageRequest& request, example_srv::simple_bool_service_messageResponse& response);
 
 }; // note: a class definition requires a semicolon at the end of the definition
+
 
 #endif  // this closes the header-include trick...ALWAYS need one of these to match #ifndef

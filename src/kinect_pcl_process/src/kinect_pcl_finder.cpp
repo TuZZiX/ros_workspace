@@ -10,13 +10,27 @@
 // rosrun cwru_pcl_utils 
 
 #include <kinect_pcl_process/kinect_pcl_process.h>
+#include <kinect_pcl_process/arm_motion_commander.h>
 
 using namespace std;
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "kinect_pcl_finder"); //node name
     ros::NodeHandle nh;
-    KinectPclProcess cwru_pcl_utils(&nh);
+	Eigen::Vector3f plane_normal;
+	double plane_dist;
+	int rtn_val;
+	std::vector<geometry_msgs::PoseStamped> tool_pose;
+	Eigen::Quaterniond default_quat;
+	std::vector<Eigen::Vector3f> route_pos;
+	default_quat.x() = 1.0;
+	default_quat.y() = 0.0;
+	default_quat.z() = 0.0;
+	default_quat.w() = 0.0;
+	
+	KinectPclProcess cwru_pcl_utils(&nh);
+	ArmMotionCommander arm_motion_commander(&nh);
+	
     while (!cwru_pcl_utils.got_kinect_cloud()) {
         ROS_INFO("did not receive pointcloud");
         ros::spinOnce();
@@ -63,31 +77,41 @@ int main(int argc, char** argv) {
     //save this transformed data to disk:
     cwru_pcl_utils.save_transformed_kinect_snapshot();
 
-    Eigen::Vector3f plane_normal;
-    double plane_dist;
-    while (ros::ok()) {
-        if (cwru_pcl_utils.got_selected_points()) {
-            ROS_INFO("transforming selected points");
-            cwru_pcl_utils.transform_selected_points_cloud(A_sensor_wrt_torso);
-            //fit a plane to these selected points:
-            cwru_pcl_utils.fit_xformed_selected_pts_to_plane(plane_normal, plane_dist);
-            ROS_INFO_STREAM(" normal: " << plane_normal.transpose() << "; dist = " << plane_dist);
-
-            //here is a function to get a copy of the transformed, selected points;
-            //cwru_pcl_utils.get_transformed_selected_points(display_cloud);
-            //alternative: compute and get offset points from selected, transformed points
-            cwru_pcl_utils.find_plane(); // offset the transformed, selected points and put result in gen-purpose object
-            cwru_pcl_utils.get_gen_purpose_cloud(display_cloud);
-            cwru_pcl_utils.reset_got_selected_points();   // reset the selected-points trigger
-        }
-        pcl::toROSMsg(display_cloud, pcl2_display_cloud); //convert datatype to compatible ROS message type for publication
-        pcl2_display_cloud.header.stamp = ros::Time::now(); //update the time stamp, so rviz does not complain
-        pcl2_display_cloud.header.frame_id = "torso";
-        pubCloud.publish(pcl2_display_cloud); //publish a point cloud that can be viewed in rviz (under topic pcl_cloud_display)
-
-        cwru_pcl_utils.reset_got_kinect_cloud();
-        ros::Duration(0.5).sleep(); // sleep for half a second
-        ros::spinOnce();
+	while (ros::ok()) {
+		if (cwru_pcl_utils.got_selected_points()) {
+			ROS_INFO("transforming selected points");
+			cwru_pcl_utils.transform_selected_points_cloud(A_sensor_wrt_torso);
+			cwru_pcl_utils.transform_kinect_cloud(A_sensor_wrt_torso);
+			//fit a plane to these selected points:
+			cwru_pcl_utils.fit_xformed_selected_pts_to_plane(plane_normal, plane_dist);
+			ROS_INFO_STREAM(" normal: " << plane_normal.transpose() << "; dist = " << plane_dist);
+			
+			//here is a function to get a copy of the transformed, selected points;
+			//cwru_pcl_utils.get_transformed_selected_points(display_cloud);
+			//alternative: compute and get offset points from selected, transformed points
+			cwru_pcl_utils.find_plane(); // offset the transformed, selected points and put result in gen-purpose object
+			cwru_pcl_utils.find_swip_pos(route_pos);
+			arm_motion_commander.conv_to_pose(tool_pose, route_pos, default_quat);
+			
+			cwru_pcl_utils.get_gen_purpose_cloud(display_cloud);
+			cwru_pcl_utils.reset_got_selected_points();   // reset the selected-points trigger
+			cwru_pcl_utils.reset_got_kinect_cloud();
+			for (int i = 0; i < tool_pose.size(); i++) {
+				rtn_val=arm_motion_commander.rt_arm_plan_path_current_to_goal_pose(tool_pose[i]);
+				if (rtn_val == cwru_action::cwru_baxter_cart_moveResult::SUCCESS)  {
+					//send command to execute planned motion
+					rtn_val=arm_motion_commander.rt_arm_execute_planned_path();
+				}
+			}
+		}
+		pcl::toROSMsg(display_cloud, pcl2_display_cloud); //convert datatype to compatible ROS message type for publication
+		pcl2_display_cloud.header.stamp = ros::Time::now(); //update the time stamp, so rviz does not complain
+		pcl2_display_cloud.header.frame_id = "torso";
+		pubCloud.publish(pcl2_display_cloud); //publish a point cloud that can be viewed in rviz (under topic pcl_cloud_display)
+		
+		ros::Duration(0.5).sleep(); // sleep for half a second
+		ros::spinOnce();
+	}  ros::spinOnce();
     }
     ROS_INFO("my work here is done!");
 

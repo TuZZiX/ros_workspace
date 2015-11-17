@@ -281,7 +281,7 @@ void KinectPclProcess::example_pcl_operation() {
 void KinectPclProcess::find_plane() {
     centroid_ = compute_centroid(pclTransformedSelectedPoints_ptr_);
     int kinpts = pclTransformed_ptr_->points.size(); //number of points
-    ROS_INFO("calculate points with Z:%f",centroid_[2]);
+    ROS_INFO("selected points has Z axis:%f",centroid_[2]);
     int nptr = 0;
     pclGenPurposeCloud_ptr_->clear();
     /*MatrixXf kinect = pclTransformed_ptr_->getMatrixXfMap();
@@ -306,8 +306,116 @@ void KinectPclProcess::find_plane() {
         }
     }
     ROS_INFO("%d points are on this plane", nptr); 
-} 
-
+}
+#define pt (pclGenPurposeCloud_ptr_->points[i].getVector3fMap())
+#define ptx (pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[0])
+#define pty (pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[1])
+#define ptz	(pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[2])
+void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position) {
+	if (pclGenPurposeCloud_ptr_->points.size > 0) {
+		Eigen::Vector3f left_up, left_down, right_up, right_down;
+		Eigen::Vector3f selcentriod = compute_centroid(pclGenPurposeCloud_ptr_);
+		left_up = 0;
+		left_down = 0;
+		right_up = 0;
+		right_down = 0;
+		for (int j = 0; i < pclGenPurposeCloud_ptr_->Points.size(); j++) {
+			pt -= selcentriod;
+		}
+		for (int i = 1; i < pclGenPurposeCloud_ptr_->Points.size(); i++) {
+			if (ptx > 0 && pty > 0) {
+				if ((ptx+pty) > (right_up[0]+right_up[1])) {
+					right_up = pt;
+				}
+			}
+			if (ptx > 0 && pty < 0) {
+				if ((ptx+abs(pty)) > (right_down[0]+abs(right_down[1]))) {
+					right_down = pt;
+				}
+			}
+			if (ptx < 0 && pty > 0) {
+				if ((abs(ptx)+pty) > (abs(left_up[0])+left_up[1])) {
+					left_up = pt;
+				}
+			}
+			if (ptx < 0 && pty < 0) {
+				if ((abs(ptx)+abs(pty)) > (abs(left_down[0])+abs(left_down[1]))) {
+					left_down = pt;
+				}
+			}
+		}
+		left_up += selcentriod;
+		left_down += selcentriod;
+		right_up += selcentriod;
+		right_down += selcentriod;
+		
+		if (abs(left_up[0] - right_up[0]) > 0.1) {
+			if (left_up[0] > right_up[0]) {
+				right_up[0] = left_up[0];
+			} else {
+				left_up[0] = right_up[0];
+			}
+		}
+		if (abs(left_down[0] - right_down[0]) > 0.1) {
+			if (left_down[0] < right_down[0]) {
+				right_down[0] = left_down[0];
+			} else {
+				left_down[0] = right_down[0];
+			}
+		}
+		if (abs(left_up[1] - left_down[1]) > 0.1) {
+			if (left_up[1] < left_down[1]) {
+				left_down[1] = left_up[1];
+			} else {
+				left_up[1] = left_down[1];
+			}
+		}
+		if (abs(right_up[1] - right_down[1]) > 0.1) {
+			if (right_up[1] > right_down[1]) {
+				right_down[1] = right_up[1];
+			} else {
+				right_up[1] = right_down[1];
+			}
+		}
+		key_position.resize(10);
+		key_position[0] = centroid_;
+		
+		int x;
+		int cnt = 1;
+		const int wipe_const = 0.2;
+		
+		for (int col = 0; 1 ; col++) {
+			if (col % 2 == 0) {
+				if ((right_up[1] - col * (wipe_cont)) > right_down[1]) {
+					x = (right_up[0] - left_up[0])/4;
+					for (int l = cnt; l < cnt + 5; l++) {
+						(key_position[l])[0] = right_up[0] - l * x;
+						(key_position[l])[1] = right_up[1] - col * (wipe_cont);
+					}
+					cnt += 5;
+					key_position.resize(cnt+5);
+//					(key_position[cnt++])[0] = right_up[0] - col * (wipe_cont);
+				} else {
+					break;
+				}
+			} else {
+				if ((left_up[1] - col * (wipe_cont)) > left_down[1]) {
+					x = (right_up[0] - left_up[0])/4;
+					for (int l = cnt; l < cnt + 5; l++) {
+						(key_position[l])[0] = left_up[0] + l * x;
+						(key_position[l])[1] = left_up[1] - col * (wipe_cont);
+					}
+					cnt += 5;
+					key_position.resize(cnt+5);
+//					(key_position[cnt++])[0] = left_up[0] - col * (wipe_cont);
+				} else {
+					break;
+				}
+			}
+		}
+		key_position.resize(cnt);
+	}
+}
 
 //generic function to copy an input cloud to an output cloud
 // provide pointers to the two clouds

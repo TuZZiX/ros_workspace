@@ -56,6 +56,7 @@
 
 //ROS-Opencv Headers
 #include <image_transport/image_transport.h>
+
 #include <opencv/cvwimage.h>
 #include <opencv/highgui.h>
 #include <cv_bridge/cv_bridge.h>
