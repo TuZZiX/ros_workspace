@@ -4,6 +4,7 @@ project(robot_simulator)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+find_package(cmake_modules REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
   roscpp
@@ -140,7 +141,9 @@ include_directories(
  add_executable(trajectory_interface src/trajectory_interface.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(robot_simulator_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(trajectory_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(trajectory_commander ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(trajectory_interface ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(simulator_controller

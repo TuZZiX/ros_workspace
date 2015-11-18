@@ -225,12 +225,13 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 # Libraries
 # cs_add_library(my_lib src/my_lib.cpp)   
 cs_add_library(kinect_pcl_process src/kinect_pcl_process.cpp) 
+cs_add_library(arm_motion_commander src/arm_motion_commander.cpp) 
 
 # Executables
 # cs_add_executable(example src/example.cpp)
 # target_link_library(example my_lib)
 cs_add_executable(kinect_pcl_finder src/kinect_pcl_finder.cpp)
-target_link_libraries(kinect_pcl_finder kinect_pcl_process ${catkin_LIBRARIES})
+target_link_libraries(kinect_pcl_finder kinect_pcl_process arm_motion_commander ${catkin_LIBRARIES})
 
 cs_install()
 cs_export()

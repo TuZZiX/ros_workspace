@@ -312,86 +312,102 @@ void KinectPclProcess::find_plane() {
 #define pty (pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[1])
 #define ptz	(pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[2])
 void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position) {
-	Eigen::Vector3f left_up, left_down, right_up, right_down;
-	Eigen::Vector3f selcentriod = compute_centroid(pclGenPurposeCloud_ptr_);
-	int x;
-	int cnt = 1;
-	const double wipe_const = 0.2;
 	if (pclGenPurposeCloud_ptr_->points.size() > 0) {
-		left_up = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
-		left_down = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
-		right_up = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
-		right_down = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
+        Eigen::Vector3f left_up, left_down, right_up, right_down;
+        Eigen::Vector3f zero_vector;
+        Eigen::Vector3f selcentriod = compute_centroid(pclGenPurposeCloud_ptr_);
+
+        zero_vector[0] = 0;
+        zero_vector[1] = 0;
+        zero_vector[2] = 0;
+
+        ROS_INFO("centroid of plane is %f %f", selcentriod[0], selcentriod[1]);
 		for (int j = 0; j < pclGenPurposeCloud_ptr_->points.size(); j++) {
 			(pclGenPurposeCloud_ptr_->points[j].getVector3fMap()) -= selcentriod;
 		}
+
+        left_up = zero_vector;
+        left_down = zero_vector;
+        right_up = zero_vector;
+        right_down = zero_vector;
 		for (int i = 1; i < pclGenPurposeCloud_ptr_->points.size(); i++) {
 			if (ptx > 0 && pty > 0) {
 				if ((ptx+pty) > (right_up[0]+right_up[1])) {
 					right_up = pt;
+//                    ROS_INFO("new right_up %f %f", right_up[0], right_up[1]);
 				}
 			}
 			if (ptx > 0 && pty < 0) {
 				if ((ptx+abs(pty)) > (right_down[0]+abs(right_down[1]))) {
 					right_down = pt;
+//                    ROS_INFO("new right_down %f %f", right_down[0], right_down[1]);
 				}
 			}
 			if (ptx < 0 && pty > 0) {
 				if ((abs(ptx)+pty) > (abs(left_up[0])+left_up[1])) {
 					left_up = pt;
+//                    ROS_INFO("new left_up %f %f", left_up[0], left_up[1]);
 				}
 			}
 			if (ptx < 0 && pty < 0) {
 				if ((abs(ptx)+abs(pty)) > (abs(left_down[0])+abs(left_down[1]))) {
 					left_down = pt;
+//                    ROS_INFO("new left_down %f %f", left_down[0], left_down[1]);
 				}
 			}
 		}
-		left_up += selcentriod;
-		left_down += selcentriod;
-		right_up += selcentriod;
-		right_down += selcentriod;
+        left_up += selcentriod;
+        left_down += selcentriod;
+        right_up += selcentriod;
+        right_down += selcentriod;
+
+        ROS_INFO("left_up is %f, %f, left_down is %f, %f, right_up is %f, %f, right_down is %f, %f",left_up[0], left_up[1], left_down[0], left_down[1], right_up[0], right_up[1], right_down[0], right_down[1]);
 		
-		if (abs(left_up[0] - right_up[0]) > 0.1) {
-			if (left_up[0] > right_up[0]) {
-				right_up[0] = left_up[0];
+		if (abs(left_up[1] - right_up[1]) > 0.1) {
+			if (left_up[1] > right_up[1]) {
+				right_up[1] = left_up[1];
 			} else {
-				left_up[0] = right_up[0];
+				left_up[1] = right_up[1];
 			}
 		}
-		if (abs(left_down[0] - right_down[0]) > 0.1) {
-			if (left_down[0] < right_down[0]) {
-				right_down[0] = left_down[0];
+		if (abs(left_down[1] - right_down[1]) > 0.1) {
+			if (left_down[1] < right_down[1]) {
+				right_down[1] = left_down[1];
 			} else {
-				left_down[0] = right_down[0];
+				left_down[1] = right_down[1];
 			}
 		}
-		if (abs(left_up[1] - left_down[1]) > 0.1) {
-			if (left_up[1] < left_down[1]) {
-				left_down[1] = left_up[1];
+		if (abs(left_up[0] - left_down[0]) > 0.1) {
+			if (left_up[0] < left_down[0]) {
+				left_down[0] = left_up[0];
 			} else {
-				left_up[1] = left_down[1];
+				left_up[0] = left_down[0];
 			}
 		}
-		if (abs(right_up[1] - right_down[1]) > 0.1) {
-			if (right_up[1] > right_down[1]) {
-				right_down[1] = right_up[1];
+		if (abs(right_up[0] - right_down[0]) > 0.1) {
+			if (right_up[0] > right_down[0]) {
+				right_down[0] = right_up[0];
 			} else {
-				right_up[1] = right_down[1];
+				right_up[0] = right_down[0];
 			}
 		}
+        ROS_WARN("FIXED: left_up is %f, %f, left_down is %f, %f, right_up is %f, %f, right_down is %f, %f",left_up[0], left_up[1], left_down[0], left_down[1], right_up[0], right_up[1], right_down[0], right_down[1]);
 		key_position.resize(10);
 		key_position[0] = centroid_;
-		
+
+		double x;
+        int cnt = 1;
+        const double wipe_const = 0.15;
+
 		for (int col = 0; 1 ; col++) {
 			if (col % 2 == 0) {
 				if ((right_up[1] - col * (wipe_const)) > right_down[1]) {
+//                    ROS_INFO("odd col %d, cnt = %d", col, cnt);
 					x = (right_up[0] - left_up[0])/4;
-					for (int l = cnt; l < cnt + 5; l++) {
-						(key_position[l])[0] = right_up[0] - l * x;
-						(key_position[l])[1] = right_up[1] - col * (wipe_const);
+					for (int l = 0; l < 5; l++) {
+						(key_position[cnt])[0] = right_up[0] - l * x;
+						(key_position[cnt++])[1] = right_up[1] - col * (wipe_const);
 					}
-					cnt += 5;
 					key_position.resize(cnt+5);
 //					(key_position[cnt++])[0] = right_up[0] - col * (wipe_const);
 				} else {
@@ -399,12 +415,12 @@ void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position)
 				}
 			} else {
 				if ((left_up[1] - col * (wipe_const)) > left_down[1]) {
+//                    ROS_INFO("even col %d, cnt = %d", col, cnt);
 					x = (right_up[0] - left_up[0])/4;
-					for (int l = cnt; l < cnt + 5; l++) {
-						(key_position[l])[0] = left_up[0] + l * x;
-						(key_position[l])[1] = left_up[1] - col * (wipe_const);
+					for (int l = 0; l < 5; l++) {
+						(key_position[cnt])[0] = left_up[0] + l * x;
+						(key_position[cnt++])[1] = left_up[1] - col * (wipe_const);
 					}
-					cnt += 5;
 					key_position.resize(cnt+5);
 //					(key_position[cnt++])[0] = left_up[0] - col * (wipe_const);
 				} else {
@@ -412,7 +428,49 @@ void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position)
 				}
 			}
 		}
+/*
+        for (int col = 0; 1 ; col++) {
+            if (col % 2 == 0) {
+                if ((right_up[1] - (wipe_const)) > right_down[1]) {
+//                    ROS_INFO("odd col %d, cnt = %d", col, cnt);
+                    right_up[1] -= wipe_const;
+                    left_up[1] -= wipe_const;
+                    x = (right_up[0] - left_up[0])/4;
+                    for (int l = 0; l < 5; l++) {
+                        (key_position[cnt])[0] = right_up[0] - l * x;
+                        (key_position[cnt++])[1] = right_up[1] - col * (wipe_const);
+                    }
+                    key_position.resize(cnt+5);
+//                  (key_position[cnt++])[0] = right_up[0] - col * (wipe_const);
+                } else {
+                    break;
+                }
+            } else {
+                if ((left_up[0] - (wipe_const)) > left_down[0]) {
+//                    ROS_INFO("even col %d, cnt = %d", col, cnt);
+                    right_up[1] -= wipe_const;
+                    left_up[1] -= wipe_const;
+                    x = (right_up[1] - left_up[0])/4;
+                    for (int l = 0; l < 5; l++) {
+                        (key_position[cnt])[0] = left_up[0] + l * x;
+                        (key_position[cnt++])[1] = left_up[1] - col * (wipe_const);
+                    }
+                    key_position.resize(cnt+5);
+//                  (key_position[cnt++])[0] = left_up[0] - col * (wipe_const);
+                } else {
+                    break;
+                }
+            }
+        }*/
+        ROS_WARN("total paths are %d", cnt);
 		key_position.resize(cnt);
+        pclGenPurposeCloud_ptr_->points.resize(cnt);
+        for (int k = 0; k < cnt; k++)
+        {
+            (key_position[k])[2] = selcentriod[2];
+            ROS_INFO("key pos: %f, %f, %f", (key_position[k])[0], (key_position[k])[1], (key_position[k])[2]);
+            pclGenPurposeCloud_ptr_->points[k].getVector3fMap() = key_position[k];
+        }
 	}
 }
 
