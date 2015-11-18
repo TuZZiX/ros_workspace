@@ -111,7 +111,6 @@ int main(int argc, char** argv) {
 		
 		ros::Duration(0.5).sleep(); // sleep for half a second
 		ros::spinOnce();
-	}  ros::spinOnce();
     }
     ROS_INFO("my work here is done!");
 

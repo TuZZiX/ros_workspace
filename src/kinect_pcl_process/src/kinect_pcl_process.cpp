@@ -312,17 +312,20 @@ void KinectPclProcess::find_plane() {
 #define pty (pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[1])
 #define ptz	(pclGenPurposeCloud_ptr_->points[i].getVector3fMap()[2])
 void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position) {
-	if (pclGenPurposeCloud_ptr_->points.size > 0) {
-		Eigen::Vector3f left_up, left_down, right_up, right_down;
-		Eigen::Vector3f selcentriod = compute_centroid(pclGenPurposeCloud_ptr_);
-		left_up = 0;
-		left_down = 0;
-		right_up = 0;
-		right_down = 0;
-		for (int j = 0; i < pclGenPurposeCloud_ptr_->Points.size(); j++) {
-			pt -= selcentriod;
+	Eigen::Vector3f left_up, left_down, right_up, right_down;
+	Eigen::Vector3f selcentriod = compute_centroid(pclGenPurposeCloud_ptr_);
+	int x;
+	int cnt = 1;
+	const double wipe_const = 0.2;
+	if (pclGenPurposeCloud_ptr_->points.size() > 0) {
+		left_up = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
+		left_down = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
+		right_up = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
+		right_down = (pclGenPurposeCloud_ptr_->points[0].getVector3fMap());
+		for (int j = 0; j < pclGenPurposeCloud_ptr_->points.size(); j++) {
+			(pclGenPurposeCloud_ptr_->points[j].getVector3fMap()) -= selcentriod;
 		}
-		for (int i = 1; i < pclGenPurposeCloud_ptr_->Points.size(); i++) {
+		for (int i = 1; i < pclGenPurposeCloud_ptr_->points.size(); i++) {
 			if (ptx > 0 && pty > 0) {
 				if ((ptx+pty) > (right_up[0]+right_up[1])) {
 					right_up = pt;
@@ -380,34 +383,30 @@ void KinectPclProcess::find_swip_pos(std::vector<Eigen::Vector3f> &key_position)
 		key_position.resize(10);
 		key_position[0] = centroid_;
 		
-		int x;
-		int cnt = 1;
-		const int wipe_const = 0.2;
-		
 		for (int col = 0; 1 ; col++) {
 			if (col % 2 == 0) {
-				if ((right_up[1] - col * (wipe_cont)) > right_down[1]) {
+				if ((right_up[1] - col * (wipe_const)) > right_down[1]) {
 					x = (right_up[0] - left_up[0])/4;
 					for (int l = cnt; l < cnt + 5; l++) {
 						(key_position[l])[0] = right_up[0] - l * x;
-						(key_position[l])[1] = right_up[1] - col * (wipe_cont);
+						(key_position[l])[1] = right_up[1] - col * (wipe_const);
 					}
 					cnt += 5;
 					key_position.resize(cnt+5);
-//					(key_position[cnt++])[0] = right_up[0] - col * (wipe_cont);
+//					(key_position[cnt++])[0] = right_up[0] - col * (wipe_const);
 				} else {
 					break;
 				}
 			} else {
-				if ((left_up[1] - col * (wipe_cont)) > left_down[1]) {
+				if ((left_up[1] - col * (wipe_const)) > left_down[1]) {
 					x = (right_up[0] - left_up[0])/4;
 					for (int l = cnt; l < cnt + 5; l++) {
 						(key_position[l])[0] = left_up[0] + l * x;
-						(key_position[l])[1] = left_up[1] - col * (wipe_cont);
+						(key_position[l])[1] = left_up[1] - col * (wipe_const);
 					}
 					cnt += 5;
 					key_position.resize(cnt+5);
-//					(key_position[cnt++])[0] = left_up[0] - col * (wipe_cont);
+//					(key_position[cnt++])[0] = left_up[0] - col * (wipe_const);
 				} else {
 					break;
 				}
