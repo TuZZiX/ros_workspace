@@ -1,5 +1,5 @@
-#ifndef ARM_MOTION_COMMANDER_H_
-#define ARM_MOTION_COMMANDER_H_
+#ifndef ARM_PLANNING_INTERFACE_H_
+#define ARM_PLANNING_INTERFACE_H_
 
 
 #include <ros/ros.h>
@@ -9,13 +9,13 @@
 #include <Eigen/Eigen>
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
-
+#include <string>
 
 using namespace std;  //just to avoid requiring std::, Eigen:: ...
 
 //define a class to encapsulate some of the tedium of populating and sending goals,
 // and interpreting responses
-class ArmMotionCommander {
+class ArmPlanningInterface {
 private:
 	ros::NodeHandle nh_;
 	
@@ -29,10 +29,20 @@ private:
 	//callback fnc for cartesian action server to return result to this node:
 	void doneCb_(const actionlib::SimpleClientGoalState& state,
 				 const cwru_action::cwru_baxter_cart_moveResultConstPtr& result);
-public:
-	ArmMotionCommander(ros::NodeHandle* nodehandle); //define the body of the constructor outside of class definition
+	geometry_msgs::Pose transformEigenAffine3dToPose(Eigen::Affine3d e);
+	Eigen::VectorXd arm_back_pose;
+	Eigen::Vector3d gripper_offset;
+	Eigen::Vector3d collision_offset;
+	Eigen::Vector3d drop_offset_left;
+	Eigen::Vector3d drop_offset_right;
+	Eigen::VectorXd take_look_pose;
 	
-	~ArmMotionCommander(void) {
+	
+	
+public:
+	ArmPlanningInterface(ros::NodeHandle* nodehandle); //define the body of the constructor outside of class definition
+	
+	~ArmPlanningInterface(void) {
 	}
 	bool moveArmsBack(void);
 	
@@ -41,11 +51,14 @@ public:
 	
 	bool planPath(geometry_msgs::PoseStamped pose);
 	bool planPath(Eigen::VectorXd joints);
-	bool planPath(Eigen::Vector3d dp_displacement);
+	bool planPath(Eigen::Vector3f plane_normal, Eigen::Vector3f major_axis, Eigen::Vector3f centroid) ;
 	
 	bool executePath(double timeout = 0.0);
 	
-	void convToPose(std::vector<geometry_msgs::PoseStamped> &pose_seq, std::vector<Eigen::Vector3f> &position_seq, Eigen::Quaterniond &orientation);
+	bool ColorMovement(string color, geometry_msgs::PoseStamped block_pose);
+	
+	void convToPose(std::vector<geometry_msgs::PoseStamped> &pose_seq, std::vector<Eigen::Vector3f> &position_seq, Eigen::Quaterniond &orientation = default_orientation);
+	static Eigen::Quaterniond default_orientation;
 };
 
 #endif  // this closes the header-include trick...ALWAYS need one of these to match #ifndef
