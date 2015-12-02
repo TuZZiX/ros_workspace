@@ -81,8 +81,8 @@ bool ArmPlanningInterface::moveArmsBack(void) {
 	return true;
 	 */
 	if(planPath(arm_back_pose)){
-		if(!executePath()) {
-			return false;
+		if(executePath()) {
+			return true;
 		}
 	} else {
 		return false;
@@ -104,6 +104,12 @@ bool ArmPlanningInterface::planPath(geometry_msgs::PoseStamped pose) {
 	computed_arrival_time_= cart_result_.computed_arrival_time; //action_client.get_computed_arrival_time();
 	//    ROS_INFO("computed move time: %f",computed_arrival_time_);
 	return true;
+}
+
+bool ArmPlanningInterface::planPath(geometry_msgs::Pose pose) {
+	geometry_msgs::PoseStamped stamped_pose;
+	stamped_pose.pose = pose;
+	return planPath(stamped_pose);
 }
 
 bool ArmPlanningInterface::planPath(Vector7d joints) {
@@ -224,6 +230,11 @@ geometry_msgs::PoseStamped ArmPlanningInterface::getGripperPose(void) {
 #define EXECUTE()	if(planPath(next)){ if(!executePath()) {	return false;} } else 	return false
 #define ADDPOS(a,b,c)	a.pose.position.x=b.pose.position.x+c[0],a.pose.position.y=b.pose.position.y+c[1],a.pose.position.z=b.pose.position.z+c[2]
 #define SUBPOS(a,b,c)	a.pose.position.x=b.pose.position.x-c[0],a.pose.position.y=b.pose.position.y-c[1],a.pose.position.z=b.pose.position.z-c[2]
+bool ArmPlanningInterface::ColorMovement(string color, geometry_msgs::Pose block_pose) {
+	geometry_msgs::PoseStamped pose;
+	pose.pose = block_pose;
+	return ColorMovement(color, pose);
+}
 bool ArmPlanningInterface::ColorMovement(string color, geometry_msgs::PoseStamped block_pose) {
 	geometry_msgs::PoseStamped next = block_pose;
 	if (color.compare("red")==0) {
