@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: baxter_test_ik
-Description: Description of baxter_test_ik
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: roscpp baxter_kinematics baxter_traj_streamer cwru_action baxter_core_msgs sensor_msgs std_msgs trajectory_msgs actionlib_msgs actionlib

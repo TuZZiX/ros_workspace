@@ -1,2 +1,0 @@
-set(example_srv_MESSAGE_FILES "")
-set(example_srv_SERVICE_FILES "/home/tianshipei/ros_ws/src/eecs-397-f15/example_srv/srv/simple_bool_service_message.srv;/home/tianshipei/ros_ws/src/eecs-397-f15/example_srv/srv/simple_int_service_message.srv;/home/tianshipei/ros_ws/src/eecs-397-f15/example_srv/srv/simple_float_service_message.srv;/home/tianshipei/ros_ws/src/eecs-397-f15/example_srv/srv/arm_nav_service_message.srv;/home/tianshipei/ros_ws/src/eecs-397-f15/example_srv/srv/IM_node_service_message.srv")

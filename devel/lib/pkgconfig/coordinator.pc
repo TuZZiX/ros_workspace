@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: coordinator
-Description: Description of coordinator
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: roscpp std_msgs geometry_msgs cwru_srv sensor_msgs tf

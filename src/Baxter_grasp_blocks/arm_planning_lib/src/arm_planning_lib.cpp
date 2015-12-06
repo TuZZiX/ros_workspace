@@ -1,5 +1,4 @@
 #include <arm_planning_lib/arm_planning_lib.h>
-
 ArmPlanningInterface::ArmPlanningInterface(ros::NodeHandle* nodehandle): nh_(*nodehandle),
 cart_move_action_client_("cartMoveActionServer", true), gripper(&nh_) { // constructor
 	// attempt to connect to the server:
@@ -9,33 +8,135 @@ cart_move_action_client_("cartMoveActionServer", true), gripper(&nh_) { // const
 		server_exists = cart_move_action_client_.waitForServer(ros::Duration(0.5)); //
 		ros::spinOnce();
 		ros::Duration(0.5).sleep();
-		//       ROS_INFO("retrying...");
+		       ROS_INFO("retrying...");
 	}
 	ROS_INFO("connected to action server"); // if here, then we connected to the server;
-	collision_offset << 0, 0, 0.32870648723;
-	gripper_offset << 0, 0, 0.17665179565;
-	//	arm_back_joints << -0.20628314186274055, -1.0357409957184627, -0.5780814380569512, 1.3172378913039648, 1.7037512511889998, 1.2374043903744254, 1.6265004725741392;
-	arm_back_pose.pose.position.x = 0.628566212076;
-	arm_back_pose.pose.position.y = -0.347307547123;
-	arm_back_pose.pose.position.z = 0.350523968221;
-	arm_back_pose.pose.orientation.x = 0.630141382934;
-	arm_back_pose.pose.orientation.y = 0.775598336984;
-	arm_back_pose.pose.orientation.z = 0.000519772148981;
-	arm_back_pose.pose.orientation.w = 0.0369971217577;
+	collision_offset << 0, 0, 0.4;
+	gripper_offset << -0.030, 0, 0.12;
+	/*gripper_pose.pose.position.x = ;
+	gripper_pose.pose.position.y =;
+	gripper_pose.pose.position.z =;
+	gripper_pose.pose.orientation.x =;
+	gripper_pose.pose.orientation.y =;
+	gripper_pose.pose.orientation.z =;
+	gripper_pose.pose.orientation.w =;
+*/
+	arm_back_joints << -0.687578798801038, -1.2286859555710585, 1.7230128939734446, 1.4960121051119204, -0.3406034304607237, 1.6922049512515933, -2.6852473873167133;
+	arm_back_pose.pose.position.x = 0.48336029291;
+	arm_back_pose.pose.position.y = -0.345984422306;
+	arm_back_pose.pose.position.z = 0.442497286433;
+	arm_back_pose.pose.orientation.x = 1;
+	arm_back_pose.pose.orientation.y = 0;
+	arm_back_pose.pose.orientation.z = 0;
+	arm_back_pose.pose.orientation.w = 0;
 	
 	//drop_offset_left << -0.627811922278, -0.37037794008, -0.01957099178;
-	drop_offset_left << -0.1, -0.2, 0;
+	drop_offset_left << -0.1, -0.25, 0;
 	//drop_offset_right << -0.02005453231, 0.29488994572, 0.00129911747;
-	drop_offset_right << 0.1, 0.2, 0;
-	//	take_look_pose << -0.18503156094537968, 0.44527797626583865, 0.36021593694382065, 1.827325037963473, 1.0199002550686511, 1.0137709796128629, 1.2701787563643496;
-	take_look_pose.pose.position.x = 0.52542198926;
-	take_look_pose.pose.position.y = -0.19065849761;
-	take_look_pose.pose.position.z = 0.154626356725;
-	take_look_pose.pose.orientation.x = -0.249821685981;
-	take_look_pose.pose.orientation.y = -0.335221027398;
-	take_look_pose.pose.orientation.z = -0.504147162678;
-	take_look_pose.pose.orientation.w = 0.755679579166;
+	drop_offset_right << 0.1, 0.25, 0;
+	take_look_joints << -0.6706028380738552, 0.3385839239076704, -3.0484307475016825, -1.1967584710123835, -0.29302672221528303, 1.4968265397170557, 1.7967659166798897;
+	take_look_pose.pose.position.x = 0.54666548495;
+	take_look_pose.pose.position.y = -0.302305563037;
+	take_look_pose.pose.position.z = 0.366209878016;
+	take_look_pose.pose.orientation.x = -0.547922120529;
+	take_look_pose.pose.orientation.y = -0.0239951476795;
+	take_look_pose.pose.orientation.z = -0.0745942473519;
+	take_look_pose.pose.orientation.w = 0.832851295841;
 	
+
+	/*
+pre_grab
+pose: 
+  position: 
+    x: 0.62630899645
+    y: -0.00805334156627
+    z: 0.206422664913
+  orientation: 
+    x: 0.629827329351
+    y: 0.776484996568
+    z: 0.0187988533019
+    w: -0.00593198287789
+
+grab
+pose: 
+  position: 
+    x: 0.627811922278
+    y: -0.00340972086974
+    z: 0.0543679733262
+  orientation: 
+    x: 0.629826654045
+    y: 0.776525376337
+    z: 0.0171547560392
+    w: -0.0056956215282
+
+drop_left
+  position: 
+    x: 0.618217876627
+    y: -0.373787660953
+    z: 0.0347969815439
+  orientation: 
+    x: 0.629429968147
+    y: 0.776821296576
+    z: 0.0183006089831
+    w: -0.00562815199012
+
+drop_right
+  position: 
+    x: 0.607757389961
+    y: 0.29148022485
+    z: 0.0556670907964
+  orientation: 
+    x: 0.629136911805
+    y: 0.777105813518
+    z: 0.0147144639623
+    w: -0.00876272515292
+
+gripper at table top
+  position: 
+    x: 0.575521702564
+    y: -0.22915244597
+    z: 0.0475048224968
+  orientation: 
+    x: 0.62945411565
+    y: 0.776795019467
+    z: 0.0183889186523
+    w: -0.00623391483899
+
+hand at table top
+pose: 
+  position: 
+    x: 0.578822113329
+    y: -0.222901535766
+    z: -0.129146973155
+  orientation: 
+    x: 0.629548500816
+    y: 0.776861010357
+    z: 0.00458504421153
+    w: 0.0116031494482
+take a look
+pose: 
+  position: 
+    x: 0.52542198926
+    y: -0.19065849761
+    z: 0.154626356725
+  orientation: 
+    x: -0.249821685981
+    y: -0.335221027398
+    z: -0.504147162678
+    w: 0.755679579166
+
+bakc to start
+pose: 
+  position: 
+    x: 0.628566212076
+    y: -0.347307547123
+    z: 0.350523968221
+  orientation: 
+    x: 0.630141382934
+    y: 0.775598336984
+    z: 0.000519772148981
+    w: 0.0369971217577
+*/
 	pre_grab_pose.pose.position.x = 0.62630899645;
 	pre_grab_pose.pose.position.y = -0.00805334156627;
 	pre_grab_pose.pose.position.z = 0.206422664913;
@@ -59,7 +160,7 @@ cart_move_action_client_("cartMoveActionServer", true), gripper(&nh_) { // const
 
 	take_look_joints << -0.18503156094537968, 0.44527797626583865, 0.36021593694382065, 1.827325037963473, 1.0199002550686511, 1.0137709796128629, 1.2701787563643496;
 
-
+#ifdef REAL_WORLD
 	global_pose_offset.pose.position.x = 0;
 	global_pose_offset.pose.position.y = 0;
 	global_pose_offset.pose.position.z = 0;
@@ -67,6 +168,17 @@ cart_move_action_client_("cartMoveActionServer", true), gripper(&nh_) { // const
 	global_pose_offset.pose.orientation.y = 0;
 	global_pose_offset.pose.orientation.z = 0;
 	global_pose_offset.pose.orientation.w = 0;
+#endif
+
+#ifdef GAZEBO
+	global_pose_offset.pose.position.x = 0;
+	global_pose_offset.pose.position.y = 0;
+	global_pose_offset.pose.position.z = -0.1;
+	global_pose_offset.pose.orientation.x = 0;
+	global_pose_offset.pose.orientation.y = 0;
+	global_pose_offset.pose.orientation.z = 0;
+	global_pose_offset.pose.orientation.w = 0;
+#endif
 
 	global_joints_offset << 0,0,0,0,0,0,0;
 
@@ -99,7 +211,7 @@ bool ArmPlanningInterface::moveArmsBack(void) {
 	return true;
 	*/
 	gripper.gripper_open();
-	if(planPath(arm_back_joints)){
+	if(planPath(arm_back_pose)){
 		if(!executePath()) {
 			return false;
 		}
@@ -124,7 +236,7 @@ bool ArmPlanningInterface::planPath(geometry_msgs::PoseStamped pose) {
 	cart_goal_.des_pose_gripper_right = pose;
 	cart_move_action_client_.sendGoal(cart_goal_, boost::bind(&ArmPlanningInterface::doneCb_, this, _1, _2)); // we could also name additional callback functions here, if desired
 	finished_before_timeout_ = cart_move_action_client_.waitForResult(ros::Duration(2.0));
-	    ROS_INFO("return code: %d",cart_result_.return_code);
+	   //ROS_INFO("return code: %d",cart_result_.return_code);
 	if (!finished_before_timeout_ || cart_result_.return_code==cwru_action::cwru_baxter_cart_moveResult::RT_ARM_PATH_NOT_VALID || cart_result_.return_code!=cwru_action::cwru_baxter_cart_moveResult::SUCCESS) {
 		return false;
 	}
@@ -145,7 +257,7 @@ bool ArmPlanningInterface::planPath(Vector7d joints) {
 	}
 	cart_move_action_client_.sendGoal(cart_goal_, boost::bind(&ArmPlanningInterface::doneCb_, this, _1, _2)); // we could also name additional callback functions here, if desired
 	finished_before_timeout_ = cart_move_action_client_.waitForResult(ros::Duration(2.0));
-		ROS_INFO("return code: %d",cart_result_.return_code);
+		//ROS_INFO("return code: %d",cart_result_.return_code);
 	if (!finished_before_timeout_ || cart_result_.return_code==cwru_action::cwru_baxter_cart_moveResult::RT_ARM_PATH_NOT_VALID || cart_result_.return_code!=cwru_action::cwru_baxter_cart_moveResult::SUCCESS) {
 		return false;
 	}
@@ -233,136 +345,143 @@ geometry_msgs::PoseStamped ArmPlanningInterface::getGripperPose(void) {
 #define EXECUTE()	if(planPath(next)){ if(!executePath()) {	return false;} } else 	return false
 bool ArmPlanningInterface::colorMovement(string color, geometry_msgs::PoseStamped block_pose) {
 	ROS_INFO("executing motion for %s block", color.c_str());
-
+	Vector3d pick_up_offset;
+	pick_up_offset << 0, 0, 0.01;
 	geometry_msgs::PoseStamped next = block_pose;
 
 	if (color.compare("red")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		
 		gripper.gripper_close();
+		//ros::Duration(1.0).sleep();
+		//next = addPosOffset(next, pick_up_offset);
+		//EXECUTE();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(next, drop_offset_left);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = subPosOffset(next, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	} else if (color.compare("blue")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_close();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		takeALook();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	} else if (color.compare("white")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_close();
-		ros::Duration(5.0).sleep();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(next, drop_offset_right);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = subPosOffset(next, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	} else if (color.compare("black")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_close();
-		ros::Duration(5.0).sleep();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	} else if (color.compare("green")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_close();
-		ros::Duration(5.0).sleep();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		takeALook();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(next, drop_offset_left);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = subPosOffset(next, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	} else if (color.compare("wood")==0) {
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_close();
+		ros::Duration(GRIPPER_TIME).sleep();
 		next = addPosOffset(block_pose, collision_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		next = addPosOffset(block_pose, gripper_offset);
 		EXECUTE();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 		gripper.gripper_open();
-		ros::Duration(5.0).sleep();
+		ros::Duration(MOTION_TIME).sleep();
 	}
-	return false;
+	return true;
 }
 bool ArmPlanningInterface::colorMovement(string color, geometry_msgs::Pose block_pose) {
 	geometry_msgs::PoseStamped stamp_pose;
 	stamp_pose.pose = block_pose;
-	return planPath(stamp_pose);
+	return colorMovement(color,stamp_pose);
 }
 void ArmPlanningInterface::convToStampPose(std::vector<geometry_msgs::PoseStamped> &pose_seq, std::vector<Vector3f> &position_seq, Quaterniond &orientation) {
 	int size = (int)pose_seq.size();

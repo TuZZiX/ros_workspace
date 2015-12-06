@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: example_ros_library
-Description: Description of example_ros_library
-Version: 0.0.0
-Cflags: -I/home/tianshipei/ros_ws/src/eecs-397-f15/example_ros_library/include
-Libs: -L/home/tianshipei/ros_ws/devel/lib -lplane_fitter
-Requires: std_msgs cmake_modules roscpp

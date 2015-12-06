@@ -17,15 +17,17 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
     Pcl_grabing cwru_pcl_utils(&nh);
     ROS_INFO("Instantiation done.");
-	
+	bool ret;
 
     while(ros::ok())
     {
 
-        cwru_pcl_utils.findTableTop();
-        //cwru_pcl_utils.isBlock();
-        //cwru_pcl_utils.checkForHand();
-
+        ret = cwru_pcl_utils.findTableTop();
+        ROS_WARN("findTableTop return %s",ret?"successed":"failed");
+        ret = cwru_pcl_utils.isBlock();
+        ROS_WARN("isBlock return %s",ret?"successed":"failed");
+        ret = cwru_pcl_utils.checkForHand();
+        ROS_WARN("checkForHand return %s",ret?"successed":"failed");
 
         ros::Duration(0.5).sleep();  // sleep for half a second
         ros::spinOnce();

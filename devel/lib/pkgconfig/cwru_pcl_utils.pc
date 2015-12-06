@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: cwru_pcl_utils
-Description: Description of cwru_pcl_utils
-Version: 0.0.0
-Cflags: -I/home/tianshipei/ros_ws/src/cwru_baxter/cwru_pcl_utils/include
-Libs: -L/home/tianshipei/ros_ws/devel/lib -lcwru_pcl_utils
-Requires: roscpp pcl_ros pcl_conversions sensor_msgs std_msgs tf cwru_srv cwru_msgs

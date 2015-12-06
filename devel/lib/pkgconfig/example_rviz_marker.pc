@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: example_rviz_marker
-Description: Description of example_rviz_marker
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: catkin_simple roscpp std_msgs visualization_msgs example_srv

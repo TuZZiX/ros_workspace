@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: cwru_baxter_sim
-Description: Description of cwru_baxter_sim
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: 

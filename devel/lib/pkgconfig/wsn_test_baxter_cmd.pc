@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: wsn_test_baxter_cmd
-Description: Description of wsn_test_baxter_cmd
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: 

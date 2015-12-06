@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: pcl_perception_node
-Description: Description of pcl_perception_node
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tianshipei/ros_ws/devel/lib -lpcl_perception_node
-Requires: roscpp std_msgs sensor_msgs cwru_srv

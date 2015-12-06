@@ -1,8 +1,0 @@
-prefix=/home/tianshipei/ros_ws/devel
-
-Name: example_ros_msg
-Description: Description of example_ros_msg
-Version: 0.0.0
-Cflags: -I/home/tianshipei/ros_ws/devel/include
-Libs: -L/home/tianshipei/ros_ws/devel/lib 
-Requires: catkin_simple roscpp std_msgs message_runtime
