@@ -11,8 +11,9 @@
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
 #include <Eigen/Eigenvalues>
+#include <string>
 
-#define REAL_WORLD
+#define GAZEBO
 
 
 
@@ -50,7 +51,7 @@
 #define TableRadius 0.35	//table r
 #define HandMinHeight 0.1	//
 #define BlockMaxHeight 0.1
-#define BlockTopRadius 0.008
+#define BlockTopRadius 0.007
 #define BlockRadius 0.05
 #endif
 
@@ -63,7 +64,8 @@ public:
     bool isBlock(); //
     geometry_msgs::Pose getBlockPose(); //
     void getBlockVector(Vector3f &plane_normal, Vector3f &major_axis, Vector3f &centroid);
-    Eigen::Vector3d getColor(); //
+    Eigen::Vector3d getColor();
+    std::string getColor2();
 
     CwruPclUtils pcl_wsn;
     //float getWidth();

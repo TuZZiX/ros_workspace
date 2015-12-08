@@ -2,6 +2,8 @@ Baxter MoveIt!
 ==========
 Author: Rethink Robotics Inc.
 
+Modified by Shipei Tian to fit CWRU Baxter
+
 Website: https://github.com/RethinkRobotics/sdk-examples
 
 MoveIt! configuration package for the Baxter Research Robot from Rethink Robotics.

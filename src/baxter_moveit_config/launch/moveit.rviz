@@ -11,9 +11,8 @@ Panels:
         - /MotionPlanning1/Planning Metrics1
         - /MotionPlanning1/Planned Path1
         - /RobotModel1
-        - /RobotModel1/Status1
       Splitter Ratio: 0.74256
-    Tree Height: 448
+    Tree Height: 393
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -44,7 +43,9 @@ Visualization Manager:
       Value: true
     - Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
+      Move Group Namespace: ""
       MoveIt_Goal_Tolerance: 0
+      MoveIt_Planning_Attempts: 10
       MoveIt_Planning_Time: 5
       MoveIt_Use_Constraint_Aware_IK: true
       MoveIt_Warehouse_Host: 127.0.0.1
@@ -52,6 +53,15 @@ Visualization Manager:
       Name: MotionPlanning
       Planned Path:
         Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+          base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           collision_head_link_1:
             Alpha: 1
             Show Axes: false
@@ -62,12 +72,38 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          display:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          dummyhead1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           head:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          head_camera:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_arm_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_arm_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_gripper:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          left_gripper_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -77,11 +113,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_hand_accelerometer:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           left_hand_camera:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          left_hand_camera_axis:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_hand_range:
             Alpha: 1
             Show Axes: false
@@ -102,6 +147,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_torso_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_upper_elbow:
             Alpha: 1
             Show Axes: false
@@ -137,7 +186,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_arm_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_arm_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_gripper:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          right_gripper_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -147,11 +209,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_hand_accelerometer:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           right_hand_camera:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          right_hand_camera_axis:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_hand_range:
             Alpha: 1
             Show Axes: false
@@ -172,6 +243,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_torso_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_upper_elbow:
             Alpha: 1
             Show Axes: false
@@ -255,6 +330,15 @@ Visualization Manager:
       Scene Robot:
         Attached Body Color: 150; 50; 150
         Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+          base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           collision_head_link_1:
             Alpha: 1
             Show Axes: false
@@ -265,12 +349,38 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          display:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          dummyhead1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           head:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          head_camera:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_arm_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_arm_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_gripper:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          left_gripper_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -280,11 +390,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_hand_accelerometer:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           left_hand_camera:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          left_hand_camera_axis:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_hand_range:
             Alpha: 1
             Show Axes: false
@@ -305,6 +424,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_torso_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_upper_elbow:
             Alpha: 1
             Show Axes: false
@@ -340,7 +463,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_arm_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_arm_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_gripper:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          right_gripper_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -350,11 +486,20 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_hand_accelerometer:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           right_hand_camera:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          right_hand_camera_axis:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_hand_range:
             Alpha: 1
             Show Axes: false
@@ -375,6 +520,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_torso_itb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_upper_elbow:
             Alpha: 1
             Show Axes: false
@@ -421,24 +570,30 @@ Visualization Manager:
             Show Trail: false
             Value: true
         Robot Alpha: 0.5
-        Show Scene Robot: true
+        Show Robot Collision: false
+        Show Robot Visual: true
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: true
       Enabled: false
       Links:
-        {}
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: /base
+    Fixed Frame: base
+    Frame Rate: 30
   Name: root
   Tools:
     - Class: rviz/Interact
@@ -450,16 +605,21 @@ Visualization Manager:
     Current:
       Class: rviz/XYOrbit
       Distance: 2.66059
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
       Focal Point:
         X: 0.554437
         Y: 0.143326
         Z: 2.87737e-05
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: -0.189797
-      Target Frame: /base_link
+      Pitch: 0.349797
+      Target Frame: base_link
       Value: XYOrbit (rviz)
-      Yaw: 5.83494
+      Yaw: 6.16994
     Saved: ~
 Window Geometry:
   Displays:
@@ -471,9 +631,9 @@ Window Geometry:
   Hide Right Dock: false
   Motion Planning:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000002a2000003dafc0200000005fb000000100044006900730070006c006100790073010000002800000255000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e006701000002830000017f0000017400ffffff000004d8000003da00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000002b1000003dafc0200000005fb000000100044006900730070006c00610079007301000000280000021e000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e0067010000024c000001b6000001ab00ffffff00000488000003da00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1920
-  X: -7
-  Y: 715
+  Width: 1855
+  X: 65
+  Y: 24

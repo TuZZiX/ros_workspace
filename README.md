@@ -6,5 +6,5 @@ Source code only, you need to do
 
 	catkin_make install
 
-before you run this code
+before running it
 

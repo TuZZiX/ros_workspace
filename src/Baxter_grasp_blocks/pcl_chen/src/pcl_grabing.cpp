@@ -175,7 +175,9 @@ bool Pcl_grabing::isBlock()
     Eigen::Vector3f pt;
     Eigen::Vector3f dist;
     vector<int> index;
+    vector<int> index_all;
     index.clear();
+    index_all.clear();
     double distance = 1;
     BlockColor<<0,0,0;
     for (int i = 0; i < npts; i++) 
@@ -185,7 +187,7 @@ bool Pcl_grabing::isBlock()
         dist[2]=0;
         distance = dist.norm();
         if(distance < TableRadius)
-            if(pt[2]>(TableHeight+0.003) && pt[2]<BlockMaxHeight)
+            if(pt[2]>(TableHeight+0.015) && pt[2]<BlockMaxHeight)
             {
                 double r, g, b, color_err;
                 r = transformed_pclKinect_clr_ptr_->points[i].r;
@@ -195,6 +197,7 @@ bool Pcl_grabing::isBlock()
                 g = abs(roughColor_G - g);
                 b = abs(roughColor_B - b);
                 color_err = r+g+b;
+                index_all.push_back(i);
                 if (color_err > ColorRange)
                 {
                     index.push_back(i);
@@ -204,15 +207,15 @@ bool Pcl_grabing::isBlock()
                 }
             }
     }
-    int n_block_points = index.size();
+    int n_block_points = index_all.size();
     if(n_block_points<10)
     {
         ROS_INFO("There is no block on the stool.");
-        return 0;
+        return false;
     }
     ROS_INFO("There is a block with %d points", n_block_points);
-    BlockColor/=n_block_points;
-    ROS_INFO_STREAM("The block color:"<<BlockColor.transpose());
+    //BlockColor/=n_block_points;
+    //ROS_INFO_STREAM("The block color:"<<BlockColor.transpose());
     
     display_ptr_->header = transformed_pclKinect_clr_ptr_->header;
     display_ptr_->is_dense = transformed_pclKinect_clr_ptr_->is_dense;
@@ -221,13 +224,17 @@ bool Pcl_grabing::isBlock()
     display_ptr_->points.resize(n_block_points);
     for (int i = 0; i < n_block_points; i++) 
     {
-        display_ptr_->points[i].getVector3fMap() = transformed_pclKinect_clr_ptr_->points[index[i]].getVector3fMap();
+        display_ptr_->points[i].getVector3fMap() = transformed_pclKinect_clr_ptr_->points[index_all[i]].getVector3fMap();
     }
     //display_points(*display_ptr_);
     
     Eigen::Vector3f BlockCentroid;
     BlockCentroid =pcl_wsn.compute_centroid(display_ptr_);
     ROS_INFO_STREAM("The centroid of the block:"<<BlockCentroid.transpose());
+    
+    int n_block_points_c = index.size();
+    BlockColor/=n_block_points_c;
+    ROS_INFO_STREAM("The block color:"<<BlockColor.transpose());
 
 
     vector<int> block_index;
@@ -245,6 +252,8 @@ bool Pcl_grabing::isBlock()
     }
     int n_block_top = block_index.size();
     ROS_INFO("There are %d points around the block's top center",n_block_top);
+    if(n_block_top==0)
+    return 0;
     pcl::PointCloud<pcl::PointXYZ>::Ptr block_ptr_(new PointCloud<pcl::PointXYZ>);
     block_ptr_->header=display_ptr_->header;
     block_ptr_->is_dense=display_ptr_->is_dense;
@@ -294,6 +303,48 @@ bool Pcl_grabing::isBlock()
 Eigen::Vector3d Pcl_grabing::getColor()
 {
     return BlockColor;
+}
+
+
+std::string Pcl_grabing::getColor2()
+{
+    int n=0;
+    Eigen::Vector3d red,blue,black,green,b,d,white;
+    b=BlockColor/BlockColor.norm();
+
+    int r_ = BlockColor[0];
+    int g_ = BlockColor[1];
+    int b_ = BlockColor[2];
+    if(r_>190 && g_>190 && b_>190){
+        return "white";
+    }
+
+    
+    black<<133.113, 125.14, 127.745;
+    black/=black.norm();
+    d=black-b;
+    if (d.norm()<Eps)
+        return "black"; // black
+
+    red<<185.185,105.872,127.196; // red
+    red=red/red.norm();
+    d=red-b;
+    if(d.norm()<Eps)
+        return "red"; // red
+
+    green<<186.449,190.894,146.061;
+    green/=green.norm();
+    d=green-b;
+    if(d.norm()<Eps)
+        return "green";// green
+
+    blue<<146.322,165.242,193.03;
+    blue/=blue.norm();
+    d=blue-b;
+    if(d.norm()<Eps)
+        return "blue"; // blue
+
+    return "wood"; // error
 }
 
 geometry_msgs::Pose Pcl_grabing::getBlockPose()

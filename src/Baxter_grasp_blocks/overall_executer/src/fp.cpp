@@ -1,8 +1,14 @@
+#define MOVEIT
+
 #include <ros/ros.h>
 #include <ros/package.h> 
 #include <geometry_msgs/Pose.h>
 #include <cwru_msgs/Path.h>
+#ifdef MOVEIT
+#include <arm_planning_lib/arm_planning_lib_moveit.h>
+#else
 #include <arm_planning_lib/arm_planning_lib.h>
+#endif
 #include <pcl_chen/pcl_grabing.h>
 #include <image_transport/image_transport.h>
 #include <opencv2/highgui/highgui.hpp>
@@ -13,38 +19,42 @@
 #include <Eigen/Eigenvalues>
 #include <string>
 
-enum ColorEnum {RED, WHITE, BLACK, GREEN, BLUE, WOODEN};
-typedef enum ColorEnum Color;
+
 using namespace Eigen;
 
 string determineColor(Eigen::Vector3d color){
-	int r = color[0];
-	int g = color[1];
-	int b = color[2];
+    int r = color[0];
+    int g = color[1];
+    int b = color[2];
 
 
 
-	if(r<80 && g<80 && b<80){
-		return "black";
-	}
+    if(r<150 && g<150 && b<150){
+        return "black";
+    }
 
-	if(r>200 && g>200 && b>180){
-		return "wood";
-	}
+    if(r>190 && g>190 && b>190){
+        if (g-b > 10)
+        {
+            return "wood";
+        } else {
+            return "white";
+        }
+    }
 
-	if(r>160 && g<80 && b<110){
-		return "red";
-	}
+    if(r>160 && g<150 && b<170){
+        return "red";
+    }
 
-	if(b>160 && r<130 && g>80 && g<180){
-		return "blue";
-	}
+    if(b>160 && r>80&& r<180 && g>80 && g<190){
+        return "blue";
+    }
 
-	if(g>160 && r>80 && r<180 && b<100){
-		return "green";
-	}
+    if(g>160 && r>80 && r<200 && b<160){
+        return "green";
+    }
 
-	return "white";
+    return "wood";
 }
 
 void publishToScreen(ros::NodeHandle &nh, string path){
@@ -63,12 +73,44 @@ void publishToScreen(ros::NodeHandle &nh, string path){
 	ros::spinOnce();
 }
 
+void printColorToScreen(ros::NodeHandle &nh, string c){
+	if (c.compare("red"))
+	{
+		publishToScreen(nh, "red_found.jpg"); 
+	}
+	else if (c.compare("blue"))
+	{
+		publishToScreen(nh, "blue_found.jpg"); 
+	}
+	else if (c.compare("white"))
+	{
+		publishToScreen(nh, "white_found.jpg"); 
+	}
+	else if (c.compare("black"))
+	{
+		publishToScreen(nh, "black_found.jpg"); 
+	}
+	else if (c.compare("green"))
+	{
+		publishToScreen(nh, "green_found.jpg"); 
+	}
+	else if (c.compare("wood"))
+	{
+		publishToScreen(nh, "wooden_found.jpg"); 
+	}
+}
+
 int main(int argc, char** argv){
 	ros::init(argc, argv, "overall_executer");
 	ros::NodeHandle nh; 
+	publishToScreen(nh, "init.jpg");
 	Pcl_grabing pcl(&nh);
+	#ifdef MOVEIT
+	MoveitPlanningInterface planner(&nh);
+	#else
 	ArmPlanningInterface planner(&nh);
-
+#	endif
+	
 	//connection to the robot
 	geometry_msgs::Pose blockPose;
 	Vector3f plane_normal, major_axis, centroid;
@@ -88,44 +130,38 @@ int main(int argc, char** argv){
 	bool searching = true;
 	bool handPresent = false;
 	bool wasHand = false;
-	publishToScreen(nh, "test.jpg");
+	publishToScreen(nh, "wait_hand_sig.jpg");
 	while(searching){
-		/*
+		
 		if(!handPresent){
 			handPresent = pcl.checkForHand();
-			ROS_INFO("check point 3");
 		}
-		if(!handPresent){
-			publishToScreen(nh, "test.jpg");
-			ROS_INFO("check point 4");
-		}
+
 		if(handPresent && !wasHand){
-			wasHand = pcl.checkForHand();
-			ROS_INFO("check point 5");
-		}*/
-//		if(wasHand){
-		if(true){
+			publishToScreen(nh, "found_hand_sig.jpg");
+			wasHand = !(pcl.checkForHand());
+		}
+		if(wasHand){
+			ros::Duration(2.0).sleep();
 			bool block = pcl.isBlock();
 			if(!block){
-				handPresent = false;
-				wasHand = false;
-				ROS_INFO("Block not found after hand signal. Waiting for next hand signal.\n");
-				publishToScreen(nh, "test.jpg");
+				//handPresent = false;
+				//wasHand = false;
+				//ROS_INFO("Block not found after hand signal. Waiting for next hand signal.\n");
 				ros::spinOnce();
 				continue;
 			}
-			
+			publishToScreen(nh, "working.jpg");
 			//blockPose = pcl.getBlockPose();
 			pcl.getBlockVector(plane_normal, major_axis, centroid);
 			blockPose = planner.convToPose(plane_normal, major_axis, centroid);
 
-			//std_msgs::Float64 width = getWidth();
-			//std_msgs::Float64 height = getHeight();
 			Eigen::Vector3d color = pcl.getColor();
 			string c = determineColor(color);
 			//cwru_msgs::Pose robotPose = getCurrentPose();
 			
 			ROS_INFO("%s Block found on table. Beginning planning.\n",c.c_str());
+			printColorToScreen(nh, c);
 			bool success = false;
 			/*
 			bool success = planner.planPath(blockPose);
@@ -156,7 +192,7 @@ int main(int argc, char** argv){
 			}
 			*/
 
-			ROS_INFO("POSE: X = %f, Y = %f, Z = %f, orientation: X = %f, Y = %f, Z = %f, W = %f", blockPose.position.x, blockPose.position.y, blockPose.position.z, blockPose.orientation.x, blockPose.orientation.y, blockPose.orientation.z, blockPose.orientation.w);
+			ROS_WARN("POSE: X = %f, Y = %f, Z = %f, orientation: X = %f, Y = %f, Z = %f, W = %f", blockPose.position.x, blockPose.position.y, blockPose.position.z, blockPose.orientation.x, blockPose.orientation.y, blockPose.orientation.z, blockPose.orientation.w);
 			//ROS_INFO("Block successfully grabbed. Planning movement for block.\n");
 			
 			//robotPose = getCurrentPose();
@@ -168,7 +204,6 @@ int main(int argc, char** argv){
 				handPresent = false;
 				//planner.releaseBlock();
 				planner.moveArmsBack();
-				publishToScreen(nh, "test.jpg");
 				ros::spinOnce();
 				continue;
 			} else {
