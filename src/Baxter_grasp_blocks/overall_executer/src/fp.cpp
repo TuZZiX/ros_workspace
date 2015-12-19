@@ -74,27 +74,27 @@ void publishToScreen(ros::NodeHandle &nh, string path){
 }
 
 void printColorToScreen(ros::NodeHandle &nh, string c){
-	if (c.compare("red"))
+	if (c.compare("red")==0)
 	{
 		publishToScreen(nh, "red_found.jpg"); 
 	}
-	else if (c.compare("blue"))
+	else if (c.compare("blue")==0)
 	{
 		publishToScreen(nh, "blue_found.jpg"); 
 	}
-	else if (c.compare("white"))
+	else if (c.compare("white")==0)
 	{
 		publishToScreen(nh, "white_found.jpg"); 
 	}
-	else if (c.compare("black"))
+	else if (c.compare("black")==0)
 	{
 		publishToScreen(nh, "black_found.jpg"); 
 	}
-	else if (c.compare("green"))
+	else if (c.compare("green")==0)
 	{
 		publishToScreen(nh, "green_found.jpg"); 
 	}
-	else if (c.compare("wood"))
+	else if (c.compare("wood")==0)
 	{
 		publishToScreen(nh, "wooden_found.jpg"); 
 	}
@@ -138,11 +138,11 @@ int main(int argc, char** argv){
 		}
 
 		if(handPresent && !wasHand){
-			publishToScreen(nh, "found_hand_sig.jpg");
+			//publishToScreen(nh, "found_hand_sig.jpg");
 			wasHand = !(pcl.checkForHand());
 		}
 		if(wasHand){
-			ros::Duration(2.0).sleep();
+			//ros::Duration(2.0).sleep();
 			bool block = pcl.isBlock();
 			if(!block){
 				//handPresent = false;
@@ -151,7 +151,7 @@ int main(int argc, char** argv){
 				ros::spinOnce();
 				continue;
 			}
-			publishToScreen(nh, "working.jpg");
+			//publishToScreen(nh, "working.jpg");
 			//blockPose = pcl.getBlockPose();
 			pcl.getBlockVector(plane_normal, major_axis, centroid);
 			blockPose = planner.convToPose(plane_normal, major_axis, centroid);
