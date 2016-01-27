@@ -5,9 +5,9 @@ project(cwru_srv)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  #message_generation
+  message_generation
   geometry_msgs
-  #nav_msgs
+  nav_msgs
   roscpp
   std_msgs
   genmsg
@@ -65,6 +65,7 @@ FILES simple_bool_service_message.srv
   simple_float_service_message.srv
   arm_nav_service_message.srv
   IM_node_service_message.srv
+  path_service_message.srv
   )
 
 ## Generate actions in the 'action' folder
@@ -79,7 +80,7 @@ generate_messages(
   DEPENDENCIES
   std_msgs  
   geometry_msgs
-  #nav_msgs
+  nav_msgs
 )
 
 ###################################
