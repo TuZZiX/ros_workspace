@@ -158,8 +158,9 @@ bool callback(example_ros_service::PathSrvRequest& request, example_ros_service:
         // this yaw is measured CCW from x-axis
         // GET RID OF NEXT LINE AFTER FIXING get_yaw_and_dist()
         yaw_desired = convertPlanarQuat2Phi(pose_desired.orientation); //from i'th desired pose
-        
-        ROS_INFO("pose %d: desired yaw = %f",i,yaw_desired);        
+        ROS_INFO("Current position x: %f, y: %f, z:%f", g_current_pose.position.x, g_current_pose.position.y, g_current_pose.position.z);
+        ROS_INFO("Current orientation x: %f, y: %f, z:%f, w:%f", g_current_pose.orientation.x, g_current_pose.orientation.y, g_current_pose.orientation.z, g_current_pose.orientation.w);
+        ROS_INFO("pose %d: desired yaw = %f",i,yaw_desired);
         yaw_current = convertPlanarQuat2Phi(g_current_pose.orientation); //our current yaw--should use a sensor
         spin_angle = yaw_desired - yaw_current; // spin this much
         spin_angle = min_spin(spin_angle);// but what if this angle is > pi?  then go the other way
