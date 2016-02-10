@@ -42,8 +42,10 @@
   <buildtool_depend>catkin_simple</buildtool_depend>
   <build_depend>roscpp</build_depend>
 <build_depend>geometry_msgs</build_depend>
+<build_depend>example_ros_service</build_depend>
   <run_depend>roscpp</run_depend>
 <run_depend>geometry_msgs</run_depend>
+<run_depend>example_ros_service</run_depend>
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- You can specify that this package is a metapackage here: -->

@@ -20,6 +20,8 @@ catkin_simple()
 # example boost usage
 # find_package(Boost REQUIRED COMPONENTS system thread)
 
+find_package(example_ros_service REQUIRED)
+
 # C++0x support - not quite the same as final C++11!
 # use carefully;  can interfere with point-cloud library
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
@@ -35,6 +37,8 @@ catkin_simple()
  cs_add_executable(solver_client src/solver_client.cpp)
  cs_add_executable(solver_server src/solver_server.cpp)
 
+add_dependencies(solver_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} example_ros_service)
+add_dependencies(solver_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} example_ros_service)
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package
 # target_link_library(example my_lib)
