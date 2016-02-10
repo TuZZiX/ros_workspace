@@ -56,9 +56,7 @@
 
 //ROS-Opencv Headers
 #include <image_transport/image_transport.h>
-
-#include <opencv/cvwimage.h>
-#include <opencv/highgui.h>
+#include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 
 #include <sensor_msgs/image_encodings.h>
@@ -102,13 +100,16 @@ class baxter_emulator {
   ros::Publisher left_ir_pub, right_ir_pub, left_ir_int_pub, right_ir_int_pub,
       left_ir_state_pub, right_ir_state_pub;
   // Navigator publishers
-  ros::Publisher left_itb_innerL_pub, right_itb_innerL_pub,
-      torso_left_innerL_pub, torso_right_innerL_pub, left_itb_outerL_pub,
-      right_itb_outerL_pub, torso_left_outerL_pub, torso_right_outerL_pub;
+  ros::Publisher left_inner_light_pub, right_inner_light_pub,
+                 left_outer_light_pub, right_outer_light_pub,
+                 torso_left_inner_light_pub, torso_right_inner_light_pub,
+                 torso_left_outer_light_pub, torso_right_outer_light_pub;
   // General state publishers
   ros::Publisher assembly_state_pub, head_pub;
   // Gravity Publishers
   ros::Publisher left_grav_pub, right_grav_pub;
+  // Simulator has Started notification Publisher
+  ros::Publisher sim_started_pub;
 
   ros::NodeHandle n;
   ros::Timer head_nod_timer;

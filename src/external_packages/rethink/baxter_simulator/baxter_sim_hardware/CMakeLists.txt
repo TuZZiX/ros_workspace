@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(baxter_sim_hardware)
 
-find_package(catkin 
+find_package(catkin
   REQUIRED COMPONENTS
   std_msgs
   roscpp
@@ -14,6 +14,7 @@ find_package(catkin
 
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(cmake_modules REQUIRED)
+find_package(OpenCV REQUIRED)
 
 find_package(Eigen REQUIRED)
 catkin_package(
@@ -24,6 +25,7 @@ catkin_package(
     cv_bridge
     image_transport
     baxter_sim_kinematics
+  DEPENDS OpenCV
   LIBRARIES ${PROJECT_NAME}
 )
 
@@ -31,8 +33,20 @@ include_directories(include
   ${catkin_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${EIGEN_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 add_executable(baxter_emulator src/baxter_emulator.cpp)
-target_link_libraries(baxter_emulator ${catkin_LIBRARIES})
+target_link_libraries(baxter_emulator ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 add_dependencies(baxter_emulator ${catkin_EXPORTED_TARGETS})
+
+install(
+  TARGETS baxter_emulator
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+
+install(
+  DIRECTORY config images include launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)

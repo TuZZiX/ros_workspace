@@ -38,8 +38,11 @@
 
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/CompressedImage.h>
+#include <sensor_msgs/image_encodings.h>
 #include <ros/static_assert.h>
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/types_c.h>
 #include <stdexcept>
 
 namespace cv_bridge {
@@ -243,6 +246,41 @@ CvImageConstPtr toCvShare(const sensor_msgs::Image& source,
  */
 CvImagePtr cvtColor(const CvImageConstPtr& source,
                     const std::string& encoding);
+
+/**
+ * \brief Converts an immutable sensor_msgs::Image message to another CvImage for display purposes,
+ * using practical conversion rules if needed.
+ *
+ * Data will be shared between input and output if possible.
+ *
+ * Recall: sensor_msgs::image_encodings::isColor and isMono tell whether an image contains R,G,B,A, mono
+ * (or any combination/subset) with 8 or 16 bit depth.
+ *
+ * The following rules apply:
+ * - if the output encoding is empty, the fact that the input image is mono or multiple-channel is
+ * preserved in the ouput image. The bit depth will be 8. it tries to convert to BGR no matter what
+ * encoding image is passed.
+ * - if the output encoding is not empty, it must have sensor_msgs::image_encodings::isColor and
+ * isMono return true. It must also be 8 bit in depth
+ * - if the input encoding is an OpenCV format (e.g. 8UC1), and if we have 1,3 or 4 channels, it is
+ * respectively converted to mono, BGR or BGRA.
+ * - if the input encoding is 32SC1, this estimate that image as label image and will convert it as
+ * bgr image with different colors for each label.
+ *
+ * \param source   A shared_ptr to a sensor_msgs::Image message
+ * \param encoding Either an encoding string that returns true in sensor_msgs::image_encodings::isColor
+ * isMono or the empty string as explained above.
+ * \param do_dynamic_scaling If true, the image is dynamically scaled between its minimum and maximum value
+ * before being converted to its final encoding.
+ * \param min_image_value Independently from do_dynamic_scaling, if min_image_value and max_image_value are
+ * different, the image is scaled between these two values before being converted to its final encoding.
+ * \param max_image_value Maximum image value
+ */
+CvImageConstPtr cvtColorForDisplay(const CvImageConstPtr& source,
+                                   const std::string& encoding = std::string(),
+                                   bool do_dynamic_scaling = false,
+                                   double min_image_value = 0.0,
+                                   double max_image_value = 0.0);
 
 /**
  * \brief Get the OpenCV type enum corresponding to the encoding.

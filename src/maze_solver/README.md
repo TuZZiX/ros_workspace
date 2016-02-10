@@ -1,15 +1,16 @@
 # maze_solver
 
-## To run
+## Start simulator
 
 `roslaunch stdr_launchers server_with_map_and_gui_plus_robot.launch`
 
-`rosrun maze_solver maze_solver`
+## Run close loop controllor
 
-## Reuseable
+`rosrun maze_solver lidar_detector`
 
-There is a class called *RobotCommander* which could use for command example robot in stdr, with two member function:
+`rosrun maze_solver feedback_solver`
 
-void move(int direction, double time)	// direction could be FORWARD or BACKWARD
-    
-void turn(int direction, double time)	// direction could be LEFT or RIGHT
+## Run open loop controllor
+
+`rosrun maze_solver openloop_solver`
+
