@@ -28,7 +28,7 @@ void odemCallback(const nav_msgs::Odometry& odom_msg) {
     g_current_pose = odom_msg.pose.pose;
 }
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "path_client");
+    ros::init(argc, argv, "solver_client");
     ros::NodeHandle n;
     ros::Subscriber odem_subscriber = n.subscribe("/robot0/odom", 1, odemCallback);
     ros::ServiceClient client = n.serviceClient<example_ros_service::PathSrv>("path_service");
@@ -45,6 +45,8 @@ int main(int argc, char **argv) {
         ros::spinOnce();
         ros::Duration(0.05).sleep();
     }
+    ROS_INFO("Start position x: %f, y: %f, z:%f", g_current_pose.position.x, g_current_pose.position.y, g_current_pose.position.z);
+    ROS_INFO("Start orientation x: %f, y: %f, z:%f, w:%f", g_current_pose.orientation.x, g_current_pose.orientation.y, g_current_pose.orientation.z, g_current_pose.orientation.w);
     //create some path points...this should be done by some intelligent algorithm, but we'll hard-code it here
     geometry_msgs::PoseStamped pose_stamped;
     geometry_msgs::Pose pose;
@@ -67,7 +69,7 @@ int main(int argc, char **argv) {
 
     quat = convertPlanarPhi2Quaternion(M_PI/2);
     pose_stamped.pose.orientation = quat;
-    pose_stamped.pose.position.y+=2.1;
+    pose_stamped.pose.position.y+=2.2;
     //desired position is not updated...just the desired heading
     path_srv.request.nav_path.poses.push_back(pose_stamped);
 

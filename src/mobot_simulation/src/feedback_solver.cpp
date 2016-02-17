@@ -254,10 +254,10 @@ int main(int argc, char **argv) {
             if (opt_dir > M_PI/2 || opt_dir < -1*M_PI/2) {
                 opt_dir = opt_dir - M_PI;
                 robot.turn(opt_dir);
-                robot.move(-0.2);
+                robot.move(-0.1);
             } else {
                 robot.turn(opt_dir);
-                robot.move(0.2);
+                robot.move(0.1);
             }
             g_lidar_alarm = false;
             //is_move = true;

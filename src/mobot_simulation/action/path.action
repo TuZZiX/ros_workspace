@@ -1,0 +1,11 @@
+#goal definition
+#the lines with the hash signs are merely comments
+#goal, result and feedback are defined by this fixed order, and separated by 3 hyphens
+nav_msgs/Path target
+---
+#result definition
+bool success
+geometry_msgs/PoseStamped final
+---
+#feedback
+geometry_msgs/PoseStamped current

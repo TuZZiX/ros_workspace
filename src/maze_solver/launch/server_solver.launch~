@@ -1,4 +1,0 @@
-<launch> 
-<node name= "solver_server" pkg= "maze_solver" type= "solver_server" output="screen/> 
-<node name= "solver_client" pkg= "maze_solver" type= "solver_client" output="screen /> 
-</launch> 
