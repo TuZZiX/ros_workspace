@@ -7,7 +7,7 @@
 #include <std_msgs/Bool.h>              /* boolean message */
 #include <math.h>
 
-const double MIN_SAFE_DISTANCE = 1.2;   /* set alarm if anything is within 0.5m of the front of robot */
+const double MIN_SAFE_DISTANCE = 1.3;   /* set alarm if anything is within 0.5m of the front of robot */
 const double DISTANCE_FILTER = 0.15;
 
 /* these values to be set within the laser callback */
@@ -46,7 +46,7 @@ void laserCallback( const sensor_msgs::LaserScan & laser_scan )
         angle_max_		= laser_scan.angle_max;
         angle_increment_= laser_scan.angle_increment;
         range_min_		= laser_scan.range_min;
-        range_max_		= laser_scan.range_max - 0.5;
+        range_max_		= laser_scan.range_max - 1.0;
         //range_max_		= 30.0;
         /*
          * what is the index of the ping that is straight ahead?
@@ -57,7 +57,7 @@ void laserCallback( const sensor_msgs::LaserScan & laser_scan )
         ROS_INFO( "LIDAR setup: ping_index = %d", ping_index_ );
     }
     for (int j = 0; j < ping_index_*2; ++j) {
-        if (laser_scan.ranges[j] <= range_max_ ) {
+        if (laser_scan.ranges[j] <= range_max_ && laser_scan.ranges[j] >= DISTANCE_FILTER) {
             all_max = false;
         }
     }

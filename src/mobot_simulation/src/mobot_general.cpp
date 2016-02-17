@@ -18,18 +18,10 @@ double sgn(double x) {
 
 //a function to consider periodicity and find min delta angle
 double min_spin(double spin_angle) {
-    while (spin_angle > M_PI) {
-        spin_angle -= 2.0 * M_PI;
-    }
-    while (spin_angle < -M_PI) {
-        spin_angle += 2.0 * M_PI;
-    }
-    if (spin_angle > M_PI/2) {
-        spin_angle -= M_PI;
-    }
-    if (spin_angle < -M_PI/2) {
-        spin_angle += M_PI;
-    }
+    if (spin_angle>M_PI) {
+        spin_angle -= 2.0*M_PI;}
+    if (spin_angle< -M_PI) {
+        spin_angle += 2.0*M_PI;}
     return spin_angle;
 }
 
@@ -105,7 +97,7 @@ void RobotCommander::stop() {
     for (int i = 0; i < 10; i++) {
         twist_commander.publish(twist_cmd);
         loop_timer.sleep();
-        //ros::spinOnce();
+        ros::spinOnce();
     }
 }
 
@@ -135,7 +127,7 @@ void RobotCommander::turn(double rad) {
         twist_commander.publish(twist_cmd);
         timer += sample_dt;
         loop_timer.sleep();
-        //ros::spinOnce();
+        ros::spinOnce();
     }
     stop();
 }
@@ -163,7 +155,7 @@ void RobotCommander::spin(int direction) {
     for (int i = 0; i < 10; i++) {
         twist_commander.publish(twist_cmd);
         loop_timer.sleep();
-        //ros::spinOnce();
+        ros::spinOnce();
     }
 }
 
@@ -195,7 +187,7 @@ void RobotCommander::move(int direction, double time) {
         twist_commander.publish(twist_cmd);
         timer += sample_dt;
         loop_timer.sleep();
-        //ros::spinOnce();
+        ros::spinOnce();
     }
     stop();
 }
@@ -232,6 +224,6 @@ void RobotCommander::go(int direction) {
     for (int i = 0; i < 10; i++) {
         twist_commander.publish(twist_cmd);
         loop_timer.sleep();
-       // ros::spinOnce();
+        ros::spinOnce();
     }
 }

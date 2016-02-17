@@ -8,6 +8,6 @@
 
   <node name= "mobot_server" pkg= "mobot_simulation" type= "mobot_server" output="screen" /> 
   <node name= "mobot_client" pkg= "mobot_simulation" type= "mobot_client" output="screen" /> 
-  <node name= "lidar_mobot" pkg= "mobot_simulation" type= "lidar_mobot"/> 
+  <node name= "lidar_mobot" pkg= "mobot_simulation" type= "lidar_mobot" output="screen" /> 
 
 </launch>

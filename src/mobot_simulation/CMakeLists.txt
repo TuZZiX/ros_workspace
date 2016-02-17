@@ -30,8 +30,10 @@ catkin_simple()
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
  cs_add_executable(lidar_mobot src/lidar_detector.cpp)
- cs_add_executable(mobot_server src/mobot_server.cpp)
- cs_add_executable(mobot_client src/mobot_client.cpp)
+ #cs_add_executable(mobot_server src/mobot_server.cpp)
+ #cs_add_executable(mobot_client src/mobot_client.cpp)
+ cs_add_executable(mobot_server src/mobot_server_simple.cpp)
+ cs_add_executable(mobot_client src/mobot_client_simple.cpp)
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package
  target_link_libraries(mobot_server mobot_general ${catkin_LIBRARIES})
