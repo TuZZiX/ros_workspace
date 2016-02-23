@@ -27,10 +27,10 @@
           <root url="file:///opt/ros/indigo/include" />
           <root url="file://$MODULE_DIR$/include" />
           <root url="file://$MODULE_DIR$/../../devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/Release/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/Debug/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/RelWithDebInfo/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/MinSizeRel/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/Release/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/Debug/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/RelWithDebInfo/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/MinSizeRel/devel/include" />
         </CLASSES>
         <SOURCES>
           <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
@@ -40,10 +40,10 @@
           <root url="file:///opt/ros/indigo/include" />
           <root url="file://$MODULE_DIR$/include" />
           <root url="file://$MODULE_DIR$/../../devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/Release/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/Debug/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/RelWithDebInfo/devel/include" />
-          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/ef8be72a/ef8be72a/MinSizeRel/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/Release/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/Debug/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/RelWithDebInfo/devel/include" />
+          <root url="file://$USER_HOME$/.CLion12/system/cmake/generated/d6b4cff1/d6b4cff1/MinSizeRel/devel/include" />
         </SOURCES>
       </library>
     </orderEntry>

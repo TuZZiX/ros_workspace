@@ -7,7 +7,7 @@
 #include <std_msgs/Bool.h>              /* boolean message */
 #include <math.h>
 
-const double MIN_SAFE_DISTANCE = 1.3;   /* set alarm if anything is within 0.5m of the front of robot */
+const double MIN_SAFE_DISTANCE = 1.2;   /* set alarm if anything is within 0.5m of the front of robot */
 const double DISTANCE_FILTER = 0.15;
 
 /* these values to be set within the laser callback */
@@ -71,6 +71,9 @@ void laserCallback( const sensor_msgs::LaserScan & laser_scan )
         opt_dir_publisher_.publish( opt_dir_msg );
         return;
     }
+
+
+
     for (int l = 0; l < ping_index_*2; ++l) {
         if (laser_scan.ranges[l] <= MIN_SAFE_DISTANCE && laser_scan.ranges[l] >= DISTANCE_FILTER) {
             if (min_dis < 0) {
