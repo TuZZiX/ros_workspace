@@ -200,8 +200,8 @@ void SteeringController::mobot_nl_steering() {
     cmd_publisher_.publish(twist_cmd_);
 
     // DEBUG OUTPUT...
-    ROS_INFO("des_state_phi, heading err = %f, %f", des_state_psi_,heading_err);
-    ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err_,trip_dist_err);
+    //ROS_INFO("des_state_phi, heading err = %f, %f", des_state_psi_,heading_err);
+    //ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err_,trip_dist_err);
     std_msgs::Float32 float_msg;
     float_msg.data = lateral_err_;
     lat_err_publisher_.publish(float_msg);

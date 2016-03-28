@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
-
 	<param name="/UPDATE_RATE" value="50.0"/>
 	<param name="/K_PHI" value="10.0"/>
 	<param name="/K_DISP" value="3.0"/>
@@ -21,17 +20,11 @@
 	<param name="/speed_max" value="0.5"/>
 	<param name="/omega_max" value="0.5"/>
 
-	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find wall_follower)/launch/mobot.world"/>
-	</include>
+	<remap from="/scan" to="/base_laser1_scan" />
 
-	<include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>
-
-	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" /> -->
-	<!--<node name= "des_state_publisher" pkg= "p5_beta" type= "des_state_publisher" output="screen" /> -->
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" output="screen" />
 	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
-	<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> 
-	<!--<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/> -->
+	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
+	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
 
-	<node pkg="rviz" name="rviz" type="rviz" />
 </launch>
