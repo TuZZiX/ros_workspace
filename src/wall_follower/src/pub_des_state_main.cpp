@@ -19,8 +19,9 @@ int main(int argc, char **argv) {
     } else if (argc > 1 && ( strcmp(argv[1], "test") == 0 )) {
         desStatePublisher.append_path_queue(0.5,  0.0,  0.0);
     } else {
-        desStatePublisher.append_path_queue(5.0,  0.0,  0.0);
-        desStatePublisher.append_path_queue(0.0, 0.0, -M_PI);
+        desStatePublisher.append_path_queue(0.0, 6.0, -0.5*M_PI);
+        desStatePublisher.append_path_queue(-10.0, 6.0, -M_PI);
+        desStatePublisher.append_path_queue(-10.0, 0.0, -1.5*M_PI);
     }
     // main loop; publish a desired state every iteration
     while (ros::ok()) {

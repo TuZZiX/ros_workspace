@@ -19,7 +19,7 @@ const double default_accel_max = 0.5; //1m/sec^2
 const double default_alpha_max = 0.2; //1 rad/sec^2
 const double default_speed_max = 0.5; //1 m/sec
 const double default_omega_max = 0.5; //1 rad/sec
-const double default_path_move_tol = 0.01; // if path points are within 1cm, fuggidaboutit   
+const double default_path_move_tol = 0.01; // if path points are within 1cm, fuggidaboutit
 const double default_dt=0.02;
 
 class TrajBuilder {
@@ -27,9 +27,9 @@ private:
     //constants and parameters: changeable via public "set" fncs
     double dt_;
     double accel_max_;
-    double alpha_max_;  // zui da jiao jia su du
+    double alpha_max_;
     double speed_max_;
-    double omega_max_;  // zui da  jiao su du
+    double omega_max_;
     double path_move_tol_;
 
     //member vars of class

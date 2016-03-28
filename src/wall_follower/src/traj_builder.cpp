@@ -36,13 +36,39 @@ int called_build_spin_traj = 0;
 
 //constructor: fill in default param values (changeable via "set" fncs)
 TrajBuilder::TrajBuilder()  {
+    ros::NodeHandle nh_;
     dt_ = default_dt; //0.02; //send desired-state messages at fixed rate, e.g. 0.02 sec = 50Hz
     //dynamic parameters: should be tuned for target system
     accel_max_ = default_accel_max; //0.5; //1m/sec^2
     alpha_max_ = default_alpha_max; //0.2; //1 rad/sec^2
     speed_max_ = default_speed_max; //1.0; //1 m/sec
     omega_max_ = default_omega_max; //1.0; //1 rad/sec
-    path_move_tol_ = default_path_move_tol; //0.01; // if path points are within 1cm, fuggidaboutit   
+    path_move_tol_ = default_path_move_tol; //0.01; // if path points are within 1cm, fuggidaboutit
+
+    if (!nh_.hasParam("accel_max")){
+        ROS_INFO("No accel_max specified, using default value %f", accel_max_);
+    } else {
+        nh_.getParam("accel_max", accel_max_);
+        ROS_INFO("accel_max set to %f", accel_max_);
+    }
+    if (!nh_.hasParam("alpha_max")){
+        ROS_INFO("No alpha_max specified, using default value %f", alpha_max_);
+    } else {
+        nh_.getParam("alpha_max", alpha_max_);
+        ROS_INFO("alpha_max set to  %f", alpha_max_);
+    }
+    if (!nh_.hasParam("speed_max")){
+        ROS_INFO("No speed_max specified, using default value %f", speed_max_);
+    } else {
+        nh_.getParam("speed_max", speed_max_);
+        ROS_INFO("speed_max set to %f", speed_max_);
+    }
+    if (!nh_.hasParam("omega_max")){
+        ROS_INFO("No omega_max specified, using default value %f", omega_max_);
+    } else {
+        nh_.getParam("omega_max", omega_max_);
+        ROS_INFO("omega_max set to %f", omega_max_);
+    }
 
     //define a halt state; zero speed and spin, and fill with viable coords
     halt_twist_.linear.x = 0.0;

@@ -7,8 +7,8 @@
 	<arg name="dist" default="1.5" />
 	<arg name="rad" default="0.5" />-->
 
-	<node name= "des_state_subscriber" pkg= "p5_beta" type= "des_state_subscriber" output="screen" /> 
+	<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" /> 
 	<!--<node name= "des_state_publisher" pkg= "p5_beta" type= "des_state_publisher" output="screen" /> -->
-	<node name= "lidar_braker2" pkg= "p5_beta" type= "lidar_braker2" args="1.0 0.5" output="screen" /> 
+	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" /> 
 
 </launch>

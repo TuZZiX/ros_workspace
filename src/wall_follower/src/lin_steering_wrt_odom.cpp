@@ -13,6 +13,43 @@
 SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehandle)
 { // constructor
     ROS_INFO("in class constructor of SteeringController");
+
+    if (!nh_.hasParam("UPDATE_RATE")){
+        ROS_INFO("No UPDATE_RATE specified, using default value %f", UPDATE_RATE);
+    } else {
+        nh_.getParam("UPDATE_RATE", UPDATE_RATE);
+        ROS_INFO("UPDATE_RATE set to %f", UPDATE_RATE);
+    }
+    if (!nh_.hasParam("K_PHI")){
+        ROS_INFO("No K_PHI specified, using default value %f", K_PHI);
+    } else {
+        nh_.getParam("K_PHI", K_PHI);
+        ROS_INFO("K_PHI set to  %f", K_PHI);
+    }
+    if (!nh_.hasParam("K_DISP")){
+        ROS_INFO("No K_DISP specified, using default value %f", K_DISP);
+    } else {
+        nh_.getParam("K_DISP", K_DISP);
+        ROS_INFO("K_DISP set to %f", K_DISP);
+    }
+    if (!nh_.hasParam("K_TRIP_DIST")){
+        ROS_INFO("No K_TRIP_DIST specified, using default value %f", K_TRIP_DIST);
+    } else {
+        nh_.getParam("K_TRIP_DIST", K_TRIP_DIST);
+        ROS_INFO("K_TRIP_DIST set to %f", K_TRIP_DIST);
+    }
+    if (!nh_.hasParam("MAX_SPEED")){
+        ROS_INFO("No MAX_SPEED specified, using default value %f", MAX_SPEED);
+    } else {
+        nh_.getParam("MAX_SPEED", MAX_SPEED);
+        ROS_INFO("MAX_SPEED set to %f", MAX_SPEED);
+    }
+    if (!nh_.hasParam("MAX_OMEGA")){
+        ROS_INFO("No MAX_OMEGA specified, using default value %f", MAX_OMEGA);
+    } else {
+        nh_.getParam("MAX_OMEGA", MAX_OMEGA);
+        ROS_INFO("MAX_OMEGA set to %f", MAX_OMEGA);
+    }
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
     initializePublishers();
     //initializeServices();
@@ -207,8 +244,8 @@ void SteeringController::lin_steering_algorithm() {
     
     
     // DEBUG OUTPUT...
-    ROS_INFO("des_state_phi, odom_phi, heading err = %f, %f, %f", des_state_phi_,odom_phi_,heading_err);
-    ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err,trip_dist_err);
+    //ROS_INFO("des_state_phi, odom_phi, heading err = %f, %f, %f", des_state_phi_,odom_phi_,heading_err);
+    //ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err,trip_dist_err);
     // DEFINITELY COMMENT OUT ALL cout<< OPERATIONS FOR REAL-TIME CODE
     //std::cout<<des_xy_vec_<<std::endl;
     //std::cout<<odom_xy_vec_<<std::endl;

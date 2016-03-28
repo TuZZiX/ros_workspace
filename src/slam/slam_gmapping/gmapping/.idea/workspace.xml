@@ -2,6 +2,25 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
+<<<<<<< HEAD
+      <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_stage.launch" />
+      <config projectName="gmapping" targetName="actionlib_generate_messages_py" />
+      <config projectName="gmapping" targetName="_run_tests_gmapping" />
+      <config projectName="gmapping" targetName="run_tests" />
+      <config projectName="gmapping" targetName="gtest_main" />
+      <config projectName="gmapping" targetName="actionlib_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_symmetry.launch" />
+      <config projectName="gmapping" targetName="tf2_msgs_generate_messages_py" />
+      <config projectName="gmapping" targetName="rosgraph_msgs_generate_messages_py" />
+      <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_laser_different_beamcount.test" />
+      <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_stage_replay.launch" />
+      <config projectName="gmapping" targetName="actionlib_msgs_generate_messages_cpp" />
+      <config projectName="gmapping" targetName="clean_test_results_gmapping" />
+      <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_stage.launch" />
+      <config projectName="gmapping" targetName="download_extra_data" />
+      <config projectName="gmapping" targetName="std_msgs_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="nav_msgs_generate_messages_py" />
+=======
       <config projectName="gmapping" targetName="rosgraph_msgs_generate_messages_py" />
       <config projectName="gmapping" targetName="_run_tests_gmapping" />
       <config projectName="gmapping" targetName="run_tests" />
@@ -19,6 +38,7 @@
       <config projectName="gmapping" targetName="download_extra_data" />
       <config projectName="gmapping" targetName="roscpp_generate_messages_cpp" />
       <config projectName="gmapping" targetName="gmapping_basic_localization_stage_indexed.bag" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
       <config projectName="gmapping" targetName="tf2_msgs_generate_messages_cpp" />
       <config projectName="gmapping" targetName="roscpp_generate_messages_lisp" />
       <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_laser_different_beamcount.test" />
@@ -27,23 +47,50 @@
       <config projectName="gmapping" targetName="gmapping_test_turtlebot.bag" />
       <config projectName="gmapping" targetName="geometry_msgs_generate_messages_cpp" />
       <config projectName="gmapping" targetName="tf_generate_messages_cpp" />
+<<<<<<< HEAD
+      <config projectName="gmapping" targetName="sensor_msgs_generate_messages_cpp" />
+      <config projectName="gmapping" targetName="tests" />
+      <config projectName="gmapping" targetName="run_tests_gmapping" />
+      <config projectName="gmapping" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="gmapping" targetName="nav_msgs_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="gmapping_basic_localization_stage_indexed.bag" />
+=======
       <config projectName="gmapping" targetName="std_msgs_generate_messages_cpp" />
       <config projectName="gmapping" targetName="sensor_msgs_generate_messages_cpp" />
       <config projectName="gmapping" targetName="tests" />
       <config projectName="gmapping" targetName="rosgraph_msgs_generate_messages_cpp" />
       <config projectName="gmapping" targetName="nav_msgs_generate_messages_lisp" />
       <config projectName="gmapping" targetName="std_msgs_generate_messages_lisp" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
       <config projectName="gmapping" targetName="gmapping_basic_localization_stage_groundtruth.pgm" />
       <config projectName="gmapping" targetName="geometry_msgs_generate_messages_lisp" />
       <config projectName="gmapping" targetName="gmapping_hallway_slow_2011-03-04-21-41-33.bag" />
       <config projectName="gmapping" targetName="actionlib_msgs_generate_messages_lisp" />
       <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_upside_down.launch" />
+<<<<<<< HEAD
+=======
       <config projectName="gmapping" targetName="tf_generate_messages_py" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
       <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_stage_replay2.launch" />
       <config projectName="gmapping" targetName="gtest" />
       <config projectName="gmapping" targetName="actionlib_generate_messages_cpp" />
       <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_upside_down.launch" />
       <config projectName="gmapping" targetName="nav_msgs_generate_messages_cpp" />
+<<<<<<< HEAD
+      <config projectName="gmapping" targetName="std_msgs_generate_messages_cpp" />
+      <config projectName="gmapping" targetName="slam_gmapping_replay" />
+      <config projectName="gmapping" targetName="slam_gmapping" />
+      <config projectName="gmapping" targetName="tf_generate_messages_py" />
+      <config projectName="gmapping" targetName="gmapping_test_upside_down.bag" />
+      <config projectName="gmapping" targetName="gmapping_test_replay_crash.bag" />
+      <config projectName="gmapping" targetName="_run_tests_gmapping_rostest_test_basic_localization_stage_replay.launch" />
+      <config projectName="gmapping" targetName="_run_tests_gmapping_rostest" />
+      <config projectName="gmapping" targetName="roscpp_generate_messages_cpp" />
+      <config projectName="gmapping" targetName="clean_test_results" />
+      <config projectName="gmapping" targetName="sensor_msgs_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="tf_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="roscpp_generate_messages_py" />
+=======
       <config projectName="gmapping" targetName="actionlib_generate_messages_py" />
       <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_stage.launch" />
       <config projectName="gmapping" targetName="slam_gmapping" />
@@ -57,14 +104,23 @@
       <config projectName="gmapping" targetName="sensor_msgs_generate_messages_lisp" />
       <config projectName="gmapping" targetName="tf_generate_messages_lisp" />
       <config projectName="gmapping" targetName="gmapping_test_replay_crash.bag" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
       <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_stage_replay2.launch" />
       <config projectName="gmapping" targetName="gmapping-rtest" />
       <config projectName="gmapping" targetName="doxygen" />
       <config projectName="gmapping" targetName="actionlib_msgs_generate_messages_py" />
+<<<<<<< HEAD
+      <config projectName="gmapping" targetName="sensor_msgs_generate_messages_py" />
+      <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_symmetry.launch" />
+      <config projectName="gmapping" targetName="run_tests_gmapping_rostest" />
+      <config projectName="gmapping" targetName="rosgraph_msgs_generate_messages_lisp" />
+      <config projectName="gmapping" targetName="std_msgs_generate_messages_py" />
+=======
       <config projectName="gmapping" targetName="clean_test_results_gmapping" />
       <config projectName="gmapping" targetName="run_tests_gmapping_rostest_test_basic_localization_symmetry.launch" />
       <config projectName="gmapping" targetName="run_tests_gmapping_rostest" />
       <config projectName="gmapping" targetName="_run_tests_gmapping_rostest" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -73,7 +129,11 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="d5d9202a-2fe8-4d85-9fe0-ac3e3d72d66f" name="Default" comment="" />
+=======
     <list default="true" id="0f706cc5-fcaf-4fe6-9724-76ac6add38de" name="Default" comment="" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
     <ignored path="gmapping.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,12 +152,33 @@
     <favorites_list name="gmapping" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+      <file leaf-file-name="slam_gmapping.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/slam_gmapping.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.16050956">
+              <caret line="304" column="17" selection-start-line="304" selection-start-column="17" selection-end-line="304" selection-end-column="17" />
+              <folding>
+                <element signature="e#4731#4757#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="slam_gmapping.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/slam_gmapping.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="8" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="8" />
+=======
     <leaf>
       <file leaf-file-name="slam_gmapping.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/slam_gmapping.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.7613883">
               <caret line="270" column="34" selection-start-line="270" selection-start-column="34" selection-end-line="270" selection-end-column="34" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
               <folding />
             </state>
           </provider>
@@ -111,10 +192,17 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
+    <option name="x" value="130" />
+    <option name="y" value="-8" />
+    <option name="width" value="2750" />
+    <option name="height" value="1808" />
+=======
     <option name="x" value="65" />
     <option name="y" value="-4" />
     <option name="width" value="1615" />
     <option name="height" value="1054" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -199,10 +287,34 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../wall_follower" />
   </component>
   <component name="RunManager" selected="Application.Build All">
+<<<<<<< HEAD
+    <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="gmapping" TARGET_NAME="_run_tests_gmapping" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+=======
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="gmapping" TARGET_NAME="_run_tests_gmapping" CONFIG_NAME="Debug">
       <envs />
       <method />
     </configuration>
+<<<<<<< HEAD
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+=======
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
     <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
       <method />
@@ -527,16 +639,48 @@
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+<<<<<<< HEAD
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d5d9202a-2fe8-4d85-9fe0-ac3e3d72d66f" name="Default" comment="" />
+      <created>1458777644001</created>
+      <option name="number" value="Default" />
+      <updated>1458777644001</updated>
+=======
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="0f706cc5-fcaf-4fe6-9724-76ac6add38de" name="Default" comment="" />
       <created>1458331440339</created>
       <option name="number" value="Default" />
       <updated>1458331440339</updated>
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="130" y="-8" width="2750" height="1808" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24981818" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+=======
     <frame x="65" y="-4" width="1615" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
@@ -555,10 +699,22 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+<<<<<<< HEAD
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+=======
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -569,11 +725,54 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/slam_gmapping.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7613883">
-          <caret line="270" column="34" selection-start-line="270" selection-start-column="34" selection-end-line="270" selection-end-column="34" />
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#4731#4757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/slam_gmapping.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../openslam_gmapping/include/gmapping/gridfastslam/gridslamprocessor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.556051">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/slam_gmapping.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="8" />
+=======
+        <state vertical-scroll-proportion="0.7613883">
+          <caret line="270" column="34" selection-start-line="270" selection-start-column="34" selection-end-line="270" selection-end-column="34" />
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/slam_gmapping.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16050956">
+          <caret line="304" column="17" selection-start-line="304" selection-start-column="17" selection-end-line="304" selection-end-column="17" />
+          <folding>
+            <element signature="e#4731#4757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+=======
+>>>>>>> 77da3fdd8eb8f94c142099089b1e7d9d130f9b0c
   </component>
 </project>

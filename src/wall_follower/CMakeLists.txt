@@ -32,6 +32,7 @@ cs_add_library(jinx_traj_builder src/traj_builder.cpp)
 cs_add_executable(traj_publisher src/pub_des_state_main.cpp src/pub_des_state.cpp)
 cs_add_executable(simple_controllor src/open_loop_controller.cpp)
 cs_add_executable(steering_corrector src/lin_steering_wrt_odom.cpp)
+cs_add_executable(steering_corrector_nl src/mobot_nl_steering.cpp)
 cs_add_executable(append_and_stop src/pub_des_state_path_client.cpp)
 cs_add_executable(wall_detector src/lidar_detector.cpp)
 
