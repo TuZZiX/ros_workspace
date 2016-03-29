@@ -29,6 +29,12 @@ SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehan
         nh_.getParam("K_LAT_ERR_THRESH", K_LAT_ERR_THRESH);
         ROS_INFO("K_LAT_ERR_THRESH set to %f", K_LAT_ERR_THRESH);
     }
+    if (!nh_.hasParam("K_TRIP_DIST")){
+        ROS_INFO("No K_TRIP_DIST specified, using default value %f", K_TRIP_DIST);
+    } else {
+        nh_.getParam("K_TRIP_DIST", K_TRIP_DIST);
+        ROS_INFO("K_TRIP_DIST set to %f", K_TRIP_DIST);
+    }
     if (!nh_.hasParam("MAX_SPEED")){
         ROS_INFO("No MAX_SPEED specified, using default value %f", MAX_SPEED);
     } else {
@@ -192,8 +198,7 @@ void SteeringController::mobot_nl_steering() {
     double strategy_psi = psi_strategy(lateral_err_); //heading command, based on NL algorithm
     controller_omega = omega_cmd_fnc(strategy_psi, state_psi_, des_state_psi_);
 
-    controller_speed = MAX_SPEED; //default...should speed up/slow down appropriately
-
+    controller_speed = MAX_SPEED ; //des_state_speed_ + K_TRIP_DIST*abs(trip_dist_err) default...should speed up/slow down appropriately
     // send out our speed/spin commands:
     twist_cmd_.linear.x = controller_speed;
     twist_cmd_.angular.z = controller_omega;

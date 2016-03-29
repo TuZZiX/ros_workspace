@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
 	<param name="/UPDATE_RATE" value="50.0"/>
-	<param name="/K_PHI" value="10.0"/>
-	<param name="/K_DISP" value="3.0"/>
+	<param name="/K_PHI" value="2.5"/>
+	<param name="/K_DISP" value="1.5"/>
 	<param name="/K_TRIP_DIST" value="1.0"/>
 	<param name="/MAX_SPEED" value="0.5"/>
 	<param name="/MAX_OMEGA" value="0.5"/>
@@ -31,6 +31,4 @@
 	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
 	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
-
-	<node pkg="rviz" name="rviz" type="rviz" />
 </launch>
