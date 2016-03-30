@@ -62,7 +62,7 @@ void DesStatePublisher::initializeServices() {
     append_path_ = nh_.advertiseService("append_path_queue_service",
             &DesStatePublisher::appendPathQueueCB, this);
     alarm_subscriber_ = nh_.subscribe("lidar_alarm", 1, &DesStatePublisher::alarmCB, this);
-    direction_subscriber_ = nh_.subscribe("opt_direction", 1, &DesStatePublisher::directionCB, this);
+    //direction_subscriber_ = nh_.subscribe("opt_direction", 1, &DesStatePublisher::directionCB, this);
 }
 
 //member helper function to set up publishers;
@@ -114,9 +114,10 @@ void DesStatePublisher::alarmCB(const std_msgs::Bool& alarm_msg)
         }
     }
 }
+/*
 void DesStatePublisher::directionCB(const std_msgs::Float64& direction_msg) {
     opt_dir_ = direction_msg.data;
-}
+}*/
 void DesStatePublisher::set_init_pose(double x, double y, double psi) {
     current_pose_ = trajBuilder_.xyPsi2PoseStamped(x, y, psi);
 }

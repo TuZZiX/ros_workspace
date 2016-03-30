@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<param name="/UPDATE_RATE" value="50.0"/>
+	<param name="/K_PHI" value="10.0"/>
+	<param name="/K_DISP" value="3.0"/>
+	<param name="/K_TRIP_DIST" value="1.0"/>
+	<param name="/MAX_SPEED" value="0.5"/>
+	<param name="/MAX_OMEGA" value="0.5"/>
+
+	<param name="/K_PSI" value="5.0"/>
+	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
+
+	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/FRONT_ANGLE" value="0.5"/>
+	<param name="/LEFT_ANGLE" value="0.5"/>
+	<param name="/RIGHT_ANGLE" value="0.5"/>
+
+	<param name="/accel_max" value="0.5"/>
+	<param name="/alpha_max" value="0.2"/>
+	<param name="/speed_max" value="0.5"/>
+	<param name="/omega_max" value="0.5"/>
+
+	<remap from="/scan" to="/base_laser1_scan" />
+
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" output="screen" />
+	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
+	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
+	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
+
+</launch>

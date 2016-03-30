@@ -180,7 +180,7 @@ ros::Publisher	alarm_info_publisher_;
     if (world_empty) {
         lidar_alarm_msg.data = false;
         lidar_alarm_publisher_.publish( lidar_alarm_msg );
-        ROS_INFO("You have enter an empty world");
+        //ROS_INFO("You have enter an empty world");
         alarm_info_msg.world_empty = true;
         alarm_info_msg.g_alarm = false;
         alarm_info_msg.f_alarm = false;
@@ -197,7 +197,7 @@ ros::Publisher	alarm_info_publisher_;
     } else {
         alarm_info_msg.world_empty = false;
         opt_dir = opt_pin * angle_increment_ + angle_min_;
-        ROS_INFO("Best direction: %f degree", (opt_dir/M_PI)*180);
+        //ROS_INFO("Best direction: %f degree", (opt_dir/M_PI)*180);
         alarm_info_msg.wide_dir = opt_dir;
 
         if (min_dis_f >= 0)
@@ -231,7 +231,7 @@ ros::Publisher	alarm_info_publisher_;
         }
         if (min_dis >= 0)
         {
-            ROS_INFO( "TOO CLOSE TO WALL!! min distance = %f", laser_scan.ranges[min_dis] );
+            //ROS_INFO( "TOO CLOSE TO WALL!! min distance = %f", laser_scan.ranges[min_dis] );
             alarm_info_msg.g_alarm = true;
             alarm_info_msg.g_distance = laser_scan.ranges[min_dis_r];
             alarm_info_msg.alarm_dir = min_dis * angle_increment_ + angle_min_;

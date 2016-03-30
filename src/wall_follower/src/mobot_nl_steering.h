@@ -25,6 +25,7 @@
 double UPDATE_RATE = 100.0; // choose the update rate for steering controller
 double K_PSI= 5.0; // control gains for steering
 double K_LAT_ERR_THRESH = 3.0;
+double K_TRIP_DIST = 1.0;
 // dynamic limitations:  
 double MAX_SPEED = 1.0; // m/sec; tune this
 double MAX_OMEGA = 1.0; // rad/sec; tune this
