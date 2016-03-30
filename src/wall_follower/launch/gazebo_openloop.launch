@@ -21,7 +21,7 @@
 	<param name="/omega_max" value="0.5"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
-		<arg name="world_name" value="$(find wall_follower)/launch/mobot.world"/>
+		<arg name="world_name" value="$(find wall_follower)/worlds/mobot_in_pen.world"/>
 	</include>
 
 	<include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>

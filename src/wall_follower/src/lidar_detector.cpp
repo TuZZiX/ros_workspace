@@ -8,7 +8,6 @@
 
 double MIN_SAFE_DISTANCE = 1.0;   /* set alarm if anything is within 0.5m of the front of robot */
 double DISTANCE_FILTER = 0.15;
-
     double FRONT_ANGLE = 0.5;
     double LEFT_ANGLE = 0.5;
     double RIGHT_ANGLE = 0.5;
@@ -28,6 +27,7 @@ int left_ping_start;
 int left_ping_end;
 int right_ping_start;
 int right_ping_end;
+
 std::vector<double> distance_tab;
 
 ros::Publisher	lidar_alarm_publisher_;
@@ -49,7 +49,9 @@ ros::Publisher	alarm_info_publisher_;
 
     int opt_pin = -1;
     int opt_pin_num = -1;
-    
+
+     int debug = 0;
+
     wall_follower::lidar alarm_info_msg;
     std_msgs::Bool lidar_alarm_msg;
 
@@ -86,14 +88,18 @@ ros::Publisher	alarm_info_publisher_;
         }
 
         distance_tab.clear();
+        double value;
         for (int i = front_ping_start; i < front_ping_end; ++i) {
-            distance_tab.push_back(MIN_SAFE_DISTANCE * (1 / cos((front_ping_start - ping_index_) / angle_increment_)));
+            value = MIN_SAFE_DISTANCE * (1 / cos(fabs(i - ping_index_) * angle_increment_));
+            //ROS_INFO("TAB%d: %f",i, value);
+            distance_tab.push_back(value);
         }
     }
 
     double opt_search_range = range_max_;
 
     for (int j = 0; j < ping_index_*2; ++j) {
+        //ROS_INFO("range = %f, max = %f, %s", laser_scan.ranges[j], range_max_, laser_scan.ranges[j] <= range_max_? "<":">");
         if (laser_scan.ranges[j] <= range_max_ && laser_scan.ranges[j] >= DISTANCE_FILTER) {
             world_empty = false;
         }
@@ -197,7 +203,7 @@ ros::Publisher	alarm_info_publisher_;
     } else {
         alarm_info_msg.world_empty = false;
         opt_dir = opt_pin * angle_increment_ + angle_min_;
-        //ROS_INFO("Best direction: %f degree", (opt_dir/M_PI)*180);
+        //ROS_INFO("LIDAR: %s, best direction: %f",min_dis_f >= 0?"Alarmed":"Clear", (opt_dir/M_PI)*180);
         alarm_info_msg.wide_dir = opt_dir;
 
         if (min_dis_f >= 0)

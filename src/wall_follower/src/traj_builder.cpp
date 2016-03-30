@@ -1,6 +1,5 @@
 #include<traj_builder/traj_builder.h>
 
-int called_build_spin_traj = 0;
 
 //This library contains functions to build simple navigation trajectories.
 //The main function is: build_point_and_go_traj().  This function takes
@@ -207,9 +206,6 @@ void TrajBuilder::build_spin_traj(geometry_msgs::PoseStamped start_pose,
         geometry_msgs::PoseStamped end_pose,
         std::vector<nav_msgs::Odometry> &vec_of_states) {
     //decide if triangular or trapezoidal profile:
-
-	ROS_WARN("Called BST %d times", ++called_build_spin_traj);
-
     double x_start = start_pose.pose.position.x;
     double y_start = start_pose.pose.position.y;
     double x_end = end_pose.pose.position.x;

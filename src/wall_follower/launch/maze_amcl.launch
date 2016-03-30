@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<param name="/UPDATE_RATE" value="50.0"/>
+	<param name="/K_PHI" value="10.0"/>
+	<param name="/K_DISP" value="3.0"/>
+	<param name="/K_TRIP_DIST" value="1.0"/>
+	<param name="/MAX_SPEED" value="0.5"/>
+	<param name="/MAX_OMEGA" value="0.5"/>
+
+	<param name="/K_PSI" value="5.0"/>
+	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
+
+	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/FRONT_ANGLE" value="0.5"/>
+	<param name="/LEFT_ANGLE" value="0.5"/>
+	<param name="/RIGHT_ANGLE" value="0.5"/>
+
+	<param name="/accel_max" value="0.5"/>
+	<param name="/alpha_max" value="0.2"/>
+	<param name="/speed_max" value="0.5"/>
+	<param name="/omega_max" value="0.5"/>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(find wall_follower)/launch/mobot.world"/>
+	</include>
+
+	<include file="$(find mobot_urdf)/launch/mobot_startup.launch"/>
+	<!--<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />-->
+	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" /> -->
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" output="screen" />
+	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
+	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
+	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
+	<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/mymap.yaml" output="screen"/>
+	<node name= "amcl_odom_tf" pkg= "map_server" type= "amcl_odom_tf" output="screen"/>
+	<node pkg="amcl" type="amcl" name="amcl" output="screen">
+		<!-- Publish scans from best pose at a max of 10 Hz -->
+		<param name="odom_model_type" value="diff"/>
+		<param name="use_map_topic" value="true"/>
+		<param name="odom_alpha5" value="0.1"/>
+		<param name="transform_tolerance" value="0.2" />
+		<param name="gui_publish_rate" value="10.0"/>
+		<param name="laser_max_beams" value="30"/>
+		<param name="min_particles" value="500"/>
+		<param name="max_particles" value="5000"/>
+		<param name="kld_err" value="0.05"/>
+		<param name="kld_z" value="0.99"/>
+		<param name="odom_alpha1" value="0.2"/>
+		<param name="odom_alpha2" value="0.2"/>
+		<!-- translation std dev, m -->
+		<param name="odom_alpha3" value="0.8"/>
+		<param name="odom_alpha4" value="0.2"/>
+		<param name="laser_z_hit" value="0.5"/>
+		<param name="laser_z_short" value="0.05"/>
+		<param name="laser_z_max" value="0.05"/>
+		<param name="laser_z_rand" value="0.5"/>
+		<param name="laser_sigma_hit" value="0.2"/>
+		<param name="laser_lambda_short" value="0.1"/>
+		<param name="laser_lambda_short" value="0.1"/>
+		<param name="laser_model_type" value="likelihood_field"/>
+		<!-- <param name="laser_model_type" value="beam"/> -->
+		<param name="laser_likelihood_max_dist" value="2.0"/>
+		<param name="update_min_d" value="0.2"/>
+		<param name="update_min_a" value="0.5"/>
+		<param name="odom_frame_id" value="odom_amcl"/>
+		<param name="resample_interval" value="1"/>
+		<param name="transform_tolerance" value="0.1"/>
+		<param name="recovery_alpha_slow" value="0.0"/>
+		<param name="recovery_alpha_fast" value="0.0"/>
+	</node>
+
+	<env name="GAZEBO_MODEL_PATH" value="$(find labrob_worlds)/models" />
+	<arg name="world_name" value="$(find labrob_worlds)/worlds/challenge_maze.world" />
+	<arg name="paused" value="false"/>
+	<arg name="debug" value="false"/>  
+	<arg name="gui" value="true"/> 
+
+	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(arg world_name)" />
+		<arg name="paused" value="$(arg paused)" />
+		<arg name="debug" value="$(arg debug)" />
+		<arg name="gui" value="$(arg gui)" />    
+		<arg name="use_sim_time" value="true" />
+		<arg name="headless" value="false" />
+	</include>
+
+
+</launch>
