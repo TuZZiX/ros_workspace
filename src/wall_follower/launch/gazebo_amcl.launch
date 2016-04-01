@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
 	<param name="/UPDATE_RATE" value="50.0"/>
-	<param name="/K_PHI" value="10.0"/>
-	<param name="/K_DISP" value="3.0"/>
-	<param name="/K_TRIP_DIST" value="1.0"/>
+	<param name="/K_PHI" value="1.0"/>
+	<param name="/K_DISP" value="1.0"/>
+	<param name="/K_TRIP_DIST" value="0.5"/>
 	<param name="/MAX_SPEED" value="0.5"/>
-	<param name="/MAX_OMEGA" value="0.5"/>
+	<param name="/MAX_OMEGA" value="1.0"/>
 
-	<param name="/K_PSI" value="5.0"/>
-	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
+	<param name="/K_PSI" value="2.5"/>
+	<param name="/K_LAT_ERR_THRESH" value="2.0"/>
 
 	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/DETECT_DISTANCE" value="2.5"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
 	<param name="/RIGHT_ANGLE" value="0.5"/>
@@ -18,7 +19,7 @@
 	<param name="/accel_max" value="0.5"/>
 	<param name="/alpha_max" value="0.2"/>
 	<param name="/speed_max" value="0.5"/>
-	<param name="/omega_max" value="0.5"/>
+	<param name="/omega_max" value="1.0"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find wall_follower)/worlds/mobot_in_pen.world"/>
@@ -43,13 +44,14 @@
 		<remap from="image" to="/kinect/rgb/image_raw" />
 	</node>
 
-	<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />
-	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" /> -->
+	<!--<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />-->
 	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen" />
 	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
+
+	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" />-->
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
 	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
-	<!--<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/mymap.yaml" output="screen"/>-->
+	<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/better_pen.yaml" output="screen"/>
 
 	<node name= "amcl_odom_tf" pkg= "wall_follower" type= "amcl_odom_tf" output="screen"/>
 	<node pkg="amcl" type="amcl" name="amcl" output="screen"/>

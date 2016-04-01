@@ -4,7 +4,7 @@
 // invokes a nonlinear steering algorithm to command speed and spin on cmd_vel topic
 
 // this header incorporates all the necessary #include files and defines the class "SteeringController"
-#include "mobot_nl_steering.h"
+#include <mobot_nl_steering/mobot_nl_steering.h>
 
 //CONSTRUCTOR:  
 SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehandle)

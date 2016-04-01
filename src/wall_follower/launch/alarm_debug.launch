@@ -11,6 +11,7 @@
 	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
 
 	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/DETECT_DISTANCE" value="1.0"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
 	<param name="/RIGHT_ANGLE" value="0.5"/>

@@ -7,10 +7,11 @@
 #include <std_msgs/Bool.h>              /* boolean message */
 
 double MIN_SAFE_DISTANCE = 1.0;   /* set alarm if anything is within 0.5m of the front of robot */
+double DETECT_DISTANCE = 2.5;
 double DISTANCE_FILTER = 0.15;
-    double FRONT_ANGLE = 0.5;
-    double LEFT_ANGLE = 0.5;
-    double RIGHT_ANGLE = 0.5;
+double FRONT_ANGLE = 0.5;
+double LEFT_ANGLE = 0.5;
+double RIGHT_ANGLE = 0.5;
 
 /* these values to be set within the laser callback */
 int	    ping_index_		    = -1;   /* NOT real; callback will have to find this */
@@ -90,7 +91,7 @@ ros::Publisher	alarm_info_publisher_;
         distance_tab.clear();
         double value;
         for (int i = front_ping_start; i < front_ping_end; ++i) {
-            value = MIN_SAFE_DISTANCE * (1 / cos(fabs(i - ping_index_) * angle_increment_));
+            value = DETECT_DISTANCE * (1 / cos(fabs(i - ping_index_) * angle_increment_));
             //ROS_INFO("TAB%d: %f",i, value);
             distance_tab.push_back(value);
         }
@@ -186,7 +187,7 @@ ros::Publisher	alarm_info_publisher_;
     if (world_empty) {
         lidar_alarm_msg.data = false;
         lidar_alarm_publisher_.publish( lidar_alarm_msg );
-        //ROS_INFO("You have enter an empty world");
+        ROS_INFO("You have enter an empty world");
         alarm_info_msg.world_empty = true;
         alarm_info_msg.g_alarm = false;
         alarm_info_msg.f_alarm = false;
@@ -204,16 +205,18 @@ ros::Publisher	alarm_info_publisher_;
         alarm_info_msg.world_empty = false;
         opt_dir = opt_pin * angle_increment_ + angle_min_;
         //ROS_INFO("LIDAR: %s, best direction: %f",min_dis_f >= 0?"Alarmed":"Clear", (opt_dir/M_PI)*180);
+        ROS_INFO("Best direction: %f", (opt_dir/M_PI)*180);
+        ROS_INFO("Left alarm %s", min_dis_l >= 0?"Alarmed":"Clear");
+        ROS_INFO("Right alarm %s", min_dis_r >= 0?"Alarmed":"Clear");
+        ROS_INFO("Front alarm %s", min_dis_f >= 0?"Alarmed":"Clear");
         alarm_info_msg.wide_dir = opt_dir;
 
         if (min_dis_f >= 0)
         {
-            lidar_alarm_msg.data = true;
             alarm_info_msg.f_alarm = true;
             alarm_info_msg.f_distance = laser_scan.ranges[min_dis_f];
             
         } else {
-            lidar_alarm_msg.data = false;
             alarm_info_msg.f_alarm = false;
             alarm_info_msg.f_distance = range_max_;
         }
@@ -237,7 +240,7 @@ ros::Publisher	alarm_info_publisher_;
         }
         if (min_dis >= 0)
         {
-            //ROS_INFO( "TOO CLOSE TO WALL!! min distance = %f", laser_scan.ranges[min_dis] );
+            ROS_INFO( "TOO CLOSE TO WALL!! min distance = %f", laser_scan.ranges[min_dis] );
             alarm_info_msg.g_alarm = true;
             alarm_info_msg.g_distance = laser_scan.ranges[min_dis_r];
             alarm_info_msg.alarm_dir = min_dis * angle_increment_ + angle_min_;
@@ -247,7 +250,7 @@ ros::Publisher	alarm_info_publisher_;
             alarm_info_msg.g_distance = range_max_;
             alarm_info_msg.alarm_dir = 0.0;
         }
-
+        lidar_alarm_msg.data = alarm_info_msg.g_alarm;
         lidar_alarm_publisher_.publish( lidar_alarm_msg );
         alarm_info_publisher_.publish( alarm_info_msg );
     }
@@ -263,6 +266,12 @@ int main( int argc, char **argv )
     } else {
         nh.getParam("MIN_SAFE_DISTANCE", MIN_SAFE_DISTANCE);
         ROS_INFO("MIN_SAFE_DISTANCE set to %f", MIN_SAFE_DISTANCE);
+    }
+    if (!nh.hasParam("DETECT_DISTANCE")){
+        ROS_INFO("No DETECT_DISTANCE specified, using default value %f", DETECT_DISTANCE);
+    } else {
+        nh.getParam("DETECT_DISTANCE", DETECT_DISTANCE);
+        ROS_INFO("DETECT_DISTANCE set to %f", DETECT_DISTANCE);
     }
     if (!nh.hasParam("FRONT_ANGLE")){
         ROS_INFO("No FRONT_ANGLE specified, using default value %f", FRONT_ANGLE);

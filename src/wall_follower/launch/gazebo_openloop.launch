@@ -11,6 +11,7 @@
 	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
 
 	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/DETECT_DISTANCE" value="2.5"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
 	<param name="/RIGHT_ANGLE" value="0.5"/>
@@ -27,7 +28,7 @@
 	<include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>
 
 	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" /> -->
-	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" output="screen" />
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen" />
 	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
 	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>

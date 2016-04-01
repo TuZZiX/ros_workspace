@@ -34,7 +34,7 @@ cs_add_executable(wall_follower src/wall_follower.cpp src/pub_des_state.cpp)
 cs_add_executable(simple_controllor src/open_loop_controller.cpp)
 cs_add_executable(steering_corrector src/lin_steering_wrt_odom.cpp)
 cs_add_executable(steering_corrector_nl src/mobot_nl_steering.cpp)
-cs_add_executable(append_and_stop src/pub_des_state_path_client.cpp)
+cs_add_executable(append_and_stop src/append_path_client.cpp)
 cs_add_executable(wall_detector src/lidar_detector.cpp)
 cs_add_executable(amcl_odom_tf src/odom_tf.cpp  src/odom_tf_fncs.cpp)
 
