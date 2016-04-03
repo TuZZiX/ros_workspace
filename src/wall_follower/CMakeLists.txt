@@ -26,6 +26,7 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 
 # Libraries: uncomment the following and edit arguments to create a new library
 cs_add_library(jinx_traj_builder src/traj_builder.cpp)
+cs_add_library(mobot_control src/mobot_general.cpp)
 
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
@@ -42,6 +43,7 @@ cs_add_executable(amcl_odom_tf src/odom_tf.cpp  src/odom_tf_fncs.cpp)
 # edit the arguments to reference the named node and named library within this package
 target_link_libraries(traj_publisher  jinx_traj_builder)
 target_link_libraries(wall_follower  jinx_traj_builder)
+target_link_libraries(wall_follower mobot_control)
 
 cs_install()
 cs_export()

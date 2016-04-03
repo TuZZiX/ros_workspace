@@ -68,7 +68,7 @@ OdomTf::OdomTf(ros::NodeHandle* nodehandle) : nh_(*nodehandle) { // constructor
     stfDriftyOdomWrtMap_.child_frame_id_ = "drifty_odom"; 
 
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
-    //initializePublishers();
+    initializePublishers();
     odom_count_=0;
     odom_phi_ = 1000.0; // put in impossible value for heading; test this value to make sure we have received a viable odom message
     ROS_INFO("waiting for valid odom message...");
@@ -91,14 +91,16 @@ void OdomTf::initializeSubscribers() {
 
 
 //member helper function to set up publishers;
-/*
+
 void OdomTf::initializePublishers()
 {
     ROS_INFO("Initializing Publishers"); //nav_msgs::Odometry
+    /*
     hybrid_pose_publisher_ = nh_.advertise<nav_msgs::Odometry>("hybrid_robot_state", 1, true);
-    hybrid_yaw_publisher_ = nh_.advertise<std_msgs::Float64>("hybrid_robot_yaw", 1, true);
+    hybrid_yaw_publisher_ = nh_.advertise<std_msgs::Float64>("hybrid_robot_yaw", 1, true);*/
+    amcl_odom_publisher_ = nh_.advertise<nav_msgs::Odometry>("amcl_odom", 1, true);
 }
- */
+
 
 //some conversion utilities:
 
@@ -382,5 +384,12 @@ void OdomTf::amclCallback(const geometry_msgs::PoseWithCovarianceStamped& amcl_r
     // conflict with "base_link" already used in rviz (which is unrealistically smooth and accurate)
     stfAmclBaseLinkWrtMap_.child_frame_id_ = "amcl_base_link";
     br_.sendTransform(stfAmclBaseLinkWrtMap_);
-    
+    nav_msgs::Odometry amcl_odom;
+    amcl_odom.header = current_odom_.header;
+    amcl_odom.header.stamp = ros::Time::now();
+    amcl_odom.header.frame_id = "amcl_odom";
+    amcl_odom.child_frame_id = current_odom_.child_frame_id;
+    amcl_odom.twist = current_odom_.twist;
+    amcl_odom.pose = amcl_rcvd.pose;
+    amcl_odom_publisher_.publish(amcl_odom);
 }

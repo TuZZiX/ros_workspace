@@ -46,7 +46,7 @@
 
 	<!--<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />-->
 	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen" />
-	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" output="screen" />
+	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" />
 
 	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" />-->
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->

@@ -6,6 +6,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <std_srvs/Trigger.h>
 #include <wall_follower/lidar.h>
+#include <mobot_general/mobot_general.h>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ double alarm_dir = 0.0;
 double opt_dir = 0.0;
 
 geometry_msgs::Pose g_current_pose;
+geometry_msgs::Twist g_current_twist;
 double UPDATE_RATE = 4.0;
 /*
 void alarmCallback(const std_msgs::Bool& alarm_msg) {
@@ -51,37 +53,11 @@ void lidarCallback(const wall_follower::lidar& lidar_msg) {
 }
 // get start orientation
 void odomCallback(const nav_msgs::Odometry& odom_msg) {
+    g_current_twist = odom_msg.twist.twist;
     g_current_pose = odom_msg.pose.pose;
 }
 
 void go_back(wall_follower::path &path_srv){
-    geometry_msgs::Quaternion quat;
-    geometry_msgs::PoseStamped pose_stamped;
-    pose_stamped.header.frame_id = "world";
-    geometry_msgs::Pose pose;
-    pose.position.x = 5.0; // say desired x-coord is 5
-    pose.position.y = 0.0;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
-
-    pose.position.y = 5.0;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
-
-    pose.position.x = 0.0;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
-
-    pose.position.y = 0.0;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
-
-    //repeat (x,y) with new heading:
-    pose_stamped.pose.orientation = convertPlanarPhi2Quaternion(0);
-    path_srv.request.path.poses.push_back(pose_stamped);
 }
 void go_forward(){
 
@@ -119,8 +95,6 @@ int main(int argc, char **argv) {
     flush.call(trigger);
     go_back(path_srv);
     client.call(path_srv);
-
-
 
 
     while (ros::ok()) {

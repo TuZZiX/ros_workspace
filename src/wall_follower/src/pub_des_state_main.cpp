@@ -19,24 +19,24 @@ int main(int argc, char **argv) {
     } else if (argc > 1 && ( strcmp(argv[1], "test") == 0 )) {
         desStatePublisher.append_path_queue(0.5,  0.0,  0.0);
     } else if (argc > 1 && ( strcmp(argv[1], "circle_out") == 0 )) {
-        double circle_length = 2.0;
+        double circle_length = 1.5;
 /*      clockwise*/
-        desStatePublisher.append_path_queue(circle_length,  0.0, M_PI/2);
-        desStatePublisher.append_path_queue(circle_length,  circle_length, M_PI);
-        desStatePublisher.append_path_queue(-1*circle_length,  circle_length, -M_PI/2);
-        desStatePublisher.append_path_queue(-1*circle_length,  -1*circle_length, 0.0);
-        desStatePublisher.append_path_queue(circle_length,  -1*circle_length, M_PI/2);
-        desStatePublisher.append_path_queue(circle_length,  circle_length, M_PI);
+        desStatePublisher.append_path_queue(circle_length,  0.0, 0.0);
+        desStatePublisher.append_path_queue(circle_length,  circle_length, -M_PI/2);
+        desStatePublisher.append_path_queue(-1*circle_length,  circle_length, -M_PI);
+        desStatePublisher.append_path_queue(-1*circle_length,  -1*circle_length, M_PI/2);
+        desStatePublisher.append_path_queue(circle_length,  -1*circle_length, 0.0);
+        desStatePublisher.append_path_queue(circle_length,  circle_length, -M_PI/2);
 /*
         desStatePublisher.append_path_queue(circle_length,  0.0, -M_PI/2);
         desStatePublisher.append_path_queue(circle_length,  -circle_length, -M_PI);
         desStatePublisher.append_path_queue(-circle_length,  -circle_length, M_PI/2);
         desStatePublisher.append_path_queue(-circle_length,  circle_length, 0.0);
 */
-        desStatePublisher.append_path_queue(0.0,  circle_length, M_PI/2);
+        desStatePublisher.append_path_queue(0.0,  circle_length, 0.0);
 
-        desStatePublisher.append_path_queue(0.0,  7.0, -M_PI/2);
-        desStatePublisher.append_path_queue(-9.0, 7.0, -M_PI);
+        desStatePublisher.append_path_queue(0.0,  6.0, -M_PI/2);
+        desStatePublisher.append_path_queue(-9.0, 6.0, -M_PI);
         desStatePublisher.append_path_queue(-9.0, 0.0, M_PI/2);
     } else if (argc > 1 && ( strcmp(argv[1], "out") == 0 )) {
         desStatePublisher.append_path_queue(0.0,  7.0, -M_PI/2);
