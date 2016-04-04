@@ -4,6 +4,7 @@
 #include <ros/ros.h>                    /* Must include this for all ROS cpp projects */
 #include <sensor_msgs/LaserScan.h>
 #include <wall_follower/lidar.h>
+#include <std_msgs/Float64.h>
 #include <std_msgs/Bool.h>              /* boolean message */
 
 double MIN_SAFE_DISTANCE = 1.0;   /* set alarm if anything is within 0.5m of the front of robot */
@@ -33,6 +34,7 @@ std::vector<double> distance_tab;
 
 ros::Publisher	lidar_alarm_publisher_;
 ros::Publisher	alarm_info_publisher_;
+ros::Publisher	opt_dir_publisher_;
 /*
  * really, do NOT want to depend on a single ping.  Should consider a subset of pings
  * to improve reliability and avoid false alarms or failure to see an obstacle
@@ -55,6 +57,7 @@ ros::Publisher	alarm_info_publisher_;
 
     wall_follower::lidar alarm_info_msg;
     std_msgs::Bool lidar_alarm_msg;
+    std_msgs::Float64 opt_dir_msg;
 
     if ( ping_index_ < 0 ) {
         /* for first message received, set up the desired index of LIDAR range to eval */
@@ -200,6 +203,8 @@ ros::Publisher	alarm_info_publisher_;
         alarm_info_msg.alarm_dir = 0.0;
         alarm_info_msg.wide_dir = 0.0;
         alarm_info_publisher_.publish( alarm_info_msg );
+        opt_dir_msg.data = 0.0;
+        opt_dir_publisher_.publish( opt_dir_msg );
         return;
     } else {
         alarm_info_msg.world_empty = false;
@@ -253,6 +258,8 @@ ros::Publisher	alarm_info_publisher_;
         lidar_alarm_msg.data = alarm_info_msg.g_alarm;
         lidar_alarm_publisher_.publish( lidar_alarm_msg );
         alarm_info_publisher_.publish( alarm_info_msg );
+        opt_dir_msg.data = opt_dir;
+        opt_dir_publisher_.publish( opt_dir_msg );
     }
 }
 
@@ -297,6 +304,8 @@ int main( int argc, char **argv )
     ros::Publisher pub2 = nh.advertise<wall_follower::lidar>( "alarm_info", 1 );
     alarm_info_publisher_ = pub2;
     ros::Subscriber lidar_subscriber = nh.subscribe( "scan", 1, laserCallback );
+    ros::Publisher pub3 = nh.advertise<std_msgs::Float64>( "opt_direction", 1 );
+    opt_dir_publisher_ = pub3;
     ros::spin();                                    /* this is essentially a "while(1)" statement, except it */
     /*
      * forces refreshing wakeups upon new data arrival

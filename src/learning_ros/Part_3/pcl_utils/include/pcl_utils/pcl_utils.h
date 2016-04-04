@@ -27,6 +27,7 @@
 #include <tf/transform_listener.h>  // transform listener headers
 #include <tf/transform_broadcaster.h>
 
+#include <pcl/io/io.h>
 #include <pcl/io/pcd_io.h>  //point-cloud library headers; likely don't need all these
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
@@ -61,6 +62,7 @@ public:
         Eigen::Vector3f &plane_normal, 
         double &plane_dist); 
     Eigen::Vector3f compute_centroid(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr);
+    Eigen::Vector3f  compute_centroid(pcl::PointCloud<pcl::PointXYZ> &input_cloud);
     
     void fit_points_to_plane(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr,Eigen::Vector3f &plane_normal, double &plane_dist);
     void fit_xformed_selected_pts_to_plane(Eigen::Vector3f &plane_normal, double &plane_dist);  
@@ -76,21 +78,44 @@ public:
      * @return an Eigen Affine object, A, such that point_in_new_frame = A*point_in_original_frame
      */    
     Eigen::Affine3f transformTFToEigen(const tf::Transform &t);
+    
+    /** function to create an Eigen-style Affine transform based on construction of a coordinate frame
+     * placed on the surface of a plane
+     */
+    Eigen::Affine3f make_affine_from_plane_params(Eigen::Vector3f plane_normal, double plane_dist);
+    /**
+     * returns an Eigen::Affine transform to a coordinate frame constructed on a plane defined by
+     * plane_parameters (normal_x, normal_y, normal_z, distance)
+     * useful for transforming data to find planar surfaces with z-axis vertical
+     */
+    Eigen::Affine3f make_affine_from_plane_params(Eigen::Vector4f plane_parameters);
+
+
     void transform_kinect_cloud(Eigen::Affine3f A);
     void transform_selected_points_cloud(Eigen::Affine3f A);
     void transform_cloud(Eigen::Affine3f A,pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr, 
-        pcl::PointCloud<pcl::PointXYZ>::Ptr output_cloud_ptr);    
+        pcl::PointCloud<pcl::PointXYZ>::Ptr output_cloud_ptr); 
+    //color version:
+    void transform_cloud(Eigen::Affine3f A, pcl::PointCloud<pcl::PointXYZRGB>::Ptr input_cloud_ptr,
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr output_cloud_ptr);
     void reset_got_kinect_cloud() {got_kinect_cloud_= false;};
     void reset_got_selected_points() {got_selected_points_= false;};    
     bool got_kinect_cloud() { return got_kinect_cloud_; };
     bool got_selected_points() {return got_selected_points_;};
-    void save_kinect_snapshot() {    pcl::io::savePCDFileASCII ("kinect_snapshot.pcd", *pclKinect_ptr_);};
+    void save_kinect_snapshot() {    pcl::io::savePCDFileASCII ("kinect_snapshot.pcd", *pclKinect_ptr_);}; //B/W
+    int read_pcd_file(string fname); 
+    int read_clr_pcd_file(string fname);
+    
     //alternative "save" fnc: save as a colored pointcloud
     void save_kinect_clr_snapshot() {pcl::io::savePCDFileASCII ("kinect_clr_snapshot.pcd", *pclKinect_clr_ptr_);};
+    int  save_kinect_clr_snapshot_binary() {return(pcl::io::savePCDFile ("kinect_clr_snapshot_bin.pcd", *pclKinect_clr_ptr_,true));};	
+
     void save_transformed_kinect_snapshot() { pcl::io::savePCDFileASCII ("xformed_kinect_snapshot.pcd", *pclTransformed_ptr_);};
     void get_transformed_selected_points(pcl::PointCloud<pcl::PointXYZ> & outputCloud );
+    void get_copy_selected_points(pcl::PointCloud<pcl::PointXYZ>::Ptr &outputCloud );
+    
     void copy_cloud(PointCloud<pcl::PointXYZ>::Ptr inputCloud, PointCloud<pcl::PointXYZ>::Ptr outputCloud); 
-    void copy_cloud_xyzrgb_indices(PointCloud<pcl::PointXYZRGB>::Ptr inputCloud, vector<int> &indices, PointCloud<pcl::PointXYZRGB>::Ptr outputCloud);
+    void copy_cloud_xyzrgb_indices(PointCloud<pcl::PointXYZRGB>::Ptr inputCloud, vector<int> &indices, PointCloud<pcl::PointXYZRGB>::Ptr outputCloud); 
 
     void get_indices(vector<int> &indices) {   indices = indices_;};
     //same as above, but assumes 
@@ -98,12 +123,16 @@ public:
 
     void get_gen_purpose_cloud(pcl::PointCloud<pcl::PointXYZ> & outputCloud ); 
     void get_kinect_points(pcl::PointCloud<pcl::PointXYZ> & outputCloud );
-    void get_kinect_points(pcl::PointCloud<pcl::PointXYZ>::Ptr outputCloudPtr );
-    
+    void get_kinect_points(pcl::PointCloud<pcl::PointXYZ>::Ptr &outputCloudPtr );
+    void get_kinect_points(pcl::PointCloud<pcl::PointXYZRGB> & outputCloudPtr );
+    void get_kinect_points(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &outputCloud );
+    void get_selected_points(pcl::PointCloud<pcl::PointXYZ>::Ptr &outputCloudPtr );
+    void get_selected_points(pcl::PointCloud<pcl::PointXYZ> &outputCloud);
 
     void example_pcl_operation();
     //operate on transformed Kinect data and identify point indices within +/-z_eps of specified height
     void filter_cloud_z(PointCloud<pcl::PointXYZ>::Ptr inputCloud, double z_nom, double z_eps, vector<int> &indices);
+    void filter_cloud_z(PointCloud<pcl::PointXYZRGB>::Ptr inputCloud, double z_nom, double z_eps, vector<int> &indices);    
     // as above, specifically for transformed kinect cloud:
     void find_coplanar_pts_z_height(double plane_height,double z_eps,vector<int> &indices);
     // find pts within +/- z_eps of z_height, AND within "radius" of "centroid"
@@ -117,12 +146,14 @@ public:
     
     Eigen::Vector3f get_centroid() { return centroid_; };
     Eigen::Vector3f get_major_axis() { return major_axis_; };
+    Eigen::Vector3f get_patch_normal() { return patch_normal_;};
+    double get_patch_dist() {return patch_dist_;};
     Eigen::Vector3d find_avg_color();
     Eigen::Vector3d find_avg_color_selected_pts(vector<int> &indices);
     void find_indices_color_match(vector<int> &input_indices,
                     Eigen::Vector3d normalized_avg_color,
                     double color_match_thresh, vector<int> &output_indices);    
-    
+
 private:
     ros::NodeHandle nh_; 
     // some objects to support subscriber, service, and publisher
@@ -158,6 +189,8 @@ private:
     
     Eigen::Vector3f major_axis_,centroid_; 
     Eigen::Vector3d avg_color_;
+    Eigen::Vector3f patch_normal_;
+    double patch_dist_;
     vector<int> indices_; // put interesting indices here
     //prototype for example service
     //bool serviceCallback(example_srv::simple_bool_service_messageRequest& request, example_srv::simple_bool_service_messageResponse& response);
