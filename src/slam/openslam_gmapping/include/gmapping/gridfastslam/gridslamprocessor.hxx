@@ -119,6 +119,7 @@ inline bool GridSlamProcessor::resample(const double* plainReading, int adaptSiz
       temp.push_back(p);
       temp.back().node=node;
       temp.back().previousIndex=m_indexes[i];
+      std::cout<<"Resample: Push back index:"<<m_indexes[i]<<std::endl;
     }
     while(j<m_indexes.size()){
       deletedParticles.push_back(j);

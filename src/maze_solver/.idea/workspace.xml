@@ -2,42 +2,42 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
-      <config projectName="maze_solver" targetName="solver_server" />
-      <config projectName="maze_solver" targetName="std_msgs_generate_messages_py" />
-      <config projectName="maze_solver" targetName="example_ros_service_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="solver_client" />
-      <config projectName="maze_solver" targetName="run_tests" />
-      <config projectName="maze_solver" targetName="gtest_main" />
-      <config projectName="maze_solver" targetName="tests" />
-      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_py" />
+      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="_catkin_empty_exported_target" />
+      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_py" />
+      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_lisp" />
       <config projectName="maze_solver" targetName="feedback_solver" />
       <config projectName="maze_solver" targetName="openloop_solver" />
-      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_py" />
-      <config projectName="maze_solver" targetName="download_extra_data" />
       <config projectName="maze_solver" targetName="nav_msgs_generate_messages_py" />
-      <config projectName="maze_solver" targetName="roscpp_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="lidar_detector" />
-      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="nav_msgs_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="roscpp_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="nav_msgs_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="std_msgs_generate_messages_cpp" />
-      <config projectName="maze_solver" targetName="clean_test_results_maze_solver" />
       <config projectName="maze_solver" targetName="example_ros_service_generate_messages_py" />
-      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_py" />
-      <config projectName="maze_solver" targetName="std_msgs_generate_messages_lisp" />
-      <config projectName="maze_solver" targetName="_catkin_empty_exported_target" />
-      <config projectName="maze_solver" targetName="maze_solver_package" />
-      <config projectName="maze_solver" targetName="clean_test_results" />
-      <config projectName="maze_solver" targetName="example_ros_service_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="nav_msgs_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="roscpp_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="lidar_detector" />
+      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_py" />
       <config projectName="maze_solver" targetName="roscpp_generate_messages_py" />
-      <config projectName="maze_solver" targetName="gtest" />
+      <config projectName="maze_solver" targetName="actionlib_msgs_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="example_ros_service_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="solver_server" />
+      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_py" />
+      <config projectName="maze_solver" targetName="std_msgs_generate_messages_py" />
+      <config projectName="maze_solver" targetName="clean_test_results" />
+      <config projectName="maze_solver" targetName="gtest_main" />
+      <config projectName="maze_solver" targetName="run_tests" />
+      <config projectName="maze_solver" targetName="maze_solver_package" />
       <config projectName="maze_solver" targetName="doxygen" />
+      <config projectName="maze_solver" targetName="download_extra_data" />
+      <config projectName="maze_solver" targetName="example_ros_service_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="tests" />
+      <config projectName="maze_solver" targetName="clean_test_results_maze_solver" />
+      <config projectName="maze_solver" targetName="geometry_msgs_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="gtest" />
+      <config projectName="maze_solver" targetName="nav_msgs_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="std_msgs_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="roscpp_generate_messages_cpp" />
+      <config projectName="maze_solver" targetName="std_msgs_generate_messages_lisp" />
+      <config projectName="maze_solver" targetName="solver_client" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -66,25 +66,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="feedback_solver.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="feedback_solver.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/feedback_solver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="231" column="47" selection-start-line="231" selection-start-column="47" selection-end-line="231" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.15126051">
+              <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lidar_detector.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lidar_detector.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
-              <folding>
-                <element signature="e#97#185#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4219654">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -133,12 +121,17 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="130" />
-    <option name="y" value="48" />
-    <option name="width" value="2750" />
-    <option name="height" value="1752" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -220,7 +213,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../rh_action_server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../quat2euler" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -432,12 +425,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="130" y="48" width="2750" height="1752" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24363637" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24312669" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -492,7 +485,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -536,7 +530,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -580,7 +575,53 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/solver_client.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/solver_server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="151" column="48" selection-start-line="151" selection-start-column="48" selection-end-line="151" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/feedback_solver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="231" column="47" selection-start-line="231" selection-start-column="47" selection-end-line="231" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lidar_detector.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
+          <folding>
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -616,7 +657,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -652,7 +694,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -672,7 +715,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -692,7 +736,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -712,7 +757,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -732,7 +778,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -759,7 +806,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -786,7 +834,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -813,7 +862,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -833,7 +883,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#97#185#0" expanded="true" />
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -842,26 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0636942">
           <caret line="76" column="12" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/feedback_solver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="231" column="47" selection-start-line="231" selection-start-column="47" selection-end-line="231" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lidar_detector.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
-          <folding>
-            <element signature="e#97#185#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -883,9 +914,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4219654">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lidar_detector.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3163753">
+          <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
+          <folding>
+            <marker date="1455084469000" expanded="true" signature="1040:4166" placeholder="{...}" />
+            <marker date="1455084469000" expanded="true" signature="4203:5150" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/feedback_solver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15126051">
+          <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

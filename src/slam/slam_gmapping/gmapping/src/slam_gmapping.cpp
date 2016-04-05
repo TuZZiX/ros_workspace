@@ -106,7 +106,9 @@ Initial map dimensions and resolution:
 
 
 #include "slam_gmapping.h"
-
+#include <sys/time.h>
+#include <chrono>
+#include <stdio.h>
 #include <iostream>
 
 #include <time.h>
@@ -121,10 +123,12 @@ Initial map dimensions and resolution:
 #include <rosbag/bag.h>
 #include <rosbag/view.h>
 #include <boost/foreach.hpp>
+
 #define foreach BOOST_FOREACH
 
 // compute linear index for given map coords
 #define MAP_IDX(sx, i, j) ((sx) * (j) + (i))
+int update_count = 0;
 
 SlamGMapping::SlamGMapping():
   map_to_odom_(tf::Transform(tf::createQuaternionFromRPY( 0, 0, 0 ), tf::Point(0, 0, 0 ))),
@@ -588,6 +592,11 @@ SlamGMapping::addScan(const sensor_msgs::LaserScan& scan, GMapping::OrientedPoin
 void
 SlamGMapping::laserCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
+/*
+  timeval t1,t2;
+  gettimeofday(&t1,NULL);*/
+  auto start = std::chrono::high_resolution_clock::now();
+
   laser_count_++;
   if ((laser_count_ % throttle_scans_) != 0)
     return;
@@ -628,6 +637,14 @@ SlamGMapping::laserCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
     }
   } else
     ROS_DEBUG("cannot process scan");
+  /*
+  gettimeofday(&t2,NULL);
+  double ms = (double)(t2.tv_usec - t1.tv_usec)/1000 + (double)(t2.tv_sec - t1.tv_sec);*/
+  auto end = std::chrono::high_resolution_clock::now();
+  double ms = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1000;
+  //std::cout<<"No."<<++update_count<<"update process takes "<<ms<<"ms"<<std::endl;
+  //printf("No. %d update process takes %f ms \n", ++update_count, ms);
+  ROS_INFO("No. %d update process takes %f ms", update_count, ms);
 }
 
 double

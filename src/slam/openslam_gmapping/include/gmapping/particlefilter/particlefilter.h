@@ -181,6 +181,7 @@ std::vector<unsigned int> uniform_resampler<Particle, Numeric>:: resampleIndexes
 		while(cweight>target){
 			indexes[n++]=i;
 			target+=interval;
+			std::cout<<"Resample index:"<<n<<" is "<<i<<std::endl;
 		}
 	}
 	return indexes;
