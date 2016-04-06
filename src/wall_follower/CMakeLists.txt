@@ -41,7 +41,7 @@ cs_add_executable(amcl_odom_tf src/odom_tf.cpp  src/odom_tf_fncs.cpp)
 
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package
-target_link_libraries(traj_publisher  jinx_traj_builder)
+target_link_libraries(traj_publisher  jinx_traj_builder mobot_control)
 target_link_libraries(wall_follower  jinx_traj_builder)
 target_link_libraries(wall_follower mobot_control)
 

@@ -50,7 +50,9 @@
 
 	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" />-->
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
-	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen"/>
+	<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen">
+		<remap from="/odom" to="/amcl_odom" />
+	</node>
 	<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/better_pen.yaml" output="screen"/>
 
 	<node name= "amcl_odom_tf" pkg= "wall_follower" type= "amcl_odom_tf" output="screen"/>

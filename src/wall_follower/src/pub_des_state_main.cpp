@@ -1,12 +1,29 @@
 #include "pub_des_state/pub_des_state.h"
+#include <nav_msgs/Odometry.h>
+#include <mobot_general/mobot_general.h>
+
+bool is_init_orien = false;
+geometry_msgs::Pose g_current_pose;
+
+void odomCallback(const nav_msgs::Odometry& odom_msg) {
+    if (!is_init_orien) {
+        is_init_orien = true;
+        g_current_pose = odom_msg.pose.pose;
+    }
+}
+
 int main(int argc, char **argv) {
     ros::init(argc, argv, "des_state_publisher");
     ros::NodeHandle nh;
+    ros::Subscriber odom_subscriber = nh.subscribe("odom", 1, odomCallback);
     //instantiate a desired-state publisher object
     DesStatePublisher desStatePublisher(nh);
     //dt is set in header file pub_des_state.h    
     ros::Rate looprate(1 / dt); //timer for fixed publication rate
-    desStatePublisher.set_init_pose(0,0,0); //x=0, y=0, psi=0
+    while (!is_init_orien) {
+        ros::spinOnce();    //wait for odom callback
+    }
+    desStatePublisher.set_init_pose(g_current_pose.position.x, g_current_pose.position.y, quat2ang(g_current_pose.orientation)); //x=0, y=0, psi=0
     //put some points in the path queue--hard coded here
     if (argc > 1 && ( strcmp(argv[1], "jinx") == 0 )) {
         double x = 5.4;
