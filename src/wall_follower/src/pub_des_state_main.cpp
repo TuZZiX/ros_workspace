@@ -18,21 +18,26 @@ int main(int argc, char **argv) {
     ros::Subscriber odom_subscriber = nh.subscribe("odom", 1, odomCallback);
     //instantiate a desired-state publisher object
     DesStatePublisher desStatePublisher(nh);
-    //dt is set in header file pub_des_state.h    
+    //dt is set in header file pub_des_state.h
     ros::Rate looprate(1 / dt); //timer for fixed publication rate
+    ROS_INFO("Waiting for odometery message to start...");
     while (!is_init_orien) {
         ros::spinOnce();    //wait for odom callback
     }
+    ROS_INFO("got odometery with x = %f, y = %f, th = %f", g_current_pose.position.x, g_current_pose.position.y, quat2ang(g_current_pose.orientation));
     desStatePublisher.set_init_pose(g_current_pose.position.x, g_current_pose.position.y, quat2ang(g_current_pose.orientation)); //x=0, y=0, psi=0
     //put some points in the path queue--hard coded here
     if (argc > 1 && ( strcmp(argv[1], "jinx") == 0 )) {
-        double x = 5.4;
-        double y = -12;
+        double gcpX  = g_current_pose.position.x;
+        double gcpY  = g_current_pose.position.y;
+        double gcpTh = quat2ang(g_current_pose.orientation);
+        double x = 5.6 + gcpX;
+        double y = -12.4 + gcpY;
         double v = 6.1 + 1.8 - 0.3; // 20 tiles + 3yd - 1ft for safety
-        desStatePublisher.append_path_queue(x,   0.0,  0.0);
-        desStatePublisher.append_path_queue(x,   0.0,  -M_PI/2);
-        desStatePublisher.append_path_queue(x,   y, -M_PI/2);
-        desStatePublisher.append_path_queue(x-v, y, -M_PI);
+        desStatePublisher.append_path_queue(x,   gcpY, gcpTh       );
+        desStatePublisher.append_path_queue(x,   gcpY, gcpTh-M_PI/2);
+        desStatePublisher.append_path_queue(x,   y,    gcpTh-M_PI/2);
+        desStatePublisher.append_path_queue(x-v, y,    gcpTh-M_PI  );
     } else if (argc > 1 && ( strcmp(argv[1], "test") == 0 )) {
         desStatePublisher.append_path_queue(0.5,  0.0,  0.0);
     } else if (argc > 1 && ( strcmp(argv[1], "circle_out") == 0 )) {

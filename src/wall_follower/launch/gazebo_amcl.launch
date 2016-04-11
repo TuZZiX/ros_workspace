@@ -2,15 +2,15 @@
 <launch>
 	<param name="/UPDATE_RATE" value="50.0"/>
 	<param name="/K_PHI" value="1.0"/>
-	<param name="/K_DISP" value="1.0"/>
-	<param name="/K_TRIP_DIST" value="0.5"/>
-	<param name="/MAX_SPEED" value="0.5"/>
-	<param name="/MAX_OMEGA" value="1.0"/>
+	<param name="/K_DISP" value="0.5"/>
+	<param name="/K_TRIP_DIST" value="0.25"/>
+	<param name="/MAX_SPEED" value="0.25"/>
+	<param name="/MAX_OMEGA" value="0.5"/>
 
 	<param name="/K_PSI" value="2.5"/>
 	<param name="/K_LAT_ERR_THRESH" value="2.0"/>
 
-	<param name="/MIN_SAFE_DISTANCE" value="1.0"/>
+	<param name="/MIN_SAFE_DISTANCE" value="0.7"/>
 	<param name="/DETECT_DISTANCE" value="2.5"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
@@ -18,8 +18,8 @@
 
 	<param name="/accel_max" value="0.5"/>
 	<param name="/alpha_max" value="0.2"/>
-	<param name="/speed_max" value="0.5"/>
-	<param name="/omega_max" value="1.0"/>
+	<param name="/speed_max" value="0.25"/>
+	<param name="/omega_max" value="0.5"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find wall_follower)/worlds/mobot_in_pen.world"/>
@@ -45,14 +45,18 @@
 	</node>
 
 	<!--<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />-->
-	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen" />
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen">
+		<remap from="/odom" to="/amcl_odom" />
+	</node>
+
 	<node name= "wall_detector" pkg= "wall_follower" type= "wall_detector" />
 
 	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" />-->
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
-	<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen">
+	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen">
 		<remap from="/odom" to="/amcl_odom" />
 	</node>
+	
 	<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/better_pen.yaml" output="screen"/>
 
 	<node name= "amcl_odom_tf" pkg= "wall_follower" type= "amcl_odom_tf" output="screen"/>
