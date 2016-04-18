@@ -7,10 +7,10 @@
 	<param name="/MAX_SPEED" value="0.25"/>
 	<param name="/MAX_OMEGA" value="0.5"/>
 
-	<param name="/K_PSI" value="2.5"/>
-	<param name="/K_LAT_ERR_THRESH" value="2.0"/>
+	<param name="/K_PSI" value="5.0"/>
+	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
 
-	<param name="/MIN_SAFE_DISTANCE" value="0.7"/>
+	<param name="/MIN_SAFE_DISTANCE" value="1.2"/>
 	<param name="/DETECT_DISTANCE" value="2.5"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
@@ -53,12 +53,12 @@
 
 	<!--<node name= "simple_controllor" pkg= "wall_follower" type= "simple_controllor" output="screen" />-->
 	<!--<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen"/> -->
-	<node name= "steering_corrector_nl" pkg= "wall_follower" type= "steering_corrector_nl" output="screen">
+	<node name= "steering_corrector" pkg= "wall_follower" type= "steering_corrector" output="screen">
 		<remap from="/odom" to="/amcl_odom" />
 	</node>
 	
 	<node name= "map_server" pkg= "map_server" type= "map_server" args="$(find wall_follower)/map/better_pen.yaml" output="screen"/>
 
-	<node name= "amcl_odom_tf" pkg= "wall_follower" type= "amcl_odom_tf" output="screen"/>
+	<node name= "amcl_odom_tf" pkg= "wall_follower" type= "amcl_odom_tf"/>
 	<node pkg="amcl" type="amcl" name="amcl" output="screen"/>
 </launch>
