@@ -13,7 +13,7 @@ include_directories(${PCL_INCLUDE_DIRS})
 
 #uncomment the following 4 lines to use the Eigen library
 find_package(cmake_modules REQUIRED)
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 add_definitions(${EIGEN_DEFINITIONS})
 

@@ -1,0 +1,11 @@
+#goal:
+float64 x
+float64 y
+float64 z 
+---
+#result definition
+int32 err_code
+string err_msg
+---
+#feedback: optional; 
+int32 fdbk
