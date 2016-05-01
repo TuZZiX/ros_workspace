@@ -45,7 +45,7 @@
 	</node>
 
 	<!--<node name= "slam_gmapping" pkg= "gmapping" type= "slam_gmapping" output="screen" />-->
-	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="circle_out" output="screen">
+	<node name= "traj_publisher" pkg= "wall_follower" type= "traj_publisher" args="out" output="screen">
 		<remap from="/odom" to="/amcl_odom" />
 	</node>
 
