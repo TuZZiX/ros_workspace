@@ -3,6 +3,7 @@
 /devel
 
 #repos
+.git
 */.git
 */.git*
 

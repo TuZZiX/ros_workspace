@@ -21,9 +21,10 @@ int main(int argc, char **argv) {
     DesStatePublisher desStatePublisher(nh);
     //dt is set in header file pub_des_state.h
     ros::Rate looprate(1 / dt); //timer for fixed publication rate
-    ROS_INFO("Waiting for good amcl particles");
-    ros::Rate wait(2);
+    ROS_INFO("You now have 15 seconds to move the robot");
+    ros::Rate wait(15);
     wait.sleep();
+    ROS_INFO("Waiting for good amcl particles");
     robot.turn(M_PI*2);
     //ROS_INFO("Waiting for odometery message to start...");
     while (!is_init_orien) {
