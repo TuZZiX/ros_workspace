@@ -4,13 +4,13 @@
 	<param name="/K_PHI" value="1.0"/>
 	<param name="/K_DISP" value="0.5"/>
 	<param name="/K_TRIP_DIST" value="0.25"/>
-	<param name="/MAX_SPEED" value="0.25"/>
+	<param name="/MAX_SPEED" value="0.5"/>
 	<param name="/MAX_OMEGA" value="0.5"/>
 
 	<param name="/K_PSI" value="5.0"/>
 	<param name="/K_LAT_ERR_THRESH" value="3.0"/>
 
-	<param name="/MIN_SAFE_DISTANCE" value="1.2"/>
+	<param name="/MIN_SAFE_DISTANCE" value="0.8"/>
 	<param name="/DETECT_DISTANCE" value="2.5"/>
 	<param name="/FRONT_ANGLE" value="0.5"/>
 	<param name="/LEFT_ANGLE" value="0.5"/>
@@ -18,7 +18,7 @@
 
 	<param name="/accel_max" value="0.5"/>
 	<param name="/alpha_max" value="0.2"/>
-	<param name="/speed_max" value="0.25"/>
+	<param name="/speed_max" value="0.5"/>
 	<param name="/omega_max" value="0.5"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">

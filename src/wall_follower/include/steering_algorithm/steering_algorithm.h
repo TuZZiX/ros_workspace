@@ -25,7 +25,7 @@
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Odometry.h>
- #include <tf/transform_listener.h>
+#include <tf/transform_listener.h>
 
 //Eigen is useful for linear algebra
 //#include <Eigen/Eigen>
@@ -58,11 +58,11 @@ private:
     // some objects to support subscriber, service, and publisher
     ros::Subscriber odom_subscriber_; //these will be set up within the class constructor, hiding these ugly details
     ros::Subscriber des_state_subscriber_;
+    ros::Subscriber start_subscriber_;
     
     ros::Publisher cmd_publisher_; // = nh.advertise<geometry_msgs::Twist>("cmd_vel",1);
     ros::Publisher cmd_publisher2_; // = nh.advertise<geometry_msgs::TwistStamped>("cmd_vel_stamped",1);
     ros::Publisher steering_errs_publisher_;
-    
     tf::TransformListener* tfListener_;
     tf::StampedTransform mapToOdom_; 
     tf::StampedTransform baseLink_wrt_map_;    
@@ -97,7 +97,7 @@ private:
     
     // message to hold/publish steering performance data
     std_msgs::Float32MultiArray steering_errs_;
-        
+    bool start;
     // member methods as well:
     void initializeSubscribers(); // we will define some helper methods to encapsulate the gory details of initializing subscribers, publishers and services
     void initializePublishers();
@@ -105,7 +105,7 @@ private:
  
     void odomCallback(const nav_msgs::Odometry& odom_rcvd);
     void desStateCallback(const nav_msgs::Odometry& des_state_rcvd);    
-        
+    void startCallback(const std_msgs::Bool& start_msg);
 }; 
 
 #endif  

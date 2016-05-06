@@ -16,14 +16,15 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "des_state_publisher");
     ros::NodeHandle nh;
     ros::Subscriber odom_subscriber = nh.subscribe("odom", 1, odomCallback);
+    ros::Publisher start_publisher = nh.advertise<std_msgs::Bool>("start_trigger", 1, true); // talks to the robot!
+    std_msgs::Bool start_cmd;
     RobotCommander robot(&nh);
     //instantiate a desired-state publisher object
     DesStatePublisher desStatePublisher(nh);
     //dt is set in header file pub_des_state.h
     ros::Rate looprate(1 / dt); //timer for fixed publication rate
-    ROS_INFO("You now have 15 seconds to move the robot");
-    ros::Rate wait(15);
-    wait.sleep();
+    ROS_WARN("You can now move the robot, input anything to start");
+    getchar();
     ROS_INFO("Waiting for good amcl particles");
     robot.turn(M_PI*2);
     //ROS_INFO("Waiting for odometery message to start...");
@@ -35,7 +36,8 @@ int main(int argc, char **argv) {
     double gcpX  = g_current_pose.position.x;
     double gcpY  = g_current_pose.position.y;
     double gcpTh = quat2ang(g_current_pose.orientation);
-
+    start_cmd.data = true;
+    start_publisher.publish(start_cmd);
     if (argc > 1 && ( strcmp(argv[1], "jinx") == 0 )) {
 
         double x = 5.6 + gcpX;

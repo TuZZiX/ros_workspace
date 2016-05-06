@@ -105,7 +105,7 @@ SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehan
 
     twist_cmd2_.twist = twist_cmd_; // copy the twist command into twist2 message
     twist_cmd2_.header.stamp = ros::Time::now(); // look up the time and put it in the header  
-
+    start = false;
 }
 
 //member helper function to set up subscribers;
@@ -114,7 +114,15 @@ void SteeringController::initializeSubscribers() {
     odom_subscriber_ = nh_.subscribe("/odom", 1, &SteeringController::odomCallback, this); //subscribe to odom messages
     // add more subscribers here, as needed
     des_state_subscriber_ = nh_.subscribe("/desState", 1, &SteeringController::desStateCallback, this); // for desired state messages
+
+    start_subscriber_ = nh_.subscribe("/start_trigger", 1, &SteeringController::startCallback, this); // for desired state messages
 }
+
+void SteeringController::startCallback(const std_msgs::Bool& start_msg) {
+    ROS_WARN("Started!");
+    start = true; 
+}
+
 
 //member helper function to set up services:
 // similar syntax to subscriber, required for setting up services outside of "main()"
@@ -215,6 +223,10 @@ bool SteeringController::serviceCallback(cwru_srv::simple_bool_service_messageRe
 
 // HERE IS THE BIG DEAL: USE DESIRED AND ACTUAL STATE TO COMPUTE AND PUBLISH CMD_VEL
 void SteeringController::lin_steering_algorithm() {
+    if (start == false)
+    {
+        return;
+    }
     double controller_speed;
     double controller_omega;
     //Eigen::Vector2d pos_err_xy_vec_;
