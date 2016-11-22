@@ -29,7 +29,7 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 # Libraries: uncomment the following and edit arguments to create a new library
 # cs_add_library(my_lib src/my_lib.cpp)   
 cs_add_library(pcl_utils src/pcl_utils.cpp)  
-
+#cs_add_library(xform_utils src/xform_utils.cpp) 
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
 # cs_add_executable(example src/example.cpp)
@@ -39,12 +39,14 @@ cs_add_library(pcl_utils src/pcl_utils.cpp)
 #cs_add_executable(example_process_pcd src/example_process_pcd.cpp)
 cs_add_executable(display_ellipse src/display_ellipse.cpp src/make_clouds.cpp)
 cs_add_executable(pcd_snapshot src/pcd_snapshot.cpp)
+cs_add_executable(compute_selected_points_centroid src/compute_selected_points_centroid.cpp)
 #cs_add_executable(demo_pcl1 src/demo_pcl1.cpp)
 #cs_add_executable(demo_pcl2 src/demo_pcl2.cpp)
 
 cs_add_executable(display_pcd_file src/display_pcd_file.cpp)
-cs_add_executable(find_plane_pcd_file src/find_plane_pcd_file.cpp src/find_indices_of_plane_from_patch.cpp)
-
+#cs_add_executable(find_plane_pcd_file src/find_plane_pcd_file.cpp src/find_indices_of_plane_from_patch.cpp)
+cs_add_executable(find_plane_pcd_file2 src/find_plane_pcd_file2.cpp src/find_indices_of_plane_from_patch2.cpp)
+cs_add_executable(box_filter src/box_filter_main.cpp src/find_indices_of_plane_from_patch2.cpp)
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package
 # target_link_library(example my_lib)
@@ -52,8 +54,9 @@ cs_add_executable(find_plane_pcd_file src/find_plane_pcd_file.cpp src/find_indic
 #target_link_libraries(ransac_main pcl_utils)
 #target_link_libraries(pcd_snapshot pcl_utils)
 #target_link_libraries(example_process_pcd pcl_utils)
-target_link_libraries(find_plane_pcd_file pcl_utils)
-
+#target_link_libraries(find_plane_pcd_file pcl_utils)
+target_link_libraries(find_plane_pcd_file2 pcl_utils)
+target_link_libraries(box_filter pcl_utils)
 cs_install()
 cs_export()
     
