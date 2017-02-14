@@ -32,7 +32,7 @@ catkin_simple()
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
 cs_add_executable(rethink_rt_gripper_service src/rethink_rt_gripper_service.cpp)
-#cs_add_executable(virtual_vacuum_gripper_service src/virtual_vacuum_gripper_service.cpp)
+cs_add_executable(virtual_vacuum_gripper_service src/virtual_vacuum_gripper_service.cpp)
 cs_add_executable(example_generic_gripper_client src/example_generic_gripper_client.cpp)
 #the following is required, if desire to link a node in this package with a library created in this same package
 #target_link_libraries(rethink_rt_gripper_service my_lib)
