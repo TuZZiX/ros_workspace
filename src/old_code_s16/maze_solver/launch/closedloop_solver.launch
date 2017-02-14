@@ -1,0 +1,4 @@
+<launch> 
+<node name= "feedback_solver" pkg= "maze_solver" type= "feedback_solver" output="screen" /> 
+<node name= "lidar_detector" pkg= "maze_solver" type= "lidar_detector" output="screen" /> 
+</launch> 

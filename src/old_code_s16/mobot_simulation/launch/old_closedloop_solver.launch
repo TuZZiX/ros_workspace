@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find mobot_simulation)/launch/mobot.world"/>
+  </include>
+
+  <include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>
+
+  <remap from="/robot0/laser_0" to="/scan"/>
+  <remap from="/robot0/cmd_vel" to="/cmd_vel"/>
+  <remap from="/robot0/odom" to="/odom"/>
+
+  <node name= "feedback_solver" pkg= "maze_solver" type= "feedback_solver" output="screen" /> 
+  <node name= "lidar_mobot" pkg= "mobot_simulation" type= "lidar_mobot" output="screen" /> 
+
+</launch>
