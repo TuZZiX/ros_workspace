@@ -49,7 +49,7 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/kdtree/impl/kdtree_flann.hpp>
-#include <pcl/common/transforms.h> 
+#include <pcl/common/transforms.h>
 #include <pcl/console/parse.h>
 
  typedef pcl::PointXYZRGBA PointType;
@@ -85,7 +85,7 @@ CloudStyle style_violet (255.0, 0.0, 255.0, 8.0);
 std::string model_filename_;
 std::string scene_filename_;
 
-//Algorithm params 
+//Algorithm params
 bool show_keypoints_ (false);
 bool use_hough_ (true);
 float model_ss_ (0.02f);
@@ -401,7 +401,7 @@ else
 }
 
   /**
-   * Generates clouds for each instances found 
+   * Generates clouds for each instances found
    */
    std::vector<pcl::PointCloud<PointType>::ConstPtr> instances;
 
